@@ -1,0 +1,26 @@
+# ── Environment / Secrets ──────────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+*.env
+
+# ── Python ─────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# ── Next.js ────────────────────────────────────────────────────────────────────
+rotech-frontend/.next/
+rotech-frontend/node_modules/
+rotech-frontend/out/
+
+# ── OS ─────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
