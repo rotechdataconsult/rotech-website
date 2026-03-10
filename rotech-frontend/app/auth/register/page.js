@@ -35,6 +35,11 @@ export default function RegisterPage() {
     e.preventDefault()
     setError('')
 
+    if (form.password.length < 6 || !/[a-zA-Z]/.test(form.password) || !/[0-9]/.test(form.password)) {
+      setError('Password must be at least 6 characters and contain a letter and a number.')
+      return
+    }
+
     if (form.password !== form.confirmPassword) {
       setError('Passwords do not match.')
       return
@@ -170,6 +175,18 @@ export default function RegisterPage() {
                 onFocus={e => e.target.style.boxShadow = '0 0 0 2px #9B4FDE'}
                 onBlur={e => e.target.style.boxShadow = 'none'}
               />
+              <ul className="mt-2 space-y-1">
+                {[
+                  { label: 'At least 6 characters', ok: form.password.length >= 6 },
+                  { label: 'Contains a letter', ok: /[a-zA-Z]/.test(form.password) },
+                  { label: 'Contains a number', ok: /[0-9]/.test(form.password) },
+                ].map(({ label, ok }) => (
+                  <li key={label} className="flex items-center gap-1.5 text-xs" style={{ color: ok ? '#86efac' : '#C8D4E8' }}>
+                    <span>{ok ? '✓' : '○'}</span>
+                    {label}
+                  </li>
+                ))}
+              </ul>
             </div>
 
             {/* Confirm Password */}

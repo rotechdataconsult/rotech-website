@@ -135,8 +135,19 @@ export default function LoginPage() {
             </button>
           </form>
 
+          {/* Forgot password */}
+          <div className="text-center mt-4">
+            <Link
+              href="/auth/forgot-password"
+              className="text-sm transition-colors"
+              style={{ color: '#C8D4E8' }}
+            >
+              Forgot your password?
+            </Link>
+          </div>
+
           {/* Register link */}
-          <p className="text-center text-sm text-[#C8D4E8] mt-6">
+          <p className="text-center text-sm text-[#C8D4E8] mt-4">
             Don&apos;t have an account?{' '}
             <Link
               href="/auth/register"
