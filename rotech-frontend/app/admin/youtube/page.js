@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/useAuth'
 import { supabase } from '@/lib/supabase'
 import { PageSpinner } from '@/components/ui/Spinner'
-import Navbar from '@/components/layout/Navbar'
+import AdminLayout from '@/components/admin/AdminLayout'
 import Button from '@/components/ui/Button'
 import { ToolBadge } from '@/components/ui/Badge'
 import VideoCard from '@/components/lms/VideoCard'
@@ -94,19 +94,12 @@ export default function AdminYouTubePage() {
   if (authLoading || dataLoading) return <PageSpinner />
 
   return (
-    <div className="min-h-screen bg-[#5a1f9a] text-white">
-      <Navbar profile={profile} back="/admin" backLabel="Admin Panel" />
+    <AdminLayout profile={profile} title="Manage YouTube Resources">
+      <p className="text-[#E8E0F0] text-sm mb-6">
+        Add video links for students to revisit concepts they have forgotten.
+      </p>
 
-      <main className="max-w-6xl mx-auto px-6 py-10 space-y-10">
-
-        <div>
-          <h1 className="text-2xl font-extrabold text-white">Manage YouTube Resources</h1>
-          <p className="mt-1 text-[#E8E0F0] text-sm">
-            Add video links for students to revisit concepts they have forgotten.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
           {/* ── Upload form ───────────────────────────────── */}
           <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-6">
@@ -248,7 +241,6 @@ export default function AdminYouTubePage() {
             </div>
           </section>
         )}
-      </main>
-    </div>
+    </AdminLayout>
   )
 }
