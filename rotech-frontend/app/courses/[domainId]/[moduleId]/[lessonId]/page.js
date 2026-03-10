@@ -9,6 +9,7 @@ import { PageSpinner } from '@/components/ui/Spinner'
 import { LessonTypeBadge } from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
 import Navbar from '@/components/layout/Navbar'
+import MarkdownContent from '@/components/ui/MarkdownContent'
 
 export default function LessonPage() {
   const { domainId, moduleId, lessonId } = useParams()
@@ -77,12 +78,7 @@ export default function LessonPage() {
         {/* Lesson content */}
         <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-2xl p-8">
           {lesson?.content ? (
-            <div
-              className="prose prose-invert prose-sm max-w-none text-[#E8E0F0] leading-relaxed"
-              style={{ whiteSpace: 'pre-wrap' }}
-            >
-              {lesson.content}
-            </div>
+            <MarkdownContent content={lesson.content} />
           ) : (
             <p className="text-[#C8D4E8] text-sm text-center py-10">
               Content is being added by your instructor. Check back soon.
