@@ -9,7 +9,7 @@ import AdminLayout from '@/components/admin/AdminLayout'
 import Button from '@/components/ui/Button'
 
 const LESSON_TYPES = ['reading', 'exercise', 'project']
-const EMPTY = { title: '', content: '', type: 'reading', order_index: '', dataset_url: '' }
+const EMPTY = { title: '', content: '', lesson_type: 'reading', order_index: '', dataset_url: '' }
 
 export default function AdminLessonsPage() {
   const router = useRouter()
@@ -71,7 +71,7 @@ export default function AdminLessonsPage() {
       module_id:   selectedModule,
       title:       form.title.trim(),
       content:     form.content.trim(),
-      type:        form.type,
+      lesson_type: form.lesson_type,
       order_index: parseInt(form.order_index) || lessons.length + 1,
       dataset_url: form.dataset_url.trim() || null,
     })
@@ -144,7 +144,7 @@ export default function AdminLessonsPage() {
               <div>
                 <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">Type *</label>
                 <select
-                  name="type" value={form.type} onChange={handleChange}
+                  name="lesson_type" value={form.lesson_type} onChange={handleChange}
                   className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-[#9B4FDE] transition cursor-pointer"
                 >
                   {LESSON_TYPES.map(t => (
@@ -207,7 +207,7 @@ export default function AdminLessonsPage() {
                 <span className="text-xs font-bold text-[#9B4FDE] w-6 shrink-0">{lesson.order_index ?? i + 1}</span>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-white truncate">{lesson.title}</p>
-                  <p className="text-xs text-[#C8D4E8] mt-0.5 capitalize">{lesson.type}</p>
+                  <p className="text-xs text-[#C8D4E8] mt-0.5 capitalize">{lesson.lesson_type}</p>
                 </div>
                 <button
                   onClick={() => handleDelete(lesson.id)}
