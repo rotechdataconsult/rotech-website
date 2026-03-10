@@ -388,7 +388,7 @@ export default function AnalystPage() {
     formData.append('user_id', user.id)
 
     try {
-      const res = await fetch('http://localhost:8000/api/upload', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/upload`, {
         method: 'POST',
         body: formData,
       })
@@ -402,7 +402,7 @@ export default function AnalystPage() {
         setActiveTab('cleaning')
       }
     } catch {
-      setError('Cannot reach the analysis server. Make sure the backend is running on port 8000.')
+      setError('Cannot reach the analysis server. Check your internet connection or try again later.')
     } finally {
       setUploading(false)
     }
