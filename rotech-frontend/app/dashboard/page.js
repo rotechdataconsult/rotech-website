@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useAuth } from '@/lib/useAuth'
 import { supabase } from '@/lib/supabase'
+import { ComingSoonBadge } from '@/components/ui/ComingSoon'
 
 const TOOL_COLORS = {
   Excel:       'bg-green-500/15 text-green-400',
@@ -200,6 +201,36 @@ export default function DashboardPage() {
                   <p className="text-xs text-[#E8E0F0] mt-0.5">Upload data for AI-powered insights</p>
                 </div>
               </Link>
+            </div>
+
+            {/* Coming soon features */}
+            <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-sm font-bold text-white">Coming Soon</h2>
+                <Link href="/pricing" className="text-xs text-[#C8D4E8] hover:text-white transition-colors">
+                  View pricing →
+                </Link>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {[
+                  { href: '/analyst/history', icon: '📂', label: 'Analysis History',       desc: 'Revisit past AI analyses' },
+                  { href: '/invoice',         icon: '🧾', label: 'Invoice Generator',       desc: 'Create PDF invoices from sales' },
+                  { href: '/team',            icon: '👥', label: 'Team Accounts',           desc: 'Add staff to your account' },
+                  { href: '/whatsapp',        icon: '💬', label: 'WhatsApp Data Bot',       desc: 'Send data via WhatsApp' },
+                ].map(item => (
+                  <Link key={item.href} href={item.href}
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl border border-[#9B4FDE]/20 bg-[#6B28A8]/40 hover:border-[#9B4FDE]/40 transition-colors">
+                    <span className="text-xl shrink-0">{item.icon}</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <p className="text-xs font-medium text-white">{item.label}</p>
+                        <ComingSoonBadge />
+                      </div>
+                      <p className="text-xs text-[#C8D4E8] mt-0.5">{item.desc}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
 
             {certificate && (

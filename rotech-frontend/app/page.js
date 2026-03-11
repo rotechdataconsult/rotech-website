@@ -77,6 +77,7 @@ function Navbar() {
           <a href="#analyst"   style={{ color: SOFT_WHITE }} className="hover:text-white transition-colors">AI Analyst</a>
           <a href="#dataentry" style={{ color: SOFT_WHITE }} className="hover:text-white transition-colors">Data Entry</a>
           <a href="#tracks"    style={{ color: SOFT_WHITE }} className="hover:text-white transition-colors">Tracks</a>
+          <Link href="/pricing" style={{ color: SOFT_WHITE }} className="hover:text-white transition-colors">Pricing</Link>
         </div>
         <div className="flex items-center gap-3">
           <Link
@@ -507,6 +508,7 @@ function Footer() {
         <div className="flex items-center gap-5 text-xs" style={{ color: SILVER }}>
           <Link href="/auth/register" className="hover:text-white transition-colors">Get Started</Link>
           <Link href="/auth/login"    className="hover:text-white transition-colors">Login</Link>
+          <Link href="/pricing"       className="hover:text-white transition-colors">Pricing</Link>
           <Link href="/courses"       className="hover:text-white transition-colors">Courses</Link>
           <Link href="/privacy"       className="hover:text-white transition-colors">Privacy Policy</Link>
         </div>

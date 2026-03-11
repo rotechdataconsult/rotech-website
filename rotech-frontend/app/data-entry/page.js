@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { useAuth } from '@/lib/useAuth'
 import { supabase } from '@/lib/supabase'
 import { PageSpinner } from '@/components/ui/Spinner'
+import { ComingSoonButton } from '@/components/ui/ComingSoon'
 
 // ── Constants ──────────────────────────────────────────────────────────────────
 const TABS = [
@@ -589,6 +590,17 @@ export default function DataEntryPage() {
         {activeTab === 'sales'     && <SalesTab     userId={user.id} />}
         {activeTab === 'expenses'  && <ExpensesTab  userId={user.id} />}
         {activeTab === 'inventory' && <InventoryTab userId={user.id} />}
+
+        {/* Coming soon features */}
+        <div className="border-t border-[#9B4FDE]/20 pt-8 space-y-3">
+          <p className="text-xs font-semibold text-[#C8D4E8] uppercase tracking-wider">More features coming soon</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <ComingSoonButton icon="🧾" label="Invoice & Receipt Generator"  description="Generate a PDF invoice from your sales records" />
+            <ComingSoonButton icon="🔔" label="Inventory Low-Stock Alerts"   description="Get email alerts when stock falls below reorder level" />
+            <ComingSoonButton icon="📊" label="Accountant Report Export"     description="Send formatted monthly reports to your accountant" />
+            <ComingSoonButton icon="💱" label="Multi-Currency Support"       description="Track revenue in ₦, $, GHS, KES and more" />
+          </div>
+        </div>
       </main>
     </div>
   )
