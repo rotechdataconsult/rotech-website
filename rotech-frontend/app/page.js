@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import QuoteRotator from '@/components/ui/QuoteRotator'
 
 // ── Brand colors ───────────────────────────────────────────────────────────────
 const PURPLE     = '#7B2FBE'
@@ -158,8 +159,11 @@ function Hero() {
           </a>
         </div>
 
+        {/* Quote */}
+        <QuoteRotator />
+
         {/* Stats row */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 max-w-2xl mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 max-w-2xl mx-auto">
           {STATS.map(({ value, label }) => (
             <div
               key={label}

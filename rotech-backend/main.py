@@ -12,6 +12,7 @@ from slowapi.errors import RateLimitExceeded
 
 from limiter import limiter
 from routers.upload import router as upload_router
+from routers.chat import router as chat_router
 
 logger = logging.getLogger("rotech")
 
@@ -50,6 +51,7 @@ async def add_security_headers(request: Request, call_next):
     return response
 
 app.include_router(upload_router)
+app.include_router(chat_router)
 
 # ── Safe global exception handler — never leak internals ──────────────────────
 @app.exception_handler(Exception)
