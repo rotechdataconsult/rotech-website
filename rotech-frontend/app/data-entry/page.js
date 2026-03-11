@@ -552,6 +552,15 @@ export default function DataEntryPage() {
           ))}
         </div>
 
+        {/* Privacy notice */}
+        <div className="bg-[#4a1580]/40 border border-[#9B4FDE]/20 rounded-xl px-5 py-3 flex items-center gap-3">
+          <span className="text-base shrink-0">🔒</span>
+          <p className="text-xs text-[#C8D4E8]">
+            Your business data is private and encrypted. Only you can see it — no other user, staff, or third party has access.{' '}
+            <Link href="/privacy" className="text-[#9B4FDE] hover:underline">Read our Data Protection Policy</Link>
+          </p>
+        </div>
+
         {/* Tip */}
         <div className="bg-[#9B4FDE]/15 border border-[#9B4FDE]/30 rounded-xl px-5 py-4 flex items-start gap-3">
           <span className="text-lg">💡</span>

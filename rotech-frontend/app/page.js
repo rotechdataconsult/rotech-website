@@ -508,6 +508,7 @@ function Footer() {
           <Link href="/auth/register" className="hover:text-white transition-colors">Get Started</Link>
           <Link href="/auth/login"    className="hover:text-white transition-colors">Login</Link>
           <Link href="/courses"       className="hover:text-white transition-colors">Courses</Link>
+          <Link href="/privacy"       className="hover:text-white transition-colors">Privacy Policy</Link>
         </div>
       </div>
     </footer>

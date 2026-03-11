@@ -251,8 +251,17 @@ export default function RegisterPage() {
             </button>
           </form>
 
+          {/* Privacy consent */}
+          <p className="text-center text-xs text-[#C8D4E8] mt-5 leading-relaxed">
+            By creating an account you agree to our{' '}
+            <Link href="/privacy" className="underline hover:text-white transition-colors">
+              Privacy & Data Protection Policy
+            </Link>
+            . Your data is protected under NDPR 2019.
+          </p>
+
           {/* Login link */}
-          <p className="text-center text-sm text-[#C8D4E8] mt-6">
+          <p className="text-center text-sm text-[#C8D4E8] mt-4">
             Already have an account?{' '}
             <Link
               href="/auth/login"
