@@ -1,9 +1,11 @@
 import io
 import uuid
 import os
+import logging
 
+import jwt
 import pandas as pd
-from fastapi import APIRouter, File, Form, UploadFile, HTTPException
+from fastapi import APIRouter, Depends, File, Form, Header, HTTPException, Request, UploadFile
 from fastapi.responses import JSONResponse
 from supabase import create_client, Client
 
@@ -11,10 +13,12 @@ from services.cleaner import clean_dataset
 from services.stats import generate_stats
 from services.charts import generate_charts
 from services.ai import generate_insights
+from main import limiter
 
 router = APIRouter()
+logger = logging.getLogger("rotech.upload")
 
-# ── Supabase client ────────────────────────────────────────────────────────────
+# ── Supabase client (service key — only used server-side) ─────────────────────
 
 _supabase: Client | None = None
 
@@ -28,43 +32,62 @@ def _get_supabase() -> Client:
         _supabase = create_client(url, key)
     return _supabase
 
+
+# ── JWT verification — extracts authenticated user_id from Bearer token ────────
+
+def get_current_user(authorization: str = Header(None)) -> str:
+    """Verify Supabase JWT and return the authenticated user's ID."""
+    if not authorization or not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Missing or invalid Authorization header.")
+
+    token = authorization.split(" ", 1)[1]
+    jwt_secret = os.getenv("SUPABASE_JWT_SECRET")
+    if not jwt_secret:
+        raise HTTPException(status_code=500, detail="Server authentication not configured.")
+
+    try:
+        payload = jwt.decode(
+            token,
+            jwt_secret,
+            algorithms=["HS256"],
+            audience="authenticated",
+        )
+        user_id = payload.get("sub")
+        if not user_id:
+            raise HTTPException(status_code=401, detail="Invalid token: missing subject.")
+        return user_id
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="Token has expired. Please log in again.")
+    except jwt.InvalidTokenError:
+        raise HTTPException(status_code=401, detail="Invalid token. Please log in again.")
+
+
 # ── Constants ──────────────────────────────────────────────────────────────────
 
 ALLOWED_EXTENSIONS = {".csv", ".xlsx", ".xls"}
-MAX_FILE_SIZE = 10 * 1024 * 1024  # 10 MB
+MAX_FILE_SIZE      = 10 * 1024 * 1024  # 10 MB
 
 
-# ── Helpers ────────────────────────────────────────────────────────────────────
-
-def _read_dataframe(filename: str, contents: bytes) -> pd.DataFrame:
-    ext = os.path.splitext(filename)[1].lower()
-    if ext == ".csv":
-        return pd.read_csv(io.BytesIO(contents))
-    return pd.read_excel(io.BytesIO(contents))
-
-
-def _error(message: str, status_code: int) -> JSONResponse:
-    return JSONResponse(
-        status_code=status_code,
-        content={"error": message, "status": "failed"},
-    )
-
-
-# ── ENDPOINT 1: POST /api/upload ───────────────────────────────────────────────
+# ── ENDPOINT: POST /api/upload ─────────────────────────────────────────────────
 
 @router.post("/api/upload")
+@limiter.limit("10/minute")           # max 10 uploads per IP per minute
 async def upload_file(
-    file: UploadFile = File(...),
-    domain: str = Form(...),
-    user_id: str = Form(...),
+    request: Request,
+    file:   UploadFile = File(...),
+    domain: str        = Form(...),
+    user_id: str       = Depends(get_current_user),   # from verified JWT, not form
 ):
-    # Validate file extension
-    ext = os.path.splitext(file.filename)[1].lower()
+    # Validate extension
+    ext = os.path.splitext(file.filename or "")[1].lower()
     if ext not in ALLOWED_EXTENSIONS:
         raise HTTPException(
             status_code=400,
             detail={"error": f"Unsupported file type '{ext}'. Allowed: .csv, .xlsx, .xls", "status": "failed"},
         )
+
+    # Validate domain input — must be a plain string, no injection
+    domain = domain.strip()[:100]
 
     # Read and validate file size
     contents = await file.read()
@@ -74,109 +97,65 @@ async def upload_file(
             detail={"error": "File exceeds the 10 MB limit.", "status": "failed"},
         )
 
+    # Parse file
     try:
-        df = _read_dataframe(file.filename, contents)
-    except Exception as exc:
+        buf = io.BytesIO(contents)
+        df  = pd.read_csv(buf) if ext == ".csv" else pd.read_excel(buf)
+    except Exception:
         raise HTTPException(
             status_code=400,
-            detail={"error": f"Could not parse file: {exc}", "status": "failed"},
+            detail={"error": "Could not parse file. Make sure it is a valid CSV or Excel file.", "status": "failed"},
         )
 
-    # Run the analysis pipeline
+    # Run analysis pipeline
     try:
-        clean_result = clean_dataset(df)
-        cleaned_df = clean_result["cleaned_df"]
+        clean_result    = clean_dataset(df)
+        cleaned_df      = clean_result["cleaned_df"]
         cleaning_report = clean_result["report"]
-
-        stats = generate_stats(cleaned_df)
-        charts = generate_charts(cleaned_df, domain)
-        insights = generate_insights(stats, domain, file.filename)
+        stats           = generate_stats(cleaned_df)
+        charts          = generate_charts(cleaned_df, domain)
+        insights        = generate_insights(stats, domain, file.filename)
     except Exception as exc:
+        logger.error("Analysis pipeline error for user %s: %s", user_id, exc, exc_info=True)
         raise HTTPException(
             status_code=500,
-            detail={"error": f"Analysis pipeline failed: {exc}", "status": "failed"},
+            detail={"error": "Analysis pipeline failed. Please try a different file.", "status": "failed"},
         )
 
-    # Persist to Supabase
+    # Persist to Supabase — using service key, user_id comes from verified JWT
     analysis_id = str(uuid.uuid4())
     try:
-        _get_supabase().table("analyses").insert({
-            "id": analysis_id,
-            "user_id": user_id,
-            "filename": file.filename,
-            "domain": domain,
+        sb = _get_supabase()
+        sb.table("analyses").insert({
+            "id":              analysis_id,
+            "user_id":         user_id,
+            "filename":        file.filename,
+            "domain":          domain,
             "cleaning_report": cleaning_report,
-            "stats": stats,
-            "status": "completed",
+            "stats":           stats,
+            "status":          "completed",
         }).execute()
 
-        _get_supabase().table("insights").insert({
+        sb.table("insights").insert({
             "analysis_id": analysis_id,
-            "user_id": user_id,
-            "charts": charts,
-            "insights": insights,
+            "user_id":     user_id,
+            "charts":      charts,
+            "insights":    insights,
         }).execute()
     except Exception as exc:
+        logger.error("Supabase insert error for user %s: %s", user_id, exc, exc_info=True)
         raise HTTPException(
             status_code=500,
-            detail={"error": f"Failed to save results: {exc}", "status": "failed"},
+            detail={"error": "Failed to save results. Please try again.", "status": "failed"},
         )
 
     return {
-        "analysis_id": analysis_id,
-        "filename": file.filename,
-        "domain": domain,
+        "analysis_id":    analysis_id,
+        "filename":       file.filename,
+        "domain":         domain,
         "cleaning_report": cleaning_report,
-        "stats": stats,
-        "charts": charts,
-        "insights": insights,
-        "status": "success",
+        "stats":          stats,
+        "charts":         charts,
+        "insights":       insights,
+        "status":         "success",
     }
-
-
-# ── ENDPOINT 2: GET /api/analyses/{user_id} ────────────────────────────────────
-
-@router.get("/api/analyses/{user_id}")
-def get_user_analyses(user_id: str):
-    try:
-        result = (
-            _get_supabase().table("analyses")
-            .select("*, insights(*)")
-            .eq("user_id", user_id)
-            .order("created_at", desc=True)
-            .execute()
-        )
-    except Exception as exc:
-        raise HTTPException(
-            status_code=500,
-            detail={"error": f"Failed to fetch analyses: {exc}", "status": "failed"},
-        )
-
-    return result.data
-
-
-# ── ENDPOINT 3: GET /api/analysis/{analysis_id} ────────────────────────────────
-
-@router.get("/api/analysis/{analysis_id}")
-def get_analysis(analysis_id: str):
-    try:
-        result = (
-            _get_supabase().table("analyses")
-            .select("*, insights(*)")
-            .eq("id", analysis_id)
-            .single()
-            .execute()
-        )
-    except Exception as exc:
-        raise HTTPException(
-            status_code=404,
-            detail={"error": f"Analysis not found: {exc}", "status": "failed"},
-        )
-
-    if not result.data:
-        raise HTTPException(
-            status_code=404,
-            detail={"error": "Analysis not found.", "status": "failed"},
-        )
-
-    return result.data

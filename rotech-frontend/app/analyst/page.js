@@ -4,6 +4,7 @@ import { useState } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useAuth } from '@/lib/useAuth'
+import { supabase } from '@/lib/supabase'
 
 const Plot = dynamic(() => import('react-plotly.js'), { ssr: false })
 
@@ -382,14 +383,23 @@ export default function AnalystPage() {
     setError(null)
     setResult(null)
 
+    // Get the current session JWT to authenticate with the backend
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session?.access_token) {
+      setError('Session expired. Please log in again.')
+      setUploading(false)
+      return
+    }
+
     const formData = new FormData()
     formData.append('file', file)
     formData.append('domain', domain)
-    formData.append('user_id', user.id)
+    // user_id is now extracted server-side from the verified JWT — not sent from client
 
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/upload`, {
         method: 'POST',
+        headers: { 'Authorization': `Bearer ${session.access_token}` },
         body: formData,
       })
 

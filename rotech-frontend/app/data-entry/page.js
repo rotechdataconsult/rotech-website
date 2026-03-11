@@ -32,11 +32,22 @@ function fmtNGN(n) {
   return Number(n ?? 0).toLocaleString('en-NG', { style: 'currency', currency: 'NGN', maximumFractionDigits: 0 })
 }
 
+function sanitiseCell(value) {
+  const str = String(value ?? '')
+  // Prevent CSV formula injection — prefix dangerous chars with a tab
+  if (str.length > 0 && ['=', '+', '-', '@', '\t', '\r'].includes(str[0])) {
+    return `\t${str}`
+  }
+  return str
+}
+
 function downloadCSV(rows, filename) {
   if (!rows.length) return
   const keys = Object.keys(rows[0]).filter(k => k !== 'id' && k !== 'user_id')
   const header = keys.join(',')
-  const body = rows.map(r => keys.map(k => `"${String(r[k] ?? '').replace(/"/g, '""')}"`).join(',')).join('\n')
+  const body = rows.map(r =>
+    keys.map(k => `"${sanitiseCell(r[k]).replace(/"/g, '""')}"`).join(',')
+  ).join('\n')
   const blob = new Blob([header + '\n' + body], { type: 'text/csv' })
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a'); a.href = url; a.download = filename; a.click()
