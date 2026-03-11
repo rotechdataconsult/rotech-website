@@ -66,7 +66,7 @@ async def chat(
         logger.error("Chat error for user %s: %s", user_id, exc, exc_info=True)
         raise HTTPException(
             status_code=500,
-            detail="Could not get a response right now. Please try again.",
+            detail=f"Claude error: {type(exc).__name__}: {str(exc)[:300]}",
         )
 
     return {"answer": answer}

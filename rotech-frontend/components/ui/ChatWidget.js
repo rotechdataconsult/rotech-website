@@ -81,7 +81,7 @@ export default function ChatWidget() {
           ? 'You are sending messages too fast. Please wait a moment and try again.'
           : res.status === 401
           ? 'Your session has expired. Please log out and log back in.'
-          : res.status === 403
+          : (res.status === 403 || res.status === 500)
           ? `Debug: ${errDetail}`
           : res.status === 503
           ? 'The AI service is being set up. Please check back shortly.'
