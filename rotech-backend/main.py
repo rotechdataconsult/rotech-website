@@ -71,3 +71,13 @@ def root():
 @app.get("/health")
 def health():
     return {"status": "healthy", "service": "rotech-api"}
+
+
+@app.get("/api/status")
+def status():
+    """Shows which environment variables are configured — for debugging only."""
+    return {
+        "SUPABASE_URL":         bool(os.getenv("SUPABASE_URL")),
+        "SUPABASE_SERVICE_KEY": bool(os.getenv("SUPABASE_SERVICE_KEY")),
+        "ANTHROPIC_API_KEY":    bool(os.getenv("ANTHROPIC_API_KEY")),
+    }
