@@ -3,10 +3,8 @@ import uuid
 import os
 import logging
 
-import jwt
 import pandas as pd
-from fastapi import APIRouter, Depends, File, Form, Header, HTTPException, Request, UploadFile
-from fastapi.responses import JSONResponse
+from fastapi import APIRouter, Depends, File, Form, HTTPException, Request, UploadFile
 from supabase import create_client, Client
 
 from services.cleaner import clean_dataset
@@ -14,52 +12,14 @@ from services.stats import generate_stats
 from services.charts import generate_charts
 from services.ai import generate_insights
 from limiter import limiter
+from auth import get_current_user, _get_supabase as _get_auth_supabase
 
 router = APIRouter()
 logger = logging.getLogger("rotech.upload")
 
-# ── Supabase client (service key — only used server-side) ─────────────────────
-
-_supabase: Client | None = None
 
 def _get_supabase() -> Client:
-    global _supabase
-    if _supabase is None:
-        url = os.getenv("SUPABASE_URL")
-        key = os.getenv("SUPABASE_SERVICE_KEY")
-        if not url or not key:
-            raise RuntimeError("SUPABASE_URL and SUPABASE_SERVICE_KEY must be set.")
-        _supabase = create_client(url, key)
-    return _supabase
-
-
-# ── JWT verification — extracts authenticated user_id from Bearer token ────────
-
-def get_current_user(authorization: str = Header(None)) -> str:
-    """Verify Supabase JWT and return the authenticated user's ID."""
-    if not authorization or not authorization.startswith("Bearer "):
-        raise HTTPException(status_code=401, detail="Missing or invalid Authorization header.")
-
-    token = authorization.split(" ", 1)[1]
-    jwt_secret = os.getenv("SUPABASE_JWT_SECRET")
-    if not jwt_secret:
-        raise HTTPException(status_code=500, detail="Server authentication not configured.")
-
-    try:
-        payload = jwt.decode(
-            token,
-            jwt_secret,
-            algorithms=["HS256"],
-            audience="authenticated",
-        )
-        user_id = payload.get("sub")
-        if not user_id:
-            raise HTTPException(status_code=401, detail="Invalid token: missing subject.")
-        return user_id
-    except jwt.ExpiredSignatureError:
-        raise HTTPException(status_code=401, detail="Token has expired. Please log in again.")
-    except jwt.InvalidTokenError:
-        raise HTTPException(status_code=401, detail="Invalid token. Please log in again.")
+    return _get_auth_supabase()
 
 
 # ── Constants ──────────────────────────────────────────────────────────────────
