@@ -13,7 +13,7 @@ from services.cleaner import clean_dataset
 from services.stats import generate_stats
 from services.charts import generate_charts
 from services.ai import generate_insights
-from main import limiter
+from limiter import limiter
 
 router = APIRouter()
 logger = logging.getLogger("rotech.upload")
