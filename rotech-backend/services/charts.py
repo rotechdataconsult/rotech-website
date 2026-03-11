@@ -159,15 +159,27 @@ def _chart_correlation_heatmap(df: pd.DataFrame, numeric_cols: list) -> dict:
 
 def _chart_scatter(df: pd.DataFrame, col_x: str, col_y: str) -> dict:
     scatter_df = df[[col_x, col_y]].dropna()
+    x = scatter_df[col_x].values
+    y = scatter_df[col_y].values
 
     fig = px.scatter(
         scatter_df, x=col_x, y=col_y,
-        trendline="ols",
-        trendline_color_override=TEAL,
         labels={col_x: col_x, col_y: col_y},
         color_discrete_sequence=["#7c9cbf"],
         opacity=0.7,
     )
+
+    # Add numpy trendline (no statsmodels/scipy needed)
+    if len(x) >= 2:
+        m, b = np.polyfit(x, y, 1)
+        x_line = np.linspace(x.min(), x.max(), 100)
+        y_line = m * x_line + b
+        fig.add_trace(go.Scatter(
+            x=x_line, y=y_line,
+            mode="lines",
+            line=dict(color=TEAL, width=2),
+            name="Trend",
+        ))
 
     return {
         "id": "chart_6",
