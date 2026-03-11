@@ -88,6 +88,6 @@ export async function POST(request) {
     return NextResponse.json({ answer })
   } catch (err) {
     console.error('Claude API error:', err)
-    return NextResponse.json({ detail: 'Could not get a response. Please try again.' }, { status: 500 })
+    return NextResponse.json({ detail: `${err?.constructor?.name}: ${String(err?.message || err).slice(0, 300)}` }, { status: 500 })
   }
 }
