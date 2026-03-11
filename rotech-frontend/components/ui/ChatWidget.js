@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { supabase } from '@/lib/supabase'
 
-const API = process.env.NEXT_PUBLIC_API_URL
 
 const SUGGESTIONS = [
   'What is a pivot table?',
@@ -64,7 +63,7 @@ export default function ChatWidget() {
         return
       }
 
-      const res = await fetch(`${API}/api/chat`, {
+      const res = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -76,8 +75,13 @@ export default function ChatWidget() {
       const data = await res.json()
 
       if (!res.ok) {
-        const errDetail = data?.detail || JSON.stringify(data) || ''
-        const errText = `Debug [${res.status}]: ${errDetail}`
+        const errText = res.status === 429
+          ? 'You are sending messages too fast. Please wait a moment and try again.'
+          : res.status === 401
+          ? 'Please log in to use the chat.'
+          : res.status === 503
+          ? 'The AI service is being set up. Please check back shortly.'
+          : 'Sorry, I could not get a response right now. Please try again.'
         setMessages(prev => [...prev, { role: 'bot', text: errText }])
       } else {
         setMessages(prev => [...prev, { role: 'bot', text: data.answer }])
