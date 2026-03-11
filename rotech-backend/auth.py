@@ -1,38 +1,41 @@
 import os
 import logging
+import jwt
 from fastapi import Header, HTTPException
-from supabase import create_client, Client
 
 logger = logging.getLogger("rotech.auth")
 
-_supabase: Client | None = None
-
-def _get_supabase() -> Client:
-    global _supabase
-    if _supabase is None:
-        url = os.getenv("SUPABASE_URL")
-        key = os.getenv("SUPABASE_SERVICE_KEY")
-        if not url or not key:
-            raise RuntimeError("SUPABASE_URL and SUPABASE_SERVICE_KEY must be set.")
-        _supabase = create_client(url, key)
-    return _supabase
-
 
 def get_current_user(authorization: str = Header(None)) -> str:
-    """Verify token via Supabase auth and return the user's ID."""
+    """Verify Supabase JWT and return the user's ID."""
     if not authorization or not authorization.startswith("Bearer "):
         raise HTTPException(status_code=401, detail="Please log in to continue.")
 
     token = authorization.split(" ", 1)[1]
 
+    jwt_secret = os.getenv("SUPABASE_JWT_SECRET")
+    if not jwt_secret:
+        logger.error("SUPABASE_JWT_SECRET is not set.")
+        raise HTTPException(status_code=503, detail="Auth service misconfigured. Contact support.")
+
     try:
-        response = _get_supabase().auth.get_user(token)
-        user = response.user
-        if not user or not user.id:
+        payload = jwt.decode(
+            token,
+            jwt_secret,
+            algorithms=["HS256"],
+            options={"verify_aud": False},
+        )
+        user_id = payload.get("sub")
+        if not user_id:
             raise HTTPException(status_code=401, detail="Session invalid. Please log in again.")
-        return user.id
+        return user_id
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="Your session has expired. Please log in again.")
+    except jwt.InvalidTokenError as exc:
+        logger.warning("Invalid JWT: %s", exc)
+        raise HTTPException(status_code=401, detail="Session invalid. Please log in again.")
     except HTTPException:
         raise
     except Exception as exc:
-        logger.error("Token verification failed: %s", type(exc).__name__, exc)
-        raise HTTPException(status_code=403, detail=f"Auth error: {type(exc).__name__}: {str(exc)[:200]}")
+        logger.error("Auth error: %s", exc, exc_info=True)
+        raise HTTPException(status_code=401, detail="Authentication failed. Please log in again.")
