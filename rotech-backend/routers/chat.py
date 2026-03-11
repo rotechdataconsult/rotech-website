@@ -5,8 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
 
 from limiter import limiter
-from routers.upload import get_current_user
-from services.ai import _get_client
+from auth import get_current_user
 
 router = APIRouter()
 logger = logging.getLogger("rotech.chat")
@@ -41,12 +40,22 @@ async def chat(
     body: ChatRequest,
     user_id: str = Depends(get_current_user),
 ):
-    message = body.message.strip()[:1000]  # cap message length
+    message = body.message.strip()[:1000]
     if not message:
         raise HTTPException(status_code=400, detail="Message cannot be empty.")
 
+    api_key = os.getenv("ANTHROPIC_API_KEY")
+    if not api_key:
+        logger.error("ANTHROPIC_API_KEY is not set in environment variables.")
+        raise HTTPException(
+            status_code=503,
+            detail="AI service is not configured. Please contact support.",
+        )
+
     try:
-        response = _get_client().messages.create(
+        import anthropic
+        client = anthropic.Anthropic(api_key=api_key)
+        response = client.messages.create(
             model="claude-haiku-4-5-20251001",
             max_tokens=400,
             system=SYSTEM_PROMPT,
