@@ -406,13 +406,23 @@ export default function AnalystPage() {
       const data = await res.json()
 
       if (!res.ok) {
-        setError(data.detail?.error ?? data.error ?? 'Analysis failed.')
+        const raw = data.detail?.error ?? data.error ?? ''
+        if (res.status === 429)
+          setError('You have uploaded too many files in a short time. Please wait a minute and try again.')
+        else if (res.status === 401)
+          setError('Your session has expired. Please log out and log back in.')
+        else if (raw.toLowerCase().includes('parse') || raw.toLowerCase().includes('could not'))
+          setError('We could not read this file. Make sure it is a valid CSV or Excel file and try again.')
+        else if (raw.toLowerCase().includes('10 mb') || raw.toLowerCase().includes('limit'))
+          setError('Your file is too large. Please upload a file smaller than 10 MB.')
+        else
+          setError('Analysis could not be completed. Please check your file and try again.')
       } else {
         setResult(data)
         setActiveTab('cleaning')
       }
     } catch {
-      setError('Cannot reach the analysis server. Check your internet connection or try again later.')
+      setError('Could not reach the analysis server. Please check your internet connection and try again.')
     } finally {
       setUploading(false)
     }
@@ -495,9 +505,21 @@ export default function AnalystPage() {
 
             {/* Error */}
             {error && (
-              <p className="text-sm text-red-400 bg-red-950 border border-red-800 rounded-lg px-4 py-3">
-                {error}
-              </p>
+              <div className="bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-3 space-y-2">
+                <div className="flex gap-2">
+                  <span className="text-red-400 shrink-0">⚠</span>
+                  <p className="text-sm text-red-400">{error}</p>
+                </div>
+                <p className="text-xs text-[#C8D4E8] pl-5">
+                  Need help? Make sure your file has column headers in the first row and contains at least 10 rows of data.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => { setError(null); setFile(null) }}
+                  className="text-xs pl-5 text-[#9B4FDE] underline hover:text-white transition-colors">
+                  Clear and try a different file
+                </button>
+              </div>
             )}
 
             {/* Submit */}
