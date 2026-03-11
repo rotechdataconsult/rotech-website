@@ -12,14 +12,22 @@ from services.stats import generate_stats
 from services.charts import generate_charts
 from services.ai import generate_insights
 from limiter import limiter
-from auth import get_current_user, _get_supabase as _get_auth_supabase
+from auth import get_current_user
 
 router = APIRouter()
 logger = logging.getLogger("rotech.upload")
 
+_supabase: Client | None = None
 
 def _get_supabase() -> Client:
-    return _get_auth_supabase()
+    global _supabase
+    if _supabase is None:
+        url = os.getenv("SUPABASE_URL")
+        key = os.getenv("SUPABASE_SERVICE_KEY")
+        if not url or not key:
+            raise RuntimeError("SUPABASE_URL and SUPABASE_SERVICE_KEY must be set.")
+        _supabase = create_client(url, key)
+    return _supabase
 
 
 # ── Constants ──────────────────────────────────────────────────────────────────
