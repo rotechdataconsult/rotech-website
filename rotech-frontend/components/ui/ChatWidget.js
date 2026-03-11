@@ -76,10 +76,13 @@ export default function ChatWidget() {
       const data = await res.json()
 
       if (!res.ok) {
+        const errDetail = data?.detail || ''
         const errText = res.status === 429
           ? 'You are sending messages too fast. Please wait a moment and try again.'
           : res.status === 401
           ? 'Your session has expired. Please log out and log back in.'
+          : res.status === 403
+          ? `Debug: ${errDetail}`
           : res.status === 503
           ? 'The AI service is being set up. Please check back shortly.'
           : 'Sorry, I could not get a response right now. Please try again.'

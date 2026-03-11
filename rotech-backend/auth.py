@@ -34,5 +34,5 @@ def get_current_user(authorization: str = Header(None)) -> str:
     except HTTPException:
         raise
     except Exception as exc:
-        logger.error("Token verification failed: %s", exc)
-        raise HTTPException(status_code=401, detail="Session invalid. Please log in again.")
+        logger.error("Token verification failed: %s", type(exc).__name__, exc)
+        raise HTTPException(status_code=403, detail=f"Auth error: {type(exc).__name__}: {str(exc)[:200]}")
