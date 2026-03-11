@@ -21,6 +21,7 @@ export default function AdminLessonsPage() {
   const [selectedDomain, setSelectedDomain] = useState('')
   const [selectedModule, setSelectedModule] = useState('')
   const [form,           setForm]           = useState(EMPTY)
+  const [editingId,      setEditingId]      = useState(null)   // lesson id being edited
   const [saving,         setSaving]         = useState(false)
   const [error,          setError]          = useState('')
   const [success,        setSuccess]        = useState('')
@@ -37,6 +38,7 @@ export default function AdminLessonsPage() {
     setSelectedModule('')
     setModules([])
     setLessons([])
+    cancelEdit()
     if (!selectedDomain) return
     supabase.from('modules').select('id, title, order_index').eq('domain_id', selectedDomain).order('order_index')
       .then(({ data }) => setModules(data ?? []))
@@ -44,6 +46,7 @@ export default function AdminLessonsPage() {
 
   useEffect(() => {
     setLessons([])
+    cancelEdit()
     if (!selectedModule) return
     loadLessons()
   }, [selectedModule])
@@ -61,25 +64,61 @@ export default function AdminLessonsPage() {
     setSuccess('')
   }
 
+  // ── Edit mode ────────────────────────────────────────────────────────────
+  function startEdit(lesson) {
+    setEditingId(lesson.id)
+    setForm({
+      title:       lesson.title ?? '',
+      content:     lesson.content ?? '',
+      lesson_type: lesson.lesson_type ?? 'reading',
+      order_index: String(lesson.order_index ?? ''),
+      dataset_url: lesson.dataset_url ?? '',
+    })
+    setError('')
+    setSuccess('')
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  function cancelEdit() {
+    setEditingId(null)
+    setForm(EMPTY)
+    setError('')
+    setSuccess('')
+  }
+
+  // ── Submit — insert or update ─────────────────────────────────────────────
   async function handleSubmit(e) {
     e.preventDefault()
-    if (!selectedModule)    { setError('Select a module first.'); return }
-    if (!form.title.trim()) { setError('Title is required.'); return }
+    if (!selectedModule)      { setError('Select a module first.'); return }
+    if (!form.title.trim())   { setError('Title is required.'); return }
     if (!form.content.trim()) { setError('Content is required.'); return }
     setSaving(true)
-    const { error: err } = await supabase.from('lessons').insert({
-      module_id:   selectedModule,
+    setError('')
+
+    const payload = {
       title:       form.title.trim(),
       content:     form.content.trim(),
       lesson_type: form.lesson_type,
       order_index: parseInt(form.order_index) || lessons.length + 1,
       dataset_url: form.dataset_url.trim() || null,
-    })
+    }
+
+    let err
+    if (editingId) {
+      // UPDATE existing lesson
+      const res = await supabase.from('lessons').update(payload).eq('id', editingId)
+      err = res.error
+    } else {
+      // INSERT new lesson
+      const res = await supabase.from('lessons').insert({ ...payload, module_id: selectedModule })
+      err = res.error
+    }
+
     if (err) {
       setError(err.message)
     } else {
-      setSuccess('Lesson added.')
-      setForm({ ...EMPTY, order_index: String(lessons.length + 2) })
+      setSuccess(editingId ? 'Lesson updated.' : 'Lesson added.')
+      cancelEdit()
       await loadLessons()
     }
     setSaving(false)
@@ -89,6 +128,7 @@ export default function AdminLessonsPage() {
     if (!confirm('Delete this lesson?')) return
     await supabase.from('lessons').delete().eq('id', id)
     setLessons(prev => prev.filter(l => l.id !== id))
+    if (editingId === id) cancelEdit()
   }
 
   if (authLoading || dataLoading) return <PageSpinner />
@@ -127,8 +167,21 @@ export default function AdminLessonsPage() {
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
 
         {/* ── Form ────────────────────────────────────────────────────────── */}
-        <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-6">
-          <h2 className="text-sm font-bold text-white mb-5">Add Lesson</h2>
+        <div className={`border rounded-xl p-6 ${editingId ? 'bg-[#4a1580] border-[#9B4FDE]/60' : 'bg-[#7B2FBE] border-[#9B4FDE]/30'}`}>
+          <div className="flex items-center justify-between mb-5">
+            <h2 className="text-sm font-bold text-white">
+              {editingId ? '&#9998; Edit Lesson' : 'Add Lesson'}
+            </h2>
+            {editingId && (
+              <button
+                onClick={cancelEdit}
+                className="text-xs px-3 py-1.5 rounded-lg border border-[#9B4FDE]/40 text-[#C8D4E8] hover:text-white hover:border-[#9B4FDE] transition-colors"
+              >
+                &#10005; Cancel Edit
+              </button>
+            )}
+          </div>
+
           <form onSubmit={handleSubmit} className="space-y-4">
 
             <div>
@@ -168,7 +221,8 @@ export default function AdminLessonsPage() {
               </label>
               <textarea
                 name="content" value={form.content} onChange={handleChange}
-                rows={10} placeholder="## Lesson Title&#10;&#10;Write lesson content here. Markdown is supported.&#10;&#10;- Bullet point&#10;- Another point"
+                rows={12}
+                placeholder="## Lesson Title&#10;&#10;Write lesson content here..."
                 className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#C8D4E8] focus:outline-none focus:border-[#9B4FDE] transition resize-y font-mono"
               />
             </div>
@@ -177,7 +231,7 @@ export default function AdminLessonsPage() {
               <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">Dataset URL (optional)</label>
               <input
                 name="dataset_url" value={form.dataset_url} onChange={handleChange}
-                placeholder="https://..."
+                placeholder="https://drive.google.com/..."
                 className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#C8D4E8] focus:outline-none focus:border-[#9B4FDE] transition"
               />
             </div>
@@ -185,9 +239,16 @@ export default function AdminLessonsPage() {
             {error   && <p className="text-red-400 text-xs bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">{error}</p>}
             {success && <p className="text-green-400 text-xs bg-green-500/10 border border-green-500/30 rounded-lg px-3 py-2">{success}</p>}
 
-            <Button type="submit" fullWidth disabled={saving || !selectedModule}>
-              {saving ? 'Saving...' : 'Add Lesson'}
-            </Button>
+            <div className="flex gap-3">
+              <Button type="submit" fullWidth disabled={saving || !selectedModule}>
+                {saving ? 'Saving...' : editingId ? 'Update Lesson' : 'Add Lesson'}
+              </Button>
+              {editingId && (
+                <Button type="button" variant="outline" onClick={cancelEdit}>
+                  Cancel
+                </Button>
+              )}
+            </div>
           </form>
         </div>
 
@@ -196,25 +257,42 @@ export default function AdminLessonsPage() {
           <h2 className="text-sm font-bold text-white">
             {selectedModule ? `Lessons (${lessons.length})` : 'Select a module to view lessons'}
           </h2>
+
           {lessons.length === 0 && selectedModule && (
             <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-8 text-center">
               <p className="text-[#C8D4E8] text-sm">No lessons yet for this module.</p>
             </div>
           )}
-          <div className="space-y-2 max-h-[600px] overflow-y-auto pr-1">
+
+          <div className="space-y-2 max-h-[640px] overflow-y-auto pr-1">
             {lessons.map((lesson, i) => (
-              <div key={lesson.id} className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl px-4 py-3 flex items-center gap-3">
+              <div
+                key={lesson.id}
+                className={`border rounded-xl px-4 py-3 flex items-center gap-3 transition-colors ${
+                  editingId === lesson.id
+                    ? 'bg-[#4a1580] border-[#9B4FDE]/60'
+                    : 'bg-[#7B2FBE] border-[#9B4FDE]/30'
+                }`}
+              >
                 <span className="text-xs font-bold text-[#9B4FDE] w-6 shrink-0">{lesson.order_index ?? i + 1}</span>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-white truncate">{lesson.title}</p>
                   <p className="text-xs text-[#C8D4E8] mt-0.5 capitalize">{lesson.lesson_type}</p>
                 </div>
-                <button
-                  onClick={() => handleDelete(lesson.id)}
-                  className="shrink-0 text-xs px-2.5 py-1 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-500/10 transition-colors"
-                >
-                  Delete
-                </button>
+                <div className="flex gap-2 shrink-0">
+                  <button
+                    onClick={() => startEdit(lesson)}
+                    className="text-xs px-2.5 py-1 rounded-lg border border-[#9B4FDE]/40 text-[#C8D4E8] hover:text-white hover:border-[#9B4FDE] transition-colors"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(lesson.id)}
+                    className="text-xs px-2.5 py-1 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-500/10 transition-colors"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             ))}
           </div>

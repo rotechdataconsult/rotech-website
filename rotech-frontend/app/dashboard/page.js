@@ -95,6 +95,7 @@ export default function DashboardPage() {
           </span>
           <div className="flex items-center gap-4">
             <Link href="/resources" className="text-sm text-[#E8E0F0] hover:text-white transition-colors">Resources</Link>
+            <Link href="/data-entry" className="text-sm text-[#E8E0F0] hover:text-white transition-colors">Data Entry</Link>
             <Link href="/analyst" className="text-sm text-[#E8E0F0] hover:text-white transition-colors">Analyst Tool</Link>
             <span className="text-sm text-[#E8E0F0] font-medium">{profile?.full_name}</span>
             <button onClick={handleLogout} className="text-sm px-4 py-1.5 rounded-lg border border-[#9B4FDE]/40 text-[#E8E0F0] hover:border-[#9B4FDE] hover:text-white transition-colors">
@@ -179,6 +180,26 @@ export default function DashboardPage() {
                   ))}
                 </div>
               )}
+            </div>
+
+            {/* Quick tools */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <Link href="/data-entry"
+                className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-5 flex items-center gap-4 hover:border-[#9B4FDE]/60 transition-colors">
+                <span className="text-2xl">📝</span>
+                <div>
+                  <p className="text-sm font-bold text-white">Business Data Entry</p>
+                  <p className="text-xs text-[#E8E0F0] mt-0.5">Record sales, expenses & inventory</p>
+                </div>
+              </Link>
+              <Link href="/analyst"
+                className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-5 flex items-center gap-4 hover:border-[#9B4FDE]/60 transition-colors">
+                <span className="text-2xl">🤖</span>
+                <div>
+                  <p className="text-sm font-bold text-white">AI Analyst Tool</p>
+                  <p className="text-xs text-[#E8E0F0] mt-0.5">Upload data for AI-powered insights</p>
+                </div>
+              </Link>
             </div>
 
             {certificate && (

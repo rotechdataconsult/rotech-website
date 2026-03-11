@@ -73,9 +73,10 @@ function Navbar() {
           Rotech <span style={{ color: SILVER }}>Data Consult</span>
         </span>
         <div className="hidden sm:flex items-center gap-6 text-sm font-medium">
-          <a href="#courses" style={{ color: SOFT_WHITE }} className="hover:text-white transition-colors">Courses</a>
-          <a href="#analyst" style={{ color: SOFT_WHITE }} className="hover:text-white transition-colors">AI Analyst</a>
-          <a href="#tracks"  style={{ color: SOFT_WHITE }} className="hover:text-white transition-colors">Tracks</a>
+          <a href="#courses"    style={{ color: SOFT_WHITE }} className="hover:text-white transition-colors">Courses</a>
+          <a href="#analyst"   style={{ color: SOFT_WHITE }} className="hover:text-white transition-colors">AI Analyst</a>
+          <a href="#dataentry" style={{ color: SOFT_WHITE }} className="hover:text-white transition-colors">Data Entry</a>
+          <a href="#tracks"    style={{ color: SOFT_WHITE }} className="hover:text-white transition-colors">Tracks</a>
         </div>
         <div className="flex items-center gap-3">
           <Link
@@ -360,6 +361,98 @@ function TracksSection() {
   )
 }
 
+function DataEntrySection() {
+  return (
+    <section id="dataentry" className="py-20 px-6" style={{ backgroundColor: DEEP }}>
+      <div className="max-w-6xl mx-auto">
+        <div className="rounded-2xl border overflow-hidden" style={{ borderColor: `${LIGHT}30` }}>
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+
+            {/* Right — mock UI */}
+            <div className="p-8 flex flex-col gap-4 order-last lg:order-first" style={{ backgroundColor: `${DEEP}90` }}>
+              {/* Mock form */}
+              <div className="rounded-xl border p-5 space-y-3" style={{ backgroundColor: `${PURPLE}60`, borderColor: `${LIGHT}25` }}>
+                <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: SILVER }}>Record a Sale</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {[['Product', 'Indomie (carton)'], ['Quantity', '10'], ['Price (₦)', '3,200'], ['Payment', 'Cash']].map(([label, val]) => (
+                    <div key={label}>
+                      <p className="text-xs" style={{ color: SILVER }}>{label}</p>
+                      <p className="text-sm font-medium text-white">{val}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="h-px" style={{ backgroundColor: `${LIGHT}20` }} />
+                <div className="flex items-center justify-between text-sm">
+                  <span style={{ color: SOFT_WHITE }}>Total</span>
+                  <span className="font-bold text-white">₦32,000</span>
+                </div>
+              </div>
+              {/* Tabs */}
+              <div className="flex gap-2">
+                {[['💰', 'Sales'], ['📋', 'Expenses'], ['📦', 'Inventory']].map(([icon, label]) => (
+                  <div key={label} className="flex-1 rounded-lg px-3 py-2 text-center text-xs font-medium border"
+                    style={{ backgroundColor: label === 'Sales' ? `${LIGHT}30` : `${PURPLE}40`, borderColor: `${LIGHT}25`, color: label === 'Sales' ? 'white' : SILVER }}>
+                    {icon} {label}
+                  </div>
+                ))}
+              </div>
+              {/* Export hint */}
+              <div className="rounded-lg px-4 py-3 border text-xs" style={{ backgroundColor: `${PURPLE}40`, borderColor: `${LIGHT}20`, color: SOFT_WHITE }}>
+                📤 <strong className="text-white">Export CSV</strong> → Upload to AI Analyst for instant insights
+              </div>
+            </div>
+
+            {/* Left — copy */}
+            <div className="p-10 space-y-6 flex flex-col justify-center" style={{ backgroundColor: `${PURPLE}70` }}>
+              <div
+                className="inline-flex self-start items-center gap-2 text-xs font-semibold px-3 py-1 rounded-full border"
+                style={{ color: SILVER, borderColor: `${LIGHT}40`, backgroundColor: `${LIGHT}20` }}
+              >
+                📝 For Paper-Based Businesses
+              </div>
+              <h2 className="text-3xl font-extrabold text-white leading-tight">
+                Still Keeping Records on Paper?{' '}
+                <span style={{ background: `linear-gradient(135deg, ${SILVER}, ${LIGHT})`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                  We Got You.
+                </span>
+              </h2>
+              <p className="text-base leading-relaxed" style={{ color: SOFT_WHITE }}>
+                Enter your daily sales, expenses, and inventory directly on the platform.
+                No Excel needed. When you are ready, export the data and run it through our AI Analyst
+                to uncover patterns, spot problems, and make smarter decisions.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  'Record daily sales with product, quantity & payment method',
+                  'Track expenses by category — rent, supplies, salaries, utilities',
+                  'Monitor inventory levels with automatic low-stock alerts',
+                  'Export as CSV and analyse with AI in one click',
+                ].map(item => (
+                  <li key={item} className="flex items-center gap-3 text-sm" style={{ color: SOFT_WHITE }}>
+                    <svg className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                      strokeWidth={2.5} style={{ color: SILVER }}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <Link href="/auth/register"
+                className="self-start inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-bold text-sm transition-opacity hover:opacity-85"
+                style={{ backgroundColor: LIGHT }}>
+                Start Recording Free
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function CTA() {
   return (
     <section className="py-20 px-6" style={{ backgroundColor: DEEP }}>
@@ -430,6 +523,7 @@ export default function HomePage() {
       <Hero />
       <CoursesSection />
       <AISection />
+      <DataEntrySection />
       <TracksSection />
       <CTA />
       <Footer />
