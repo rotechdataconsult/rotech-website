@@ -1,20 +1,20 @@
 import os
 import json
-from openai import OpenAI
+import anthropic
 
 _client = None
 
-def _get_client() -> OpenAI:
+def _get_client() -> anthropic.Anthropic:
     global _client
     if _client is None:
-        _client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        _client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
     return _client
 
 FALLBACK = {
     "insights": [
         {
             "title": "Analysis Unavailable",
-            "finding": "AI insights could not be generated. Please check your API key.",
+            "finding": "AI insights could not be generated. Please check your API key configuration.",
             "significance": "low",
         }
     ],
@@ -43,7 +43,6 @@ def build_data_summary(stats: dict, domain: str, filename: str) -> str:
         "",
     ]
 
-    # Top numeric columns (max 4)
     if numeric:
         lines.append("── Numeric Column Statistics ──")
         for col, s in list(numeric.items())[:4]:
@@ -53,7 +52,6 @@ def build_data_summary(stats: dict, domain: str, filename: str) -> str:
             )
         lines.append("")
 
-    # Top categorical columns (max 3, top 5 values each)
     if categ:
         lines.append("── Categorical Column Distributions ──")
         for col, s in list(categ.items())[:3]:
@@ -67,7 +65,6 @@ def build_data_summary(stats: dict, domain: str, filename: str) -> str:
             )
         lines.append("")
 
-    # Outliers (only columns that have any)
     notable_outliers = {
         col: v for col, v in outliers.items() if v.get("outlier_count", 0) > 0
     }
@@ -80,7 +77,6 @@ def build_data_summary(stats: dict, domain: str, filename: str) -> str:
             )
         lines.append("")
 
-    # Correlations
     if corrs:
         lines.append("── Notable Correlations ──")
         for pair, v in list(corrs.items())[:5]:
@@ -97,9 +93,10 @@ def generate_insights(stats: dict, domain: str, filename: str) -> dict:
 
     system_message = (
         f"You are a senior data analyst specializing in {domain} analytics "
-        "in Africa and globally. You give specific, actionable insights based "
-        "on real data patterns. You never give generic advice. Every insight "
-        "must reference specific numbers from the data summary provided."
+        "for African businesses and globally. You give specific, actionable insights "
+        "based on real data patterns. You never give generic advice. Every insight "
+        "must reference specific numbers from the data summary provided. "
+        "Focus on insights that help business owners make better decisions."
     )
 
     user_message = (
@@ -123,19 +120,16 @@ def generate_insights(stats: dict, domain: str, filename: str) -> dict:
     )
 
     try:
-        response = _get_client().chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": system_message},
-                {"role": "user",   "content": user_message},
-            ],
-            temperature=0.4,
+        response = _get_client().messages.create(
+            model="claude-haiku-4-5-20251001",
             max_tokens=1200,
+            system=system_message,
+            messages=[{"role": "user", "content": user_message}],
         )
 
-        raw = response.choices[0].message.content.strip()
+        raw = response.content[0].text.strip()
 
-        # Strip markdown code fences if the model includes them anyway
+        # Strip markdown code fences if the model includes them
         if raw.startswith("```"):
             raw = raw.split("```")[1]
             if raw.startswith("json"):

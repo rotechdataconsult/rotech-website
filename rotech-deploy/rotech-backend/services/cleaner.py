@@ -46,7 +46,7 @@ def clean_dataset(df: pd.DataFrame) -> dict:
         if df[col].dtype == object:
             # Try datetime
             try:
-                converted = pd.to_datetime(df[col], infer_datetime_format=True, errors="raise")
+                converted = pd.to_datetime(df[col], errors="raise")
                 df[col] = converted
                 report["type_conversions"].append(f"'{col}': string → datetime")
                 continue
@@ -72,7 +72,7 @@ def clean_dataset(df: pd.DataFrame) -> dict:
         if pd.api.types.is_numeric_dtype(df[col]):
             df[col] = df[col].fillna(df[col].median())
         elif pd.api.types.is_datetime64_any_dtype(df[col]):
-            df[col] = df[col].fillna(method="ffill").fillna(method="bfill")
+            df[col] = df[col].ffill().bfill()
         else:
             df[col] = df[col].fillna("Unknown")
 
