@@ -7,7 +7,7 @@ export default function QuizQuestion({
   options,
   selected,
   onSelect,
-  revealed,      // true after submission — show correct/wrong
+  revealed,
   correctAnswer,
   explanation,
   index,
@@ -16,30 +16,29 @@ export default function QuizQuestion({
   function getStyle(option) {
     if (!revealed) {
       return selected === option
-        ? 'border-[#9B4FDE] bg-[#9B4FDE]/20 text-white'
-        : 'border-[#9B4FDE]/30 bg-[#6B28A8] text-[#E8E0F0] hover:border-[#9B4FDE]/60 hover:text-white'
+        ? { border: '1px solid #8B5CF6', backgroundColor: 'rgba(139,92,246,0.2)', color: 'white' }
+        : { border: '1px solid rgba(51,65,85,0.6)', backgroundColor: '#0F172A', color: '#CBD5E1' }
     }
-    if (option === correctAnswer)  return 'border-green-500 bg-green-500/15 text-green-300'
-    if (option === selected)       return 'border-red-500 bg-red-500/15 text-red-300'
-    return 'border-[#9B4FDE]/20 bg-[#6B28A8]/50 text-[#C8D4E8] opacity-60'
+    if (option === correctAnswer)  return { border: '1px solid #22c55e', backgroundColor: 'rgba(34,197,94,0.12)', color: '#86efac' }
+    if (option === selected)       return { border: '1px solid #ef4444', backgroundColor: 'rgba(239,68,68,0.12)', color: '#fca5a5' }
+    return { border: '1px solid rgba(51,65,85,0.3)', backgroundColor: 'rgba(15,23,42,0.5)', color: '#64748B', opacity: 0.6 }
   }
 
   return (
     <div className="space-y-5">
-      {/* Progress */}
-      <p className="text-xs text-[#C8D4E8]">Question {index + 1} of {total}</p>
-
-      {/* Question */}
+      <p className="text-xs text-slate-400">Question {index + 1} of {total}</p>
       <h3 className="text-white font-semibold text-base leading-relaxed">{question}</h3>
 
-      {/* Options */}
       <div className="space-y-3">
         {options.map((option, i) => (
           <button
             key={i}
             onClick={() => !revealed && onSelect(option)}
             disabled={revealed}
-            className={`w-full text-left flex items-start gap-3 px-4 py-3.5 rounded-xl border transition-all ${getStyle(option)}`}
+            className="w-full text-left flex items-start gap-3 px-4 py-3.5 rounded-xl transition-all"
+            style={getStyle(option)}
+            onMouseEnter={e => { if (!revealed && selected !== option) e.currentTarget.style.borderColor = 'rgba(139,92,246,0.5)' }}
+            onMouseLeave={e => { if (!revealed && selected !== option) e.currentTarget.style.borderColor = 'rgba(51,65,85,0.6)' }}
           >
             <span className="shrink-0 w-6 h-6 rounded-full border border-current flex items-center justify-center text-xs font-bold mt-0.5">
               {LETTERS[i]}
@@ -49,11 +48,10 @@ export default function QuizQuestion({
         ))}
       </div>
 
-      {/* Explanation after reveal */}
       {revealed && explanation && (
-        <div className="bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-xl px-4 py-3">
-          <p className="text-xs font-semibold text-[#9B4FDE] mb-1">Explanation</p>
-          <p className="text-sm text-[#E8E0F0] leading-relaxed">{explanation}</p>
+        <div className="rounded-xl px-4 py-3" style={{ backgroundColor: '#0F172A', border: '1px solid rgba(139,92,246,0.3)' }}>
+          <p className="text-xs font-semibold text-violet-400 mb-1">Explanation</p>
+          <p className="text-sm text-slate-300 leading-relaxed">{explanation}</p>
         </div>
       )}
     </div>

@@ -5,15 +5,15 @@ export default function ProgressBar({ value = 0, max = 100, showLabel = true, si
   return (
     <div className="w-full">
       {showLabel && (
-        <div className="flex justify-between mb-1.5 text-xs text-[#E8E0F0]">
+        <div className="flex justify-between mb-1.5 text-xs text-slate-400">
           <span>{value} of {max} completed</span>
-          <span className="font-bold" style={{ color: '#9B4FDE' }}>{pct}%</span>
+          <span className="font-bold" style={{ color: '#8B5CF6' }}>{pct}%</span>
         </div>
       )}
-      <div className={`w-full ${heights[size]} bg-[#6B28A8] rounded-full overflow-hidden`}>
+      <div className={`w-full ${heights[size]} rounded-full overflow-hidden`} style={{ backgroundColor: '#0F172A' }}>
         <div
           className="h-full rounded-full transition-all duration-500"
-          style={{ width: `${pct}%`, backgroundColor: '#9B4FDE' }}
+          style={{ width: `${pct}%`, background: 'linear-gradient(90deg, #6C3FD4, #8B5CF6)' }}
         />
       </div>
     </div>

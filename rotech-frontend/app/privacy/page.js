@@ -1,18 +1,12 @@
 import Link from 'next/link'
 
-const DEEP   = '#5a1f9a'
-const PURPLE = '#7B2FBE'
-const LIGHT  = '#9B4FDE'
-const SILVER = '#C8D4E8'
-const SOFT   = '#E8E0F0'
-
 const LAST_UPDATED = '11 March 2026'
 
 function Section({ title, children }) {
   return (
     <section className="space-y-3">
       <h2 className="text-base font-bold text-white">{title}</h2>
-      <div className="text-sm leading-relaxed space-y-3" style={{ color: SOFT }}>
+      <div className="text-sm leading-relaxed space-y-3 text-slate-300">
         {children}
       </div>
     </section>
@@ -24,7 +18,7 @@ function Bullet({ items }) {
     <ul className="space-y-1.5 pl-4">
       {items.map((item, i) => (
         <li key={i} className="flex items-start gap-2">
-          <span style={{ color: LIGHT }} className="mt-0.5 shrink-0">•</span>
+          <span className="mt-0.5 shrink-0" style={{ color: '#8B5CF6' }}>•</span>
           <span>{item}</span>
         </li>
       ))}
@@ -34,30 +28,34 @@ function Bullet({ items }) {
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: DEEP }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#0F172A' }}>
 
       {/* Nav */}
-      <nav className="border-b px-6 py-4 flex items-center justify-between" style={{ borderColor: `${LIGHT}25` }}>
-        <Link href="/" className="text-lg font-bold text-white">
-          Rotech <span style={{ color: SILVER }}>Data Consult</span>
-        </Link>
-        <Link href="/auth/register" className="text-sm font-semibold px-4 py-2 rounded-lg text-white"
-          style={{ backgroundColor: LIGHT }}>
-          Get Started
-        </Link>
+      <nav className="px-6 py-4 sticky top-0 z-40"
+        style={{ backgroundColor: 'rgba(15,23,42,0.97)', borderBottom: '1px solid rgba(51,65,85,0.6)', backdropFilter: 'blur(14px)' }}>
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
+          <Link href="/" className="text-lg font-extrabold tracking-tight text-white">
+            Rotech <span style={{ color: '#8B5CF6' }}>Data Consult</span>
+          </Link>
+          <Link href="/auth/register"
+            className="text-sm font-semibold px-4 py-2 rounded-lg text-white transition-all hover:opacity-90"
+            style={{ backgroundColor: '#6C3FD4' }}>
+            Get Started
+          </Link>
+        </div>
       </nav>
 
       <main className="max-w-3xl mx-auto px-6 py-14 space-y-10">
 
         {/* Header */}
         <div className="space-y-3">
-          <div className="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-full border"
-            style={{ color: SILVER, borderColor: `${LIGHT}40`, backgroundColor: `${PURPLE}50` }}>
+          <div className="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-full"
+            style={{ color: '#94A3B8', border: '1px solid rgba(139,92,246,0.35)', backgroundColor: 'rgba(30,41,59,0.6)' }}>
             🔒 Data Protection Policy
           </div>
           <h1 className="text-3xl font-extrabold text-white">Privacy & Data Protection Policy</h1>
-          <p className="text-sm" style={{ color: SILVER }}>Last updated: {LAST_UPDATED}</p>
-          <p className="text-sm leading-relaxed" style={{ color: SOFT }}>
+          <p className="text-sm text-slate-400">Last updated: {LAST_UPDATED}</p>
+          <p className="text-sm leading-relaxed text-slate-300">
             This policy explains how Rotech Data Consult collects, uses, stores, and protects
             your personal and business data. It is compliant with the{' '}
             <strong className="text-white">Nigeria Data Protection Regulation (NDPR) 2019</strong>{' '}
@@ -65,9 +63,8 @@ export default function PrivacyPage() {
           </p>
         </div>
 
-        <div className="h-px" style={{ backgroundColor: `${LIGHT}20` }} />
+        <div className="h-px" style={{ backgroundColor: 'rgba(51,65,85,0.5)' }} />
 
-        {/* 1 */}
         <Section title="1. Who We Are">
           <p>
             Rotech Data Consult is a Nigerian data analytics education and business intelligence platform.
@@ -77,14 +74,13 @@ export default function PrivacyPage() {
           <p>
             <strong className="text-white">Data Controller:</strong> Rotech Data Consult<br />
             <strong className="text-white">Contact:</strong>{' '}
-            <a href="mailto:privacy@rotechdataconsult.com" style={{ color: LIGHT }}
+            <a href="mailto:privacy@rotechdataconsult.com" style={{ color: '#8B5CF6' }}
               className="hover:underline">
               privacy@rotechdataconsult.com
             </a>
           </p>
         </Section>
 
-        {/* 2 */}
         <Section title="2. What Data We Collect">
           <p><strong className="text-white">Account Data:</strong></p>
           <Bullet items={[
@@ -115,7 +111,6 @@ export default function PrivacyPage() {
           ]} />
         </Section>
 
-        {/* 3 */}
         <Section title="3. How We Use Your Data">
           <Bullet items={[
             'To create and manage your account',
@@ -131,7 +126,6 @@ export default function PrivacyPage() {
           </p>
         </Section>
 
-        {/* 4 */}
         <Section title="4. How Your Business Data Is Protected">
           <p>
             We take the protection of your business data extremely seriously. The following
@@ -145,7 +139,6 @@ export default function PrivacyPage() {
           ]} />
         </Section>
 
-        {/* 5 */}
         <Section title="5. Data Sharing">
           <p>We share your data <strong className="text-white">only</strong> in the following limited cases:</p>
           <Bullet items={[
@@ -159,7 +152,6 @@ export default function PrivacyPage() {
           </p>
         </Section>
 
-        {/* 6 */}
         <Section title="6. How Long We Keep Your Data">
           <Bullet items={[
             'Account and learning data — retained for as long as your account is active.',
@@ -169,7 +161,6 @@ export default function PrivacyPage() {
           ]} />
         </Section>
 
-        {/* 7 */}
         <Section title="7. Your Rights Under NDPR/NDPA">
           <p>As a data subject, you have the following rights:</p>
           <Bullet items={[
@@ -182,13 +173,12 @@ export default function PrivacyPage() {
           ]} />
           <p>
             To exercise any of these rights, email us at{' '}
-            <a href="mailto:privacy@rotechdataconsult.com" style={{ color: LIGHT }} className="hover:underline">
+            <a href="mailto:privacy@rotechdataconsult.com" style={{ color: '#8B5CF6' }} className="hover:underline">
               privacy@rotechdataconsult.com
             </a>. We will respond within <strong className="text-white">72 hours</strong>.
           </p>
         </Section>
 
-        {/* 8 */}
         <Section title="8. Cookies">
           <p>
             We use only essential session cookies required for authentication. We do not use
@@ -196,7 +186,6 @@ export default function PrivacyPage() {
           </p>
         </Section>
 
-        {/* 9 */}
         <Section title="9. Children's Privacy">
           <p>
             Our platform is intended for users aged <strong className="text-white">16 and above</strong>.
@@ -205,7 +194,6 @@ export default function PrivacyPage() {
           </p>
         </Section>
 
-        {/* 10 */}
         <Section title="10. Changes to This Policy">
           <p>
             We may update this policy to reflect changes in our services or legal requirements.
@@ -215,11 +203,10 @@ export default function PrivacyPage() {
           </p>
         </Section>
 
-        {/* 11 */}
         <Section title="11. Contact & Complaints">
           <p>
             For any privacy-related questions or concerns, contact us at:{' '}
-            <a href="mailto:privacy@rotechdataconsult.com" style={{ color: LIGHT }} className="hover:underline">
+            <a href="mailto:privacy@rotechdataconsult.com" style={{ color: '#8B5CF6' }} className="hover:underline">
               privacy@rotechdataconsult.com
             </a>
           </p>
@@ -230,10 +217,9 @@ export default function PrivacyPage() {
           </p>
         </Section>
 
-        <div className="h-px" style={{ backgroundColor: `${LIGHT}20` }} />
+        <div className="h-px" style={{ backgroundColor: 'rgba(51,65,85,0.5)' }} />
 
-        {/* Footer nav */}
-        <div className="flex flex-wrap gap-4 text-sm" style={{ color: SILVER }}>
+        <div className="flex flex-wrap gap-4 text-sm text-slate-400">
           <Link href="/" className="hover:text-white transition-colors">← Back to Home</Link>
           <Link href="/auth/register" className="hover:text-white transition-colors">Create Account</Link>
           <Link href="/auth/login" className="hover:text-white transition-colors">Login</Link>
@@ -241,7 +227,8 @@ export default function PrivacyPage() {
 
       </main>
 
-      <footer className="border-t px-6 py-6 text-center text-xs" style={{ borderColor: `${LIGHT}20`, color: SILVER }}>
+      <footer className="px-6 py-6 text-center text-xs text-slate-500"
+        style={{ borderTop: '1px solid rgba(51,65,85,0.4)' }}>
         © {new Date().getFullYear()} Rotech Data Consult. All rights reserved.
       </footer>
     </div>

@@ -18,11 +18,11 @@ export default function Button({
 
   const variants = {
     primary: 'text-white font-semibold rounded-lg disabled:opacity-60 disabled:cursor-not-allowed',
-    outline: 'font-semibold rounded-lg border border-[#9B4FDE]/50 text-[#9B4FDE] hover:bg-[#9B4FDE] hover:text-white transition-all disabled:opacity-40 disabled:cursor-not-allowed',
-    ghost:   'font-medium rounded-lg text-[#C8D4E8] hover:text-white transition-colors disabled:opacity-40',
+    outline: 'font-semibold rounded-lg border border-violet-500/50 text-violet-400 hover:bg-violet-600 hover:text-white hover:border-violet-600 transition-all disabled:opacity-40 disabled:cursor-not-allowed',
+    ghost:   'font-medium rounded-lg text-slate-400 hover:text-white transition-colors disabled:opacity-40',
   }
 
-  const primaryStyle = variant === 'primary' ? { backgroundColor: '#9B4FDE' } : {}
+  const primaryStyle = variant === 'primary' ? { backgroundColor: '#6C3FD4' } : {}
 
   return (
     <button

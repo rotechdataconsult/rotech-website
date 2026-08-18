@@ -2,7 +2,7 @@ export default function Spinner({ size = 8, className = '' }) {
   return (
     <svg
       className={`animate-spin h-${size} w-${size} ${className}`}
-      style={{ color: '#9B4FDE' }}
+      style={{ color: '#8B5CF6' }}
       fill="none"
       viewBox="0 0 24 24"
     >
@@ -14,7 +14,7 @@ export default function Spinner({ size = 8, className = '' }) {
 
 export function PageSpinner() {
   return (
-    <div className="min-h-screen bg-[#5a1f9a] flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#0F172A' }}>
       <Spinner size={8} />
     </div>
   )

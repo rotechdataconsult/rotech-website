@@ -84,11 +84,11 @@ export default function AdminModulesPage() {
 
       {/* Domain selector */}
       <div className="mb-6 flex items-center gap-3">
-        <label className="text-xs font-medium text-[#E8E0F0] shrink-0">Domain:</label>
+        <label className="text-xs font-medium text-slate-300 shrink-0">Domain:</label>
         <select
           value={selectedDomain}
           onChange={e => setSelectedDomain(e.target.value)}
-          className="bg-[#7B2FBE] border border-[#9B4FDE]/40 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-[#9B4FDE] transition cursor-pointer"
+          className="bg-[#1E293B] border border-slate-700 rounded-lg px-4 py-2 text-sm text-white focus:outline-none focus:border-violet-500 transition cursor-pointer"
         >
           <option value="">Choose a domain...</option>
           {domains.map(d => <option key={d.id} value={d.id}>{d.icon} {d.title}</option>)}
@@ -98,46 +98,46 @@ export default function AdminModulesPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
         {/* ── Form ────────────────────────────────────────────────────────── */}
-        <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-6">
+        <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-6">
           <h2 className="text-sm font-bold text-white mb-5">Add Module</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
 
             <div>
-              <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">Title *</label>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">Title *</label>
               <input
                 name="title" value={form.title} onChange={handleChange}
                 placeholder="e.g. Introduction to Financial Data"
-                className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#C8D4E8] focus:outline-none focus:border-[#9B4FDE] transition"
+                className="w-full bg-[#0F172A] border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">Tool</label>
+                <label className="block text-xs font-medium text-slate-300 mb-1.5">Tool</label>
                 <select
                   name="tool" value={form.tool} onChange={handleChange}
-                  className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-[#9B4FDE] transition cursor-pointer"
+                  className="w-full bg-[#0F172A] border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-violet-500 transition cursor-pointer"
                 >
                   <option value="">No tool</option>
                   {TOOLS.map(t => <option key={t} value={t}>{t}</option>)}
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">Order</label>
+                <label className="block text-xs font-medium text-slate-300 mb-1.5">Order</label>
                 <input
                   name="order_index" value={form.order_index} onChange={handleChange}
                   type="number" min="1" placeholder={modules.length + 1}
-                  className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-3 py-2.5 text-sm text-white placeholder-[#C8D4E8] focus:outline-none focus:border-[#9B4FDE] transition"
+                  className="w-full bg-[#0F172A] border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">Description</label>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">Description</label>
               <textarea
                 name="description" value={form.description} onChange={handleChange}
                 rows={3} placeholder="What students will learn in this module..."
-                className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#C8D4E8] focus:outline-none focus:border-[#9B4FDE] transition resize-none"
+                className="w-full bg-[#0F172A] border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition resize-none"
               />
             </div>
 
@@ -156,17 +156,17 @@ export default function AdminModulesPage() {
             {selectedDomain ? `Modules (${modules.length})` : 'Select a domain to view modules'}
           </h2>
           {modules.length === 0 && selectedDomain && (
-            <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-8 text-center">
-              <p className="text-[#C8D4E8] text-sm">No modules yet for this domain.</p>
+            <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-8 text-center">
+              <p className="text-slate-400 text-sm">No modules yet for this domain.</p>
             </div>
           )}
           <div className="space-y-2 max-h-[480px] overflow-y-auto pr-1">
             {modules.map((mod, i) => (
-              <div key={mod.id} className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl px-4 py-3 flex items-center gap-3">
-                <span className="text-xs font-bold text-[#9B4FDE] w-6 shrink-0">{mod.order_index ?? i + 1}</span>
+              <div key={mod.id} className="bg-[#1E293B] border border-slate-700/50 rounded-xl px-4 py-3 flex items-center gap-3">
+                <span className="text-xs font-bold text-violet-400 w-6 shrink-0">{mod.order_index ?? i + 1}</span>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-white truncate">{mod.title}</p>
-                  {mod.tool && <p className="text-xs text-[#C8D4E8] mt-0.5">{mod.tool}</p>}
+                  {mod.tool && <p className="text-xs text-slate-400 mt-0.5">{mod.tool}</p>}
                 </div>
                 <button
                   onClick={() => handleDelete(mod.id)}

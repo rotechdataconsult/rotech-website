@@ -1,12 +1,6 @@
 import Link from 'next/link'
 import { ComingSoonBadge } from '@/components/ui/ComingSoon'
 
-const DEEP   = '#5a1f9a'
-const PURPLE = '#7B2FBE'
-const LIGHT  = '#9B4FDE'
-const SILVER = '#C8D4E8'
-const SOFT   = '#E8E0F0'
-
 const PLANS = [
   {
     name: 'Free',
@@ -70,23 +64,26 @@ const PLANS = [
 
 export default function PricingPage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: DEEP }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#0F172A' }}>
 
       {/* Nav */}
-      <nav className="border-b px-6 py-4 flex items-center justify-between" style={{ borderColor: `${LIGHT}25` }}>
-        <Link href="/" className="text-lg font-bold text-white">
-          Rotech <span style={{ color: SILVER }}>Data Consult</span>
-        </Link>
-        <div className="flex items-center gap-3">
-          <Link href="/auth/login"
-            className="text-sm font-medium text-[#E8E0F0] hover:text-white transition-colors px-3 py-1.5">
-            Login
+      <nav className="px-6 py-4 sticky top-0 z-40"
+        style={{ backgroundColor: 'rgba(15,23,42,0.97)', borderBottom: '1px solid rgba(51,65,85,0.6)', backdropFilter: 'blur(14px)' }}>
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
+          <Link href="/" className="text-lg font-extrabold tracking-tight text-white">
+            Rotech <span style={{ color: '#8B5CF6' }}>Data Consult</span>
           </Link>
-          <Link href="/auth/register"
-            className="text-sm font-semibold px-4 py-2 rounded-lg text-white"
-            style={{ backgroundColor: LIGHT }}>
-            Get Started Free
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link href="/auth/login"
+              className="text-sm font-medium text-slate-400 hover:text-white transition-colors px-3 py-1.5">
+              Login
+            </Link>
+            <Link href="/auth/register"
+              className="text-sm font-semibold px-4 py-2 rounded-lg text-white transition-all hover:opacity-90"
+              style={{ backgroundColor: '#6C3FD4' }}>
+              Get Started Free
+            </Link>
+          </div>
         </div>
       </nav>
 
@@ -95,12 +92,12 @@ export default function PricingPage() {
         {/* Header */}
         <div className="text-center space-y-4">
           <h1 className="text-4xl font-extrabold text-white">Simple, Transparent Pricing</h1>
-          <p className="text-lg max-w-xl mx-auto" style={{ color: SOFT }}>
+          <p className="text-lg text-slate-300 max-w-xl mx-auto">
             Start free. Upgrade when your business grows. No hidden fees.
           </p>
-          <div className="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full border"
-            style={{ color: SILVER, borderColor: `${LIGHT}40`, backgroundColor: `${LIGHT}15` }}>
-            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: LIGHT }} />
+          <div className="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full"
+            style={{ color: '#94A3B8', border: '1px solid rgba(139,92,246,0.35)', backgroundColor: 'rgba(108,63,212,0.12)' }}>
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: '#8B5CF6' }} />
             Pro & Team plans launching soon — join free now to be first in line
           </div>
         </div>
@@ -109,16 +106,18 @@ export default function PricingPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {PLANS.map(plan => (
             <div key={plan.name}
-              className={`rounded-2xl p-7 border flex flex-col gap-6 relative ${
-                plan.highlight
-                  ? 'border-[#9B4FDE] bg-[#7B2FBE]'
-                  : 'border-[#9B4FDE]/30 bg-[#7B2FBE]/60'
-              }`}>
+              className="rounded-2xl p-7 flex flex-col gap-6 relative"
+              style={{
+                backgroundColor: plan.highlight ? '#1E3A5F' : '#1E293B',
+                border: plan.highlight
+                  ? '1px solid rgba(139,92,246,0.6)'
+                  : '1px solid rgba(51,65,85,0.5)',
+              }}>
 
               {plan.highlight && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                   <span className="text-xs font-bold px-3 py-1 rounded-full text-white"
-                    style={{ backgroundColor: LIGHT }}>
+                    style={{ backgroundColor: '#6C3FD4' }}>
                     Most Popular
                   </span>
                 </div>
@@ -131,16 +130,16 @@ export default function PricingPage() {
                 </div>
                 <div className="flex items-baseline gap-1">
                   <span className="text-3xl font-extrabold text-white">{plan.price}</span>
-                  <span className="text-sm" style={{ color: SILVER }}>{plan.period}</span>
+                  <span className="text-sm text-slate-400">{plan.period}</span>
                 </div>
-                <p className="text-sm mt-2" style={{ color: SOFT }}>{plan.description}</p>
+                <p className="text-sm mt-2 text-slate-300">{plan.description}</p>
               </div>
 
               <ul className="space-y-2.5 flex-1">
                 {plan.features.map(f => (
-                  <li key={f} className="flex items-start gap-2.5 text-sm" style={{ color: SOFT }}>
+                  <li key={f} className="flex items-start gap-2.5 text-sm text-slate-300">
                     <svg className="h-4 w-4 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24"
-                      stroke="currentColor" strokeWidth={2.5} style={{ color: LIGHT }}>
+                      stroke="currentColor" strokeWidth={2.5} style={{ color: '#8B5CF6' }}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                     {f}
@@ -150,13 +149,14 @@ export default function PricingPage() {
 
               {plan.active ? (
                 <Link href={plan.href}
-                  className="block w-full text-center font-semibold rounded-xl px-4 py-3 text-sm text-white transition-opacity hover:opacity-85"
-                  style={{ backgroundColor: LIGHT }}>
+                  className="block w-full text-center font-semibold rounded-xl px-4 py-3 text-sm text-white transition-all hover:opacity-90"
+                  style={{ backgroundColor: '#6C3FD4' }}>
                   {plan.cta}
                 </Link>
               ) : (
                 <button disabled
-                  className="w-full font-semibold rounded-xl px-4 py-3 text-sm text-white cursor-not-allowed opacity-50 border border-[#9B4FDE]/40">
+                  className="w-full font-semibold rounded-xl px-4 py-3 text-sm text-slate-500 cursor-not-allowed"
+                  style={{ border: '1px solid rgba(51,65,85,0.4)', backgroundColor: 'rgba(15,23,42,0.4)' }}>
                   {plan.cta}
                 </button>
               )}
@@ -185,19 +185,20 @@ export default function PricingPage() {
               a: 'Yes. No contracts, no lock-ins. Cancel whenever you want from your account settings.',
             },
           ].map(({ q, a }) => (
-            <div key={q} className="rounded-xl border border-[#9B4FDE]/20 p-5"
-              style={{ backgroundColor: `${PURPLE}60` }}>
+            <div key={q} className="rounded-xl p-5"
+              style={{ backgroundColor: '#1E293B', border: '1px solid rgba(51,65,85,0.4)' }}>
               <p className="text-sm font-semibold text-white mb-1">{q}</p>
-              <p className="text-sm" style={{ color: SOFT }}>{a}</p>
+              <p className="text-sm text-slate-300">{a}</p>
             </div>
           ))}
         </div>
 
       </main>
 
-      <footer className="border-t px-6 py-6 text-center text-xs" style={{ borderColor: `${LIGHT}20`, color: SILVER }}>
+      <footer className="px-6 py-6 text-center text-xs text-slate-500"
+        style={{ borderTop: '1px solid rgba(51,65,85,0.4)' }}>
         © {new Date().getFullYear()} Rotech Data Consult.{' '}
-        <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+        <Link href="/privacy" className="hover:text-slate-300 transition-colors">Privacy Policy</Link>
       </footer>
     </div>
   )

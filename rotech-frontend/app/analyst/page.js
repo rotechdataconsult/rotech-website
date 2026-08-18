@@ -13,7 +13,7 @@ const DOMAINS = [
   'Agriculture', 'Real Estate', 'HR', 'Marketing', 'Other',
 ]
 
-const TEAL = '#9B4FDE'
+const TEAL = '#8B5CF6'
 
 const TABS = [
   { id: 'cleaning',      label: 'Data Cleaning' },
@@ -38,10 +38,10 @@ function Badge({ value, color }) {
   const colors = {
     high:   'bg-red-900 text-red-300',
     medium: 'bg-yellow-900 text-yellow-300',
-    low:    'bg-[#6B28A8] text-[#E8E0F0]',
+    low:    'bg-[#0F172A] text-slate-300',
     strong: 'bg-teal-900 text-teal-300',
     moderate: 'bg-blue-900 text-blue-300',
-    weak:   'bg-[#6B28A8] text-[#E8E0F0]',
+    weak:   'bg-[#0F172A] text-slate-300',
   }
   return (
     <span className={`text-xs font-semibold px-2 py-0.5 rounded-full capitalize ${colors[value] ?? colors.low}`}>
@@ -54,12 +54,12 @@ function Badge({ value, color }) {
 
 function CleaningPanel({ report }) {
   const score = report.quality_score ?? 0
-  const scoreColor = score >= 80 ? '#9B4FDE' : score >= 60 ? '#facc15' : '#f87171'
+  const scoreColor = score >= 80 ? '#8B5CF6' : score >= 60 ? '#facc15' : '#f87171'
 
   return (
     <div className="space-y-6">
       {/* Quality score */}
-      <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-6 flex items-center gap-6">
+      <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-6 flex items-center gap-6">
         <div className="relative shrink-0 w-24 h-24">
           <svg viewBox="0 0 36 36" className="w-24 h-24 -rotate-90">
             <circle cx="18" cy="18" r="15.9" fill="none" stroke="#1f2937" strokeWidth="3" />
@@ -74,7 +74,7 @@ function CleaningPanel({ report }) {
         </div>
         <div>
           <p className="text-lg font-semibold text-white">Data Quality Score</p>
-          <p className="text-sm text-[#E8E0F0] mt-1">
+          <p className="text-sm text-slate-300 mt-1">
             {score >= 80 ? 'Good — dataset is clean and ready for analysis.'
               : score >= 60 ? 'Fair — some issues were found and fixed automatically.'
               : 'Poor — significant data quality problems detected.'}
@@ -90,35 +90,35 @@ function CleaningPanel({ report }) {
           { label: 'Original Columns', value: report.original_columns },
           { label: 'Final Columns',    value: report.final_columns },
         ].map(({ label, value }) => (
-          <div key={label} className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl px-5 py-4">
+          <div key={label} className="bg-[#1E293B] border border-slate-700/50 rounded-xl px-5 py-4">
             <p className="text-2xl font-extrabold" style={{ color: TEAL }}>{value}</p>
-            <p className="text-xs text-[#E8E0F0] mt-1">{label}</p>
+            <p className="text-xs text-slate-300 mt-1">{label}</p>
           </div>
         ))}
       </div>
 
       {/* Actions taken */}
-      <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-6 space-y-4">
+      <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-6 space-y-4">
         <h3 className="text-sm font-semibold text-white">Cleaning Actions</h3>
         <div className="space-y-3 text-sm">
           <div className="flex justify-between">
-            <span className="text-[#E8E0F0]">Duplicate rows removed</span>
+            <span className="text-slate-300">Duplicate rows removed</span>
             <span className="font-medium text-white">{report.duplicates_removed}</span>
           </div>
 
           {report.columns_dropped?.length > 0 && (
             <div className="flex justify-between">
-              <span className="text-[#E8E0F0]">Empty columns dropped</span>
+              <span className="text-slate-300">Empty columns dropped</span>
               <span className="font-medium text-white">{report.columns_dropped.join(', ')}</span>
             </div>
           )}
 
           {Object.keys(report.missing_values_filled ?? {}).length > 0 && (
             <div>
-              <p className="text-[#E8E0F0] mb-2">Missing values filled (median / mode / &quot;Unknown&quot;)</p>
+              <p className="text-slate-300 mb-2">Missing values filled (median / mode / &quot;Unknown&quot;)</p>
               <div className="flex flex-wrap gap-2">
                 {Object.entries(report.missing_values_filled).map(([col, count]) => (
-                  <span key={col} className="bg-[#6B28A8] text-[#E8E0F0] text-xs px-2 py-1 rounded">
+                  <span key={col} className="bg-[#0F172A] text-slate-300 text-xs px-2 py-1 rounded">
                     {col}: {count}
                   </span>
                 ))}
@@ -128,10 +128,10 @@ function CleaningPanel({ report }) {
 
           {report.type_conversions?.length > 0 && (
             <div>
-              <p className="text-[#E8E0F0] mb-2">Type conversions</p>
+              <p className="text-slate-300 mb-2">Type conversions</p>
               <div className="flex flex-col gap-1">
                 {report.type_conversions.map((t, i) => (
-                  <span key={i} className="text-xs text-[#E8E0F0]">{t}</span>
+                  <span key={i} className="text-xs text-slate-300">{t}</span>
                 ))}
               </div>
             </div>
@@ -150,12 +150,12 @@ function StatsPanel({ stats }) {
   return (
     <div className="space-y-6">
       {/* Overview */}
-      <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-6">
+      <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-6">
         <h3 className="text-sm font-semibold text-white mb-4">Dataset Overview</h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm">
           {Object.entries(overview).map(([key, val]) => (
             <div key={key}>
-              <p className="text-[#E8E0F0] capitalize">{key.replace(/_/g, ' ')}</p>
+              <p className="text-slate-300 capitalize">{key.replace(/_/g, ' ')}</p>
               <p className="font-semibold text-white">{val}</p>
             </div>
           ))}
@@ -164,20 +164,20 @@ function StatsPanel({ stats }) {
 
       {/* Numeric stats */}
       {Object.keys(numeric_stats ?? {}).length > 0 && (
-        <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-6">
+        <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-6">
           <h3 className="text-sm font-semibold text-white mb-4">Numeric Columns</h3>
           <div className="overflow-x-auto">
             <table className="w-full text-sm text-left">
               <thead>
-                <tr className="text-[#E8E0F0] border-b border-[#9B4FDE]/30">
+                <tr className="text-slate-300 border-b border-slate-700/50">
                   {['Column', 'Min', 'Max', 'Mean', 'Median', 'Std Dev', 'Nulls %'].map(h => (
                     <th key={h} className="pb-2 pr-6 font-medium">{h}</th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#9B4FDE]/20">
+              <tbody className="divide-y divide-slate-700/50">
                 {Object.entries(numeric_stats).map(([col, s]) => (
-                  <tr key={col} className="text-[#E8E0F0]">
+                  <tr key={col} className="text-slate-300">
                     <td className="py-2 pr-6 font-medium text-white">{col}</td>
                     <td className="py-2 pr-6">{s.min}</td>
                     <td className="py-2 pr-6">{s.max}</td>
@@ -195,19 +195,19 @@ function StatsPanel({ stats }) {
 
       {/* Categorical stats */}
       {Object.keys(categorical_stats ?? {}).length > 0 && (
-        <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-6">
+        <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-6">
           <h3 className="text-sm font-semibold text-white mb-4">Categorical Columns</h3>
           <div className="space-y-4">
             {Object.entries(categorical_stats).map(([col, s]) => (
               <div key={col}>
                 <div className="flex items-center justify-between mb-2">
                   <p className="text-sm font-medium text-white">{col}</p>
-                  <span className="text-xs text-[#E8E0F0]">{s.unique_count} unique · {s.null_percentage}% null</span>
+                  <span className="text-xs text-slate-300">{s.unique_count} unique · {s.null_percentage}% null</span>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {s.top_10_values.slice(0, 6).map(({ value, count }) => (
-                    <span key={value} className="bg-[#6B28A8] text-[#E8E0F0] text-xs px-2 py-1 rounded">
-                      {value} <span className="text-[#C8D4E8]">({count})</span>
+                    <span key={value} className="bg-[#0F172A] text-slate-300 text-xs px-2 py-1 rounded">
+                      {value} <span className="text-slate-400">({count})</span>
                     </span>
                   ))}
                 </div>
@@ -219,12 +219,12 @@ function StatsPanel({ stats }) {
 
       {/* Correlations */}
       {Object.keys(correlations ?? {}).length > 0 && (
-        <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-6">
+        <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-6">
           <h3 className="text-sm font-semibold text-white mb-4">Notable Correlations</h3>
           <div className="space-y-2">
             {Object.entries(correlations).map(([pair, c]) => (
               <div key={pair} className="flex items-center justify-between text-sm">
-                <span className="text-[#E8E0F0]">{pair}</span>
+                <span className="text-slate-300">{pair}</span>
                 <div className="flex items-center gap-3">
                   <span className="font-medium text-white">{c.value}</span>
                   <Badge value={c.strength} />
@@ -237,14 +237,14 @@ function StatsPanel({ stats }) {
 
       {/* Outliers */}
       {Object.values(outliers ?? {}).some(o => o.outlier_count > 0) && (
-        <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-6">
+        <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-6">
           <h3 className="text-sm font-semibold text-white mb-4">Outliers Detected (IQR method)</h3>
           <div className="space-y-2">
             {Object.entries(outliers)
               .filter(([, o]) => o.outlier_count > 0)
               .map(([col, o]) => (
                 <div key={col} className="flex items-center justify-between text-sm">
-                  <span className="text-[#E8E0F0]">{col}</span>
+                  <span className="text-slate-300">{col}</span>
                   <span className="text-white font-medium">
                     {o.outlier_count} outliers ({o.outlier_percentage}%) · range {o.min_outlier} – {o.max_outlier}
                   </span>
@@ -262,7 +262,7 @@ function StatsPanel({ stats }) {
 function ChartsPanel({ charts }) {
   if (!Array.isArray(charts) || charts.length === 0) {
     return (
-      <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-10 text-center text-[#C8D4E8]">
+      <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-10 text-center text-slate-400">
         No charts could be generated for this dataset.
       </div>
     )
@@ -271,9 +271,9 @@ function ChartsPanel({ charts }) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       {charts.map((chart) => (
-        <div key={chart.id} className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-5">
+        <div key={chart.id} className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-5">
           <p className="text-sm font-semibold text-white mb-1">{chart.title}</p>
-          <p className="text-xs text-[#E8E0F0] mb-4">{chart.description}</p>
+          <p className="text-xs text-slate-300 mb-4">{chart.description}</p>
           <Plot
             data={chart.figure.data}
             layout={{
@@ -300,14 +300,14 @@ function InsightsPanel({ insights }) {
   return (
     <div className="space-y-6">
       {/* Summary */}
-      <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-6">
+      <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-6">
         <h3 className="text-sm font-semibold text-white mb-3">Executive Summary</h3>
-        <p className="text-sm text-[#E8E0F0] leading-relaxed">{summary}</p>
+        <p className="text-sm text-slate-300 leading-relaxed">{summary}</p>
       </div>
 
       {/* Key insights */}
       {items?.length > 0 && (
-        <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-6">
+        <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-6">
           <h3 className="text-sm font-semibold text-white mb-4">Key Insights</h3>
           <div className="space-y-4">
             {items.map((item, i) => (
@@ -316,7 +316,7 @@ function InsightsPanel({ insights }) {
                   <p className="text-sm font-medium text-white">{item.title}</p>
                   <Badge value={item.significance} />
                 </div>
-                <p className="text-sm text-[#E8E0F0]">{item.finding}</p>
+                <p className="text-sm text-slate-300">{item.finding}</p>
               </div>
             ))}
           </div>
@@ -325,7 +325,7 @@ function InsightsPanel({ insights }) {
 
       {/* Recommendations */}
       {recommendations?.length > 0 && (
-        <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-6">
+        <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-6">
           <h3 className="text-sm font-semibold text-white mb-4">Recommendations</h3>
           <div className="space-y-4">
             {recommendations.map((rec, i) => (
@@ -336,7 +336,7 @@ function InsightsPanel({ insights }) {
                 </span>
                 <div>
                   <p className="text-sm font-medium text-white">{rec.action}</p>
-                  <p className="text-sm text-[#E8E0F0] mt-0.5">{rec.rationale}</p>
+                  <p className="text-sm text-slate-300 mt-0.5">{rec.rationale}</p>
                   <Badge value={rec.priority} />
                 </div>
               </div>
@@ -347,11 +347,11 @@ function InsightsPanel({ insights }) {
 
       {/* Data quality notes */}
       {data_quality_notes?.length > 0 && (
-        <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-6">
+        <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-6">
           <h3 className="text-sm font-semibold text-white mb-3">Data Quality Notes</h3>
           <ul className="space-y-2">
             {data_quality_notes.map((note, i) => (
-              <li key={i} className="flex gap-2 text-sm text-[#E8E0F0]">
+              <li key={i} className="flex gap-2 text-sm text-slate-300">
                 <span style={{ color: TEAL }}>•</span>
                 {note}
               </li>
@@ -430,22 +430,22 @@ export default function AnalystPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#5a1f9a] flex items-center justify-center">
+      <div className="min-h-screen bg-[#0F172A] flex items-center justify-center">
         <Spinner />
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-[#5a1f9a] text-white">
+    <div className="min-h-screen bg-[#0F172A] text-white">
 
       {/* Nav */}
-      <header className="border-b border-[#9B4FDE]/30 px-6 py-4 flex items-center justify-between">
+      <header className="border-b border-slate-700/50 px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Link href="/dashboard" className="text-[#E8E0F0] hover:text-white text-sm transition-colors">
+          <Link href="/dashboard" className="text-slate-300 hover:text-white text-sm transition-colors">
             ← Dashboard
           </Link>
-          <span className="text-[#9B4FDE]/40">|</span>
+          <span className="text-slate-600">|</span>
           <h1 className="text-sm font-semibold text-white">AI Data Analyst</h1>
         </div>
       </header>
@@ -453,28 +453,28 @@ export default function AnalystPage() {
       <main className="max-w-5xl mx-auto px-6 py-10 space-y-10">
 
         {/* Upload card */}
-        <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-2xl p-8">
+        <div className="bg-[#1E293B] border border-slate-700/50 rounded-2xl p-8">
           <h2 className="text-lg font-bold text-white mb-1">Upload your dataset</h2>
-          <p className="text-sm text-[#E8E0F0] mb-6">
+          <p className="text-sm text-slate-300 mb-6">
             Supports CSV, XLSX, XLS — up to 10 MB. Your data is analysed instantly and never shared.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             {/* File input */}
             <div>
-              <label className="block text-xs font-semibold text-[#E8E0F0] uppercase tracking-wider mb-2">
+              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
                 Dataset file
               </label>
               <div
-                className="border-2 border-dashed border-[#9B4FDE]/40 rounded-xl px-6 py-8 text-center cursor-pointer hover:border-[#9B4FDE] transition-colors"
+                className="border-2 border-dashed border-slate-700 rounded-xl px-6 py-8 text-center cursor-pointer hover:border-violet-500 transition-colors"
                 onClick={() => document.getElementById('file-input').click()}
               >
                 {file ? (
                   <p className="text-sm font-medium text-white">{file.name}</p>
                 ) : (
                   <>
-                    <p className="text-sm text-[#E8E0F0]">Click to choose a file</p>
-                    <p className="text-xs text-[#C8D4E8] mt-1">CSV · XLSX · XLS</p>
+                    <p className="text-sm text-slate-300">Click to choose a file</p>
+                    <p className="text-xs text-slate-400 mt-1">CSV · XLSX · XLS</p>
                   </>
                 )}
               </div>
@@ -489,13 +489,13 @@ export default function AnalystPage() {
 
             {/* Domain */}
             <div>
-              <label className="block text-xs font-semibold text-[#E8E0F0] uppercase tracking-wider mb-2">
+              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
                 Domain
               </label>
               <select
                 value={domain}
                 onChange={e => setDomain(e.target.value)}
-                className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-[#9B4FDE]"
+                className="w-full bg-[#0F172A] border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-violet-500"
               >
                 {DOMAINS.map(d => (
                   <option key={d} value={d}>{d}</option>
@@ -510,13 +510,13 @@ export default function AnalystPage() {
                   <span className="text-red-400 shrink-0">⚠</span>
                   <p className="text-sm text-red-400">{error}</p>
                 </div>
-                <p className="text-xs text-[#C8D4E8] pl-5">
+                <p className="text-xs text-slate-400 pl-5">
                   Need help? Make sure your file has column headers in the first row and contains at least 10 rows of data.
                 </p>
                 <button
                   type="button"
                   onClick={() => { setError(null); setFile(null) }}
-                  className="text-xs pl-5 text-[#9B4FDE] underline hover:text-white transition-colors">
+                  className="text-xs pl-5 text-violet-400 underline hover:text-white transition-colors">
                   Clear and try a different file
                 </button>
               </div>
@@ -547,11 +547,11 @@ export default function AnalystPage() {
             {/* Result header */}
             <div className="mb-6">
               <h2 className="text-lg font-bold text-white">Results for {result.filename}</h2>
-              <p className="text-sm text-[#E8E0F0] mt-0.5">Domain: {result.domain}</p>
+              <p className="text-sm text-slate-300 mt-0.5">Domain: {result.domain}</p>
             </div>
 
             {/* Tabs */}
-            <div className="flex gap-1 mb-6 bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-1 w-fit">
+            <div className="flex gap-1 mb-6 bg-[#1E293B] border border-slate-700/50 rounded-xl p-1 w-fit">
               {TABS.map(tab => (
                 <button
                   key={tab.id}
@@ -559,7 +559,7 @@ export default function AnalystPage() {
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                     activeTab === tab.id
                       ? 'text-white'
-                      : 'text-[#E8E0F0] hover:text-white'
+                      : 'text-slate-300 hover:text-white'
                   }`}
                   style={activeTab === tab.id ? { backgroundColor: TEAL } : {}}
                 >

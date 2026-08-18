@@ -5,12 +5,20 @@ export default function LessonItem({ lesson, moduleId, domainId, isCompleted, in
   return (
     <Link
       href={`/courses/${domainId}/${moduleId}/${lesson.id}`}
-      className={`flex items-center gap-4 rounded-lg px-4 py-3 transition-colors group
-        ${isCompleted ? 'bg-green-500/10 border border-green-500/20' : 'bg-[#6B28A8] hover:bg-[#7B2FBE]'}`}
+      className="flex items-center gap-4 rounded-lg px-4 py-3 transition-all group"
+      style={{
+        backgroundColor: isCompleted ? 'rgba(34,197,94,0.08)' : '#0F172A',
+        border: isCompleted ? '1px solid rgba(34,197,94,0.2)' : '1px solid rgba(51,65,85,0.4)',
+      }}
+      onMouseEnter={e => { if (!isCompleted) e.currentTarget.style.borderColor = 'rgba(139,92,246,0.4)' }}
+      onMouseLeave={e => { if (!isCompleted) e.currentTarget.style.borderColor = 'rgba(51,65,85,0.4)' }}
     >
       {/* Number / checkmark */}
-      <div className={`shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold
-        ${isCompleted ? 'bg-green-500/20 text-green-400' : 'bg-[#9B4FDE]/20 text-[#C8D4E8]'}`}
+      <div
+        className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold"
+        style={isCompleted
+          ? { backgroundColor: 'rgba(34,197,94,0.2)', color: '#86efac' }
+          : { backgroundColor: 'rgba(139,92,246,0.15)', color: '#94A3B8' }}
       >
         {isCompleted ? '✓' : index + 1}
       </div>
@@ -26,7 +34,7 @@ export default function LessonItem({ lesson, moduleId, domainId, isCompleted, in
       <LessonTypeBadge type={lesson.lesson_type ?? 'reading'} />
 
       {/* Arrow */}
-      <svg className="h-4 w-4 text-[#9B4FDE] shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg className="h-4 w-4 text-violet-500 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
       </svg>
     </Link>

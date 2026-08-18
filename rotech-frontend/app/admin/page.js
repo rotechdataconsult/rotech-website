@@ -67,25 +67,25 @@ export default function AdminDashboard() {
           <Link
             key={label}
             href={href}
-            className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl px-4 py-5 text-center hover:border-[#9B4FDE]/60 transition-colors"
+            className="bg-[#1E293B] border border-slate-700/50 rounded-xl px-4 py-5 text-center hover:border-violet-500/50 transition-colors"
           >
-            <p className="text-3xl font-extrabold" style={{ color: '#9B4FDE' }}>{value ?? 0}</p>
-            <p className="text-xs text-[#E8E0F0] mt-1">{label}</p>
+            <p className="text-3xl font-extrabold" style={{ color: '#8B5CF6' }}>{value ?? 0}</p>
+            <p className="text-xs text-slate-300 mt-1">{label}</p>
           </Link>
         ))}
       </div>
 
       {/* Quick access */}
-      <h2 className="text-xs font-semibold text-[#C8D4E8] uppercase tracking-widest mb-4">Quick Access</h2>
+      <h2 className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4">Quick Access</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {SECTIONS.map(({ href, title, desc }) => (
           <Link
             key={href}
             href={href}
-            className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-5 hover:border-[#9B4FDE]/60 transition-colors group"
+            className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-5 hover:border-violet-500/50 transition-colors group"
           >
             <p className="font-semibold text-white text-sm">{title}</p>
-            <p className="text-xs text-[#C8D4E8] mt-1">{desc}</p>
+            <p className="text-xs text-slate-400 mt-1">{desc}</p>
           </Link>
         ))}
       </div>

@@ -56,13 +56,13 @@ export default function ImpactCMSPage() {
     <AdminLayout profile={profile} title="CMS — Impact Metrics">
       <div className="max-w-2xl space-y-6">
 
-        <p className="text-xs" style={{ color: '#C8D4E8' }}>
+        <p className="text-xs" style={{ color: '#94A3B8' }}>
           These 4 stat cards appear in the &quot;Growing Across Africa&quot; section. Numbers animate when visitors scroll to them.
         </p>
 
         <div className="space-y-3">
           {items.map((item, i) => (
-            <div key={i} className="grid grid-cols-12 gap-3 items-center p-4 rounded-xl border" style={{ backgroundColor: '#7B2FBE', borderColor: 'rgba(155,79,222,0.3)' }}>
+            <div key={i} className="grid grid-cols-12 gap-3 items-center p-4 rounded-xl border" style={{ backgroundColor: '#1E293B', borderColor: 'rgba(51,65,85,0.6)' }}>
               <div className="col-span-1">
                 <input
                   className={`${INPUT} text-center text-lg`}
@@ -72,7 +72,7 @@ export default function ImpactCMSPage() {
                 />
               </div>
               <div className="col-span-3">
-                <label className="text-xs text-[#C8D4E8] mb-1 block">Value</label>
+                <label className="text-xs text-slate-400 mb-1 block">Value</label>
                 <input
                   className={INPUT}
                   value={item.value}
@@ -81,7 +81,7 @@ export default function ImpactCMSPage() {
                 />
               </div>
               <div className="col-span-8">
-                <label className="text-xs text-[#C8D4E8] mb-1 block">Label</label>
+                <label className="text-xs text-slate-400 mb-1 block">Label</label>
                 <input
                   className={INPUT}
                   value={item.label}
@@ -104,4 +104,4 @@ export default function ImpactCMSPage() {
   )
 }
 
-const INPUT = 'w-full rounded-lg px-3 py-2 text-sm text-white border outline-none focus:border-[#9B4FDE] transition-colors bg-[#3d1270] border-[#9B4FDE]/30'
+const INPUT = 'w-full rounded-lg px-3 py-2 text-sm text-white border outline-none focus:border-violet-500 transition-colors bg-[#0F172A] border-slate-700/50'

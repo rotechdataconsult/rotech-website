@@ -47,20 +47,20 @@ export default function QuoteRotator() {
       className="max-w-2xl mx-auto rounded-2xl border px-8 py-6 text-center space-y-3 transition-opacity duration-300"
       style={{
         opacity: fade ? 1 : 0,
-        borderColor: 'rgba(155,79,222,0.25)',
-        backgroundColor: 'rgba(123,47,190,0.25)',
+        borderColor: 'rgba(51,65,85,0.5)',
+        backgroundColor: 'rgba(30,41,59,0.5)',
       }}
     >
       <p className="text-sm sm:text-base font-medium leading-relaxed italic"
-        style={{ color: '#E8E0F0' }}>
+        style={{ color: '#CBD5E1' }}>
         &ldquo;{quote.text}&rdquo;
       </p>
-      <p className="text-xs font-semibold" style={{ color: '#9B4FDE' }}>
+      <p className="text-xs font-semibold" style={{ color: '#8B5CF6' }}>
         — {quote.author}
       </p>
       <button
         onClick={nextQuote}
-        className="text-xs text-[#C8D4E8] hover:text-white transition-colors mt-1"
+        className="text-xs text-slate-400 hover:text-white transition-colors mt-1"
       >
         Next quote →
       </button>

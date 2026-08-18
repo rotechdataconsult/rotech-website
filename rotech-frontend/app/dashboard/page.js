@@ -76,8 +76,8 @@ export default function DashboardPage() {
 
   if (authLoading || dataLoading) {
     return (
-      <div className="min-h-screen bg-[#5a1f9a] flex items-center justify-center">
-        <svg className="animate-spin h-8 w-8" style={{ color: '#9B4FDE' }} fill="none" viewBox="0 0 24 24">
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#0F172A' }}>
+        <svg className="animate-spin h-8 w-8" style={{ color: '#8B5CF6' }} fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
         </svg>
@@ -88,18 +88,27 @@ export default function DashboardPage() {
   const progressPct = totalLessons > 0 ? Math.round((completed / totalLessons) * 100) : 0
 
   return (
-    <div className="min-h-screen bg-[#5a1f9a] text-white">
-      <nav className="bg-[#5a1f9a] border-b border-[#9B4FDE]/30 px-6 py-4">
+    <div className="min-h-screen text-white" style={{ backgroundColor: '#0F172A' }}>
+
+      {/* Nav */}
+      <nav className="px-6 py-4 sticky top-0 z-40"
+        style={{ backgroundColor: 'rgba(15,23,42,0.97)', borderBottom: '1px solid rgba(51,65,85,0.6)', backdropFilter: 'blur(14px)' }}>
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <span className="text-lg font-bold tracking-tight">
-            Rotech <span style={{ color: '#C8D4E8' }}>Data Consult</span>
+          <span className="text-lg font-extrabold tracking-tight text-white">
+            Rotech <span style={{ color: '#8B5CF6' }}>Data Consult</span>
           </span>
           <div className="flex items-center gap-4">
-            <Link href="/resources" className="text-sm text-[#E8E0F0] hover:text-white transition-colors">Resources</Link>
-            <Link href="/data-entry" className="text-sm text-[#E8E0F0] hover:text-white transition-colors">Data Entry</Link>
-            <Link href="/analyst" className="text-sm text-[#E8E0F0] hover:text-white transition-colors">Analyst Tool</Link>
-            <span className="text-sm text-[#E8E0F0] font-medium">{profile?.full_name}</span>
-            <button onClick={handleLogout} className="text-sm px-4 py-1.5 rounded-lg border border-[#9B4FDE]/40 text-[#E8E0F0] hover:border-[#9B4FDE] hover:text-white transition-colors">
+            <Link href="/resources" className="text-sm text-slate-400 hover:text-white transition-colors hidden md:block">Resources</Link>
+            <Link href="/data-entry" className="text-sm text-slate-400 hover:text-white transition-colors hidden md:block">Data Entry</Link>
+            <Link href="/analyst" className="text-sm text-slate-400 hover:text-white transition-colors hidden md:block">Analyst Tool</Link>
+            <span className="text-sm text-slate-300 font-medium hidden sm:block">{profile?.full_name}</span>
+            <button
+              onClick={handleLogout}
+              className="text-sm px-4 py-1.5 rounded-lg border text-slate-300 hover:text-white transition-colors"
+              style={{ borderColor: 'rgba(100,116,139,0.4)' }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(139,92,246,0.6)' }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(100,116,139,0.4)' }}
+            >
               Logout
             </button>
           </div>
@@ -107,25 +116,30 @@ export default function DashboardPage() {
       </nav>
 
       <main className="max-w-6xl mx-auto px-6 py-10 space-y-8">
+
+        {/* Welcome header */}
         <div>
           <h1 className="text-2xl font-extrabold text-white">
-            Welcome back, <span style={{ color: '#C8D4E8' }}>{profile?.full_name}</span>!
+            Welcome back, <span style={{ color: '#8B5CF6' }}>{profile?.full_name}</span>!
           </h1>
-          <p className="mt-1 text-[#E8E0F0] text-sm">
+          <p className="mt-1 text-slate-400 text-sm">
             {domain ? (
               <span>Your domain: <span className="text-white font-semibold">{domain.icon} {domain.title}</span></span>
             ) : 'You have not selected a domain yet.'}
           </p>
         </div>
 
+        {/* No enrollment CTA */}
         {!enrollment && (
-          <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-8 text-center">
+          <div className="rounded-xl p-8 text-center" style={{ backgroundColor: '#1E293B', border: '1px solid rgba(51,65,85,0.6)' }}>
             <p className="text-4xl mb-3">🎯</p>
             <h2 className="text-lg font-bold text-white mb-2">Choose Your Learning Domain</h2>
-            <p className="text-[#E8E0F0] text-sm mb-6 max-w-md mx-auto">
+            <p className="text-slate-300 text-sm mb-6 max-w-md mx-auto">
               Select one industry domain to begin your structured data analytics journey.
             </p>
-            <Link href="/courses" className="inline-block text-sm font-semibold px-6 py-2.5 rounded-lg text-white" style={{ backgroundColor: '#9B4FDE' }}>
+            <Link href="/courses"
+              className="inline-block text-sm font-semibold px-6 py-2.5 rounded-lg text-white transition-all hover:opacity-90 hover:scale-105"
+              style={{ backgroundColor: '#6C3FD4' }}>
               Browse Domains →
             </Link>
           </div>
@@ -133,6 +147,7 @@ export default function DashboardPage() {
 
         {enrollment && (
           <>
+            {/* Stat cards */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
                 { label: 'Domain',        value: domain?.title?.split(' ')[0] ?? '—' },
@@ -140,40 +155,47 @@ export default function DashboardPage() {
                 { label: 'Total Lessons', value: totalLessons },
                 { label: 'Certificate',   value: certificate ? '✓' : '—' },
               ].map(({ label, value }) => (
-                <div key={label} className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl px-5 py-5">
-                  <p className="text-2xl font-extrabold" style={{ color: '#9B4FDE' }}>{value}</p>
-                  <p className="mt-1 text-sm text-[#E8E0F0]">{label}</p>
+                <div key={label} className="rounded-xl px-5 py-5" style={{ backgroundColor: '#1E293B', border: '1px solid rgba(51,65,85,0.5)' }}>
+                  <p className="text-2xl font-extrabold" style={{ color: '#8B5CF6' }}>{value}</p>
+                  <p className="mt-1 text-sm text-slate-400">{label}</p>
                 </div>
               ))}
             </div>
 
-            <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-6">
+            {/* Progress bar */}
+            <div className="rounded-xl p-6" style={{ backgroundColor: '#1E293B', border: '1px solid rgba(51,65,85,0.5)' }}>
               <div className="flex items-center justify-between mb-3">
                 <h2 className="text-base font-semibold text-white">Overall Progress</h2>
-                <span className="text-sm font-bold" style={{ color: '#9B4FDE' }}>{progressPct}%</span>
+                <span className="text-sm font-bold" style={{ color: '#8B5CF6' }}>{progressPct}%</span>
               </div>
-              <div className="w-full h-2.5 bg-[#6B28A8] rounded-full overflow-hidden">
-                <div className="h-full rounded-full transition-all duration-500" style={{ width: `${progressPct}%`, backgroundColor: '#9B4FDE' }} />
+              <div className="w-full h-2.5 rounded-full overflow-hidden" style={{ backgroundColor: '#0F172A' }}>
+                <div className="h-full rounded-full transition-all duration-700"
+                  style={{ width: `${progressPct}%`, background: 'linear-gradient(90deg, #6C3FD4, #8B5CF6)' }} />
               </div>
-              <p className="mt-2 text-xs text-[#E8E0F0]">{completed} of {totalLessons} lessons completed</p>
+              <p className="mt-2 text-xs text-slate-500">{completed} of {totalLessons} lessons completed</p>
             </div>
 
-            <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-6">
+            {/* Modules */}
+            <div className="rounded-xl p-6" style={{ backgroundColor: '#1E293B', border: '1px solid rgba(51,65,85,0.5)' }}>
               <div className="flex items-center justify-between mb-5">
                 <h2 className="text-base font-semibold text-white">Your Modules</h2>
-                <Link href={`/courses/${enrollment.domain_id}`} className="text-xs font-medium" style={{ color: '#C8D4E8' }}>View all →</Link>
+                <Link href={`/courses/${enrollment.domain_id}`} className="text-xs font-medium text-slate-400 hover:text-white transition-colors">View all →</Link>
               </div>
               {modules.length === 0 ? (
-                <p className="text-sm text-[#C8D4E8]">Modules are being prepared. Check back soon.</p>
+                <p className="text-sm text-slate-400">Modules are being prepared. Check back soon.</p>
               ) : (
                 <div className="space-y-3">
                   {modules.map((mod, i) => (
                     <Link key={mod.id} href={`/courses/${enrollment.domain_id}/${mod.id}`}
-                      className="flex items-center gap-4 bg-[#6B28A8] rounded-lg px-4 py-3 hover:bg-[#7B2FBE] transition-colors">
-                      <span className="text-xs font-bold text-[#C8D4E8] w-5 shrink-0">{i + 1}</span>
+                      className="flex items-center gap-4 rounded-lg px-4 py-3 transition-colors"
+                      style={{ backgroundColor: '#0F172A', border: '1px solid rgba(51,65,85,0.4)' }}
+                      onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(139,92,246,0.4)'}
+                      onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(51,65,85,0.4)'}
+                    >
+                      <span className="text-xs font-bold text-slate-500 w-5 shrink-0">{i + 1}</span>
                       <p className="flex-1 text-sm font-medium text-white truncate">{mod.title}</p>
                       {mod.tool && (
-                        <span className={`shrink-0 text-xs px-2 py-0.5 rounded-full ${TOOL_COLORS[mod.tool] ?? 'bg-[#9B4FDE]/20 text-[#E8E0F0]'}`}>
+                        <span className={`shrink-0 text-xs px-2 py-0.5 rounded-full ${TOOL_COLORS[mod.tool] ?? 'bg-violet-500/20 text-violet-300'}`}>
                           {mod.tool}
                         </span>
                       )}
@@ -186,62 +208,77 @@ export default function DashboardPage() {
             {/* Quick tools */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Link href="/data-entry"
-                className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-5 flex items-center gap-4 hover:border-[#9B4FDE]/60 transition-colors">
+                className="rounded-xl p-5 flex items-center gap-4 transition-all"
+                style={{ backgroundColor: '#1E293B', border: '1px solid rgba(51,65,85,0.5)' }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(139,92,246,0.4)'}
+                onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(51,65,85,0.5)'}
+              >
                 <span className="text-2xl">📝</span>
                 <div>
                   <p className="text-sm font-bold text-white">Business Data Entry</p>
-                  <p className="text-xs text-[#E8E0F0] mt-0.5">Record sales, expenses & inventory</p>
+                  <p className="text-xs text-slate-400 mt-0.5">Record sales, expenses & inventory</p>
                 </div>
               </Link>
               <Link href="/analyst"
-                className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-5 flex items-center gap-4 hover:border-[#9B4FDE]/60 transition-colors">
+                className="rounded-xl p-5 flex items-center gap-4 transition-all"
+                style={{ backgroundColor: '#1E293B', border: '1px solid rgba(51,65,85,0.5)' }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(139,92,246,0.4)'}
+                onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(51,65,85,0.5)'}
+              >
                 <span className="text-2xl">🤖</span>
                 <div>
                   <p className="text-sm font-bold text-white">AI Analyst Tool</p>
-                  <p className="text-xs text-[#E8E0F0] mt-0.5">Upload data for AI-powered insights</p>
+                  <p className="text-xs text-slate-400 mt-0.5">Upload data for AI-powered insights</p>
                 </div>
               </Link>
             </div>
 
             {/* Coming soon features */}
-            <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-6">
+            <div className="rounded-xl p-6" style={{ backgroundColor: '#1E293B', border: '1px solid rgba(51,65,85,0.5)' }}>
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-sm font-bold text-white">Coming Soon</h2>
-                <Link href="/pricing" className="text-xs text-[#C8D4E8] hover:text-white transition-colors">
+                <Link href="/pricing" className="text-xs text-slate-400 hover:text-white transition-colors">
                   View pricing →
                 </Link>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[
-                  { href: '/analyst/history', icon: '📂', label: 'Analysis History',       desc: 'Revisit past AI analyses' },
-                  { href: '/invoice',         icon: '🧾', label: 'Invoice Generator',       desc: 'Create PDF invoices from sales' },
-                  { href: '/team',            icon: '👥', label: 'Team Accounts',           desc: 'Add staff to your account' },
-                  { href: '/whatsapp',        icon: '💬', label: 'WhatsApp Data Bot',       desc: 'Send data via WhatsApp' },
+                  { href: '/analyst/history', icon: '📂', label: 'Analysis History',  desc: 'Revisit past AI analyses' },
+                  { href: '/invoice',         icon: '🧾', label: 'Invoice Generator',  desc: 'Create PDF invoices from sales' },
+                  { href: '/team',            icon: '👥', label: 'Team Accounts',      desc: 'Add staff to your account' },
+                  { href: '/whatsapp',        icon: '💬', label: 'WhatsApp Data Bot',  desc: 'Send data via WhatsApp' },
                 ].map(item => (
                   <Link key={item.href} href={item.href}
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl border border-[#9B4FDE]/20 bg-[#6B28A8]/40 hover:border-[#9B4FDE]/40 transition-colors">
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors"
+                    style={{ border: '1px solid rgba(51,65,85,0.4)', backgroundColor: 'rgba(15,23,42,0.5)' }}
+                    onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(139,92,246,0.3)'}
+                    onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(51,65,85,0.4)'}
+                  >
                     <span className="text-xl shrink-0">{item.icon}</span>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
                         <p className="text-xs font-medium text-white">{item.label}</p>
                         <ComingSoonBadge />
                       </div>
-                      <p className="text-xs text-[#C8D4E8] mt-0.5">{item.desc}</p>
+                      <p className="text-xs text-slate-500 mt-0.5">{item.desc}</p>
                     </div>
                   </Link>
                 ))}
               </div>
             </div>
 
+            {/* Certificate */}
             {certificate && (
-              <div className="bg-[#7B2FBE] border border-yellow-500/30 rounded-xl p-6 flex items-center gap-4">
+              <div className="rounded-xl p-6 flex items-center gap-4"
+                style={{ backgroundColor: '#1E293B', border: '1px solid rgba(234,179,8,0.3)' }}>
                 <span className="text-3xl">🏆</span>
                 <div className="flex-1">
                   <h2 className="text-base font-bold text-white">Certificate Earned!</h2>
-                  <p className="text-xs text-[#E8E0F0] mt-0.5">Code: <span className="font-mono text-white">{certificate.verification_code}</span></p>
+                  <p className="text-xs text-slate-400 mt-0.5">Code: <span className="font-mono text-white">{certificate.verification_code}</span></p>
                 </div>
                 <Link href={`/courses/${enrollment.domain_id}/certificate`}
-                  className="shrink-0 text-sm font-semibold px-4 py-2 rounded-lg text-white" style={{ backgroundColor: '#9B4FDE' }}>
+                  className="shrink-0 text-sm font-semibold px-4 py-2 rounded-lg text-white transition-all hover:opacity-90"
+                  style={{ backgroundColor: '#6C3FD4' }}>
                   View
                 </Link>
               </div>

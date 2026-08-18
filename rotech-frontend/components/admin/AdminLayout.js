@@ -29,19 +29,20 @@ export default function AdminLayout({ profile, title, children }) {
   const pathname = usePathname()
 
   return (
-    <div className="min-h-screen bg-[#5a1f9a] flex">
+    <div className="min-h-screen flex" style={{ backgroundColor: '#0F172A' }}>
 
-      {/* ── Sidebar ────────────────────────────────────────────────────────── */}
-      <aside className="w-52 shrink-0 bg-[#3d1270] border-r border-[#9B4FDE]/20 flex flex-col">
-        <div className="px-5 py-5 border-b border-[#9B4FDE]/20">
-          <p className="text-xs text-[#9B4FDE] font-semibold uppercase tracking-widest">Admin Panel</p>
+      {/* Sidebar */}
+      <aside className="w-52 shrink-0 flex flex-col"
+        style={{ backgroundColor: '#0A0F1E', borderRight: '1px solid rgba(51,65,85,0.6)' }}>
+        <div className="px-5 py-5" style={{ borderBottom: '1px solid rgba(51,65,85,0.5)' }}>
+          <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: '#8B5CF6' }}>Admin Panel</p>
           <p className="text-sm font-bold text-white mt-0.5 truncate">{profile?.full_name}</p>
         </div>
 
         <nav className="flex-1 py-3 px-2 overflow-y-auto space-y-4">
           {NAV_GROUPS.map(group => (
             <div key={group.label}>
-              <p className="text-xs font-bold uppercase tracking-widest px-3 mb-1" style={{ color: 'rgba(155,79,222,0.6)' }}>
+              <p className="text-xs font-bold uppercase tracking-widest px-3 mb-1 text-slate-600">
                 {group.label}
               </p>
               <div className="space-y-0.5">
@@ -51,11 +52,14 @@ export default function AdminLayout({ profile, title, children }) {
                     <Link
                       key={href}
                       href={href}
-                      className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors ${
-                        active
-                          ? 'bg-[#9B4FDE]/25 text-white font-semibold'
-                          : 'text-[#C8D4E8] hover:text-white hover:bg-[#9B4FDE]/10'
-                      }`}
+                      className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors"
+                      style={{
+                        backgroundColor: active ? 'rgba(139,92,246,0.2)' : 'transparent',
+                        color: active ? 'white' : '#94A3B8',
+                        fontWeight: active ? 600 : 400,
+                      }}
+                      onMouseEnter={e => { if (!active) { e.currentTarget.style.color = 'white'; e.currentTarget.style.backgroundColor = 'rgba(139,92,246,0.1)' } }}
+                      onMouseLeave={e => { if (!active) { e.currentTarget.style.color = '#94A3B8'; e.currentTarget.style.backgroundColor = 'transparent' } }}
                     >
                       <span className="text-sm w-4 shrink-0">{icon}</span>
                       <span>{label}</span>
@@ -67,16 +71,17 @@ export default function AdminLayout({ profile, title, children }) {
           ))}
         </nav>
 
-        <div className="px-5 py-4 border-t border-[#9B4FDE]/20">
-          <Link href="/dashboard" className="text-xs text-[#C8D4E8] hover:text-white transition-colors">
+        <div className="px-5 py-4" style={{ borderTop: '1px solid rgba(51,65,85,0.5)' }}>
+          <Link href="/dashboard" className="text-xs text-slate-400 hover:text-white transition-colors">
             &#8592; Back to App
           </Link>
         </div>
       </aside>
 
-      {/* ── Main ───────────────────────────────────────────────────────────── */}
+      {/* Main */}
       <div className="flex-1 flex flex-col min-w-0 text-white">
-        <header className="bg-[#4a1580] border-b border-[#9B4FDE]/20 px-8 py-4 shrink-0">
+        <header className="px-8 py-4 shrink-0"
+          style={{ backgroundColor: '#0F172A', borderBottom: '1px solid rgba(51,65,85,0.6)' }}>
           <h1 className="text-base font-bold text-white">{title}</h1>
         </header>
         <main className="flex-1 px-8 py-8 overflow-auto">

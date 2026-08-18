@@ -152,14 +152,14 @@ export default function AdminYouTubePage() {
 
   return (
     <AdminLayout profile={profile} title="Manage YouTube Resources">
-      <p className="text-[#E8E0F0] text-sm mb-6">
+      <p className="text-slate-300 text-sm mb-6">
         Add video links for students to revisit concepts they have forgotten.
       </p>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
         {/* ── Form ─────────────────────────────────────────── */}
-        <div className={`border rounded-xl p-6 ${editingId ? 'bg-[#4a1580] border-[#9B4FDE]/60' : 'bg-[#7B2FBE] border-[#9B4FDE]/30'}`}>
+        <div className={`border rounded-xl p-6 ${editingId ? 'bg-[#1E3A5F] border-violet-500/50' : 'bg-[#1E293B] border-slate-700/50'}`}>
           <div className="flex items-center justify-between mb-5">
             <h2 className="text-base font-bold text-white">
               {editingId ? 'Edit Video' : 'Add New Video'}
@@ -167,7 +167,7 @@ export default function AdminYouTubePage() {
             {editingId && (
               <button
                 onClick={cancelEdit}
-                className="text-xs px-3 py-1.5 rounded-lg border border-[#9B4FDE]/40 text-[#C8D4E8] hover:text-white hover:border-[#9B4FDE] transition-colors"
+                className="text-xs px-3 py-1.5 rounded-lg border border-slate-700 text-slate-400 hover:text-white hover:border-violet-500 transition-colors"
               >
                 ✕ Cancel Edit
               </button>
@@ -177,20 +177,20 @@ export default function AdminYouTubePage() {
           <form onSubmit={handleSubmit} className="space-y-4">
 
             <div>
-              <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">Video Title *</label>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">Video Title *</label>
               <input
                 name="title" value={form.title} onChange={handleChange}
                 placeholder="e.g. Intro to Pivot Tables in Excel"
-                className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#C8D4E8] focus:outline-none focus:border-[#9B4FDE] transition"
+                className="w-full bg-[#0F172A] border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">YouTube URL *</label>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">YouTube URL *</label>
               <input
                 name="youtube_url" value={form.youtube_url} onChange={handleChange}
                 placeholder="https://www.youtube.com/watch?v=..."
-                className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#C8D4E8] focus:outline-none focus:border-[#9B4FDE] transition"
+                className="w-full bg-[#0F172A] border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition"
               />
               {preview && (
                 <img src={preview} alt="thumbnail" className="mt-2 rounded-lg w-full max-w-xs aspect-video object-cover" />
@@ -203,10 +203,10 @@ export default function AdminYouTubePage() {
             {/* Domain + Module row */}
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">Domain *</label>
+                <label className="block text-xs font-medium text-slate-300 mb-1.5">Domain *</label>
                 <select
                   name="domain_id" value={form.domain_id} onChange={handleChange}
-                  className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-[#9B4FDE] transition cursor-pointer"
+                  className="w-full bg-[#0F172A] border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-violet-500 transition cursor-pointer"
                 >
                   <option value="">Select domain...</option>
                   {domains.map(d => (
@@ -215,11 +215,11 @@ export default function AdminYouTubePage() {
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">Module (optional)</label>
+                <label className="block text-xs font-medium text-slate-300 mb-1.5">Module (optional)</label>
                 <select
                   name="module_id" value={form.module_id} onChange={handleChange}
                   disabled={!form.domain_id || modules.length === 0}
-                  className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-[#9B4FDE] transition cursor-pointer disabled:opacity-50"
+                  className="w-full bg-[#0F172A] border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-violet-500 transition cursor-pointer disabled:opacity-50"
                 >
                   <option value="">All modules</option>
                   {modules.map(m => (
@@ -232,10 +232,10 @@ export default function AdminYouTubePage() {
             {/* Tool + Level row */}
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">Tool (optional)</label>
+                <label className="block text-xs font-medium text-slate-300 mb-1.5">Tool (optional)</label>
                 <select
                   name="tool" value={form.tool} onChange={handleChange}
-                  className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-[#9B4FDE] transition cursor-pointer"
+                  className="w-full bg-[#0F172A] border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-violet-500 transition cursor-pointer"
                 >
                   <option value="">All tools / General</option>
                   {TOOLS.filter(t => t !== 'Capstone').map(t => (
@@ -244,10 +244,10 @@ export default function AdminYouTubePage() {
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">Level (optional)</label>
+                <label className="block text-xs font-medium text-slate-300 mb-1.5">Level (optional)</label>
                 <select
                   name="level" value={form.level} onChange={handleChange}
-                  className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-[#9B4FDE] transition cursor-pointer"
+                  className="w-full bg-[#0F172A] border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-violet-500 transition cursor-pointer"
                 >
                   <option value="">Select level...</option>
                   {LEVELS.map(l => (
@@ -260,30 +260,30 @@ export default function AdminYouTubePage() {
             {/* Instructor + Duration row */}
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">Instructor (optional)</label>
+                <label className="block text-xs font-medium text-slate-300 mb-1.5">Instructor (optional)</label>
                 <input
                   name="instructor" value={form.instructor} onChange={handleChange}
                   placeholder="e.g. John Doe"
-                  className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-3 py-2.5 text-sm text-white placeholder-[#C8D4E8] focus:outline-none focus:border-[#9B4FDE] transition"
+                  className="w-full bg-[#0F172A] border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">Duration (mins, optional)</label>
+                <label className="block text-xs font-medium text-slate-300 mb-1.5">Duration (mins, optional)</label>
                 <input
                   name="duration_mins" value={form.duration_mins} onChange={handleChange}
                   type="number" min="1" placeholder="e.g. 15"
-                  className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-3 py-2.5 text-sm text-white placeholder-[#C8D4E8] focus:outline-none focus:border-[#9B4FDE] transition"
+                  className="w-full bg-[#0F172A] border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">Description (optional)</label>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">Description (optional)</label>
               <textarea
                 name="description" value={form.description} onChange={handleChange}
                 rows={3}
                 placeholder="Brief description of what students will learn..."
-                className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#C8D4E8] focus:outline-none focus:border-[#9B4FDE] transition resize-none"
+                className="w-full bg-[#0F172A] border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition resize-none"
               />
             </div>
 
@@ -305,12 +305,12 @@ export default function AdminYouTubePage() {
         <div className="space-y-4">
           <h2 className="text-base font-bold text-white">
             Uploaded Videos{' '}
-            <span className="text-[#9B4FDE] font-normal">({resources.length})</span>
+            <span className="text-violet-400 font-normal">({resources.length})</span>
           </h2>
 
           {resources.length === 0 ? (
-            <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-10 text-center">
-              <p className="text-[#C8D4E8] text-sm">No videos uploaded yet.</p>
+            <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-10 text-center">
+              <p className="text-slate-400 text-sm">No videos uploaded yet.</p>
             </div>
           ) : (
             <div className="space-y-3 max-h-[680px] overflow-y-auto pr-1">
@@ -319,8 +319,8 @@ export default function AdminYouTubePage() {
                   key={r.id}
                   className={`border rounded-xl p-4 transition-colors ${
                     editingId === r.id
-                      ? 'bg-[#4a1580] border-[#9B4FDE]/60'
-                      : 'bg-[#7B2FBE] border-[#9B4FDE]/30'
+                      ? 'bg-[#1E3A5F] border-violet-500/50'
+                      : 'bg-[#1E293B] border-slate-700/50'
                   }`}
                 >
                   <div className="flex items-start gap-3">
@@ -329,28 +329,28 @@ export default function AdminYouTubePage() {
                       <div className="flex items-center gap-2 mt-1 flex-wrap">
                         {r.tool && <ToolBadge tool={r.tool} size="xs" />}
                         {r.level && (
-                          <span className="text-xs px-1.5 py-0.5 rounded bg-[#9B4FDE]/20 text-[#C8D4E8]">{r.level}</span>
+                          <span className="text-xs px-1.5 py-0.5 rounded bg-violet-500/20 text-slate-400">{r.level}</span>
                         )}
                         {r.domains?.title && (
-                          <span className="text-xs text-[#C8D4E8]">{r.domains.icon} {r.domains.title}</span>
+                          <span className="text-xs text-slate-400">{r.domains.icon} {r.domains.title}</span>
                         )}
                       </div>
                       <div className="flex items-center gap-3 mt-1 flex-wrap">
                         {r.instructor && (
-                          <span className="text-xs text-[#C8D4E8]">👤 {r.instructor}</span>
+                          <span className="text-xs text-slate-400">👤 {r.instructor}</span>
                         )}
                         {r.duration_mins && (
-                          <span className="text-xs text-[#C8D4E8]">⏱ {r.duration_mins} min</span>
+                          <span className="text-xs text-slate-400">⏱ {r.duration_mins} min</span>
                         )}
                         {r.modules?.title && (
-                          <span className="text-xs text-[#C8D4E8]">📂 {r.modules.title}</span>
+                          <span className="text-xs text-slate-400">📂 {r.modules.title}</span>
                         )}
                       </div>
                     </div>
                     <div className="flex gap-2 shrink-0">
                       <button
                         onClick={() => startEdit(r)}
-                        className="text-xs px-2.5 py-1 rounded-lg border border-[#9B4FDE]/40 text-[#C8D4E8] hover:text-white hover:border-[#9B4FDE] transition-colors"
+                        className="text-xs px-2.5 py-1 rounded-lg border border-slate-700 text-slate-400 hover:text-white hover:border-violet-500 transition-colors"
                       >
                         Edit
                       </button>
@@ -375,7 +375,7 @@ export default function AdminYouTubePage() {
         <section className="mt-8">
           <h2 className="text-base font-bold text-white mb-5">
             Student Preview
-            <span className="text-xs font-normal text-[#C8D4E8] ml-2">how it looks on /resources</span>
+            <span className="text-xs font-normal text-slate-400 ml-2">how it looks on /resources</span>
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {resources.slice(0, 6).map(r => (

@@ -69,17 +69,17 @@ export default function DomainPage() {
   if (authLoading || dataLoading) return <PageSpinner />
 
   return (
-    <div className="min-h-screen bg-[#5a1f9a] text-white">
+    <div className="min-h-screen text-white" style={{ backgroundColor: '#0F172A' }}>
       <Navbar profile={profile} back="/courses" backLabel="All Domains" />
       <main className="max-w-6xl mx-auto px-6 py-10 space-y-10">
 
         {/* Domain header */}
-        <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-2xl p-8">
+        <div className="bg-[#1E293B] border border-slate-700/50 rounded-2xl p-8">
           <div className="flex items-center gap-4 mb-4">
             <span className="text-5xl">{domain?.icon}</span>
             <div>
               <h1 className="text-2xl font-extrabold text-white">{domain?.title}</h1>
-              <p className="text-[#E8E0F0] text-sm mt-1 max-w-2xl">{domain?.description}</p>
+              <p className="text-slate-300 text-sm mt-1 max-w-2xl">{domain?.description}</p>
             </div>
           </div>
           <ProgressBar value={totalDone} max={totalAll || 1} />
@@ -89,8 +89,8 @@ export default function DomainPage() {
         <section>
           <h2 className="text-lg font-bold text-white mb-5">Modules</h2>
           {modules.length === 0 ? (
-            <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-10 text-center">
-              <p className="text-[#C8D4E8] text-sm">Modules are being prepared. Check back soon.</p>
+            <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-10 text-center">
+              <p className="text-slate-400 text-sm">Modules are being prepared. Check back soon.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -110,16 +110,16 @@ export default function DomainPage() {
 
         {/* Final exam CTA */}
         {totalAll > 0 && totalDone === totalAll && (
-          <div className="bg-[#7B2FBE] border border-yellow-500/30 rounded-xl p-6 flex items-center gap-4">
+          <div className="bg-[#1E293B] border border-yellow-500/30 rounded-xl p-6 flex items-center gap-4">
             <span className="text-3xl">&#127891;</span>
             <div className="flex-1">
               <h2 className="text-base font-bold text-white">Ready for the Final Exam!</h2>
-              <p className="text-xs text-[#E8E0F0] mt-0.5">Pass with 70%+ to earn your certificate.</p>
+              <p className="text-xs text-slate-300 mt-0.5">Pass with 70%+ to earn your certificate.</p>
             </div>
             <Link
               href={`/courses/${domainId}/exam`}
               className="shrink-0 text-sm font-semibold px-5 py-2.5 rounded-lg text-white"
-              style={{ backgroundColor: '#9B4FDE' }}
+              style={{ backgroundColor: '#6C3FD4' }}
             >
               Take Exam
             </Link>

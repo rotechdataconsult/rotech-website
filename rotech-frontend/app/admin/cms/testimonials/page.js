@@ -97,28 +97,28 @@ export default function TestimonialsCMSPage() {
 
         {editing === null && (
           <>
-            <p className="text-xs" style={{ color: '#C8D4E8' }}>
+            <p className="text-xs" style={{ color: '#94A3B8' }}>
               {items.length === 0 ? 'No testimonials yet — built-in placeholder stories will display until you add real ones.' : `${items.length} testimonial(s). The carousel shows 3 at a time on desktop.`}
             </p>
             <div className="space-y-2">
               {items.map((item, i) => (
-                <div key={item.id} className="flex items-start gap-3 p-4 rounded-xl border" style={{ backgroundColor: '#7B2FBE', borderColor: 'rgba(155,79,222,0.3)' }}>
+                <div key={item.id} className="flex items-start gap-3 p-4 rounded-xl border" style={{ backgroundColor: '#1E293B', borderColor: 'rgba(51,65,85,0.6)' }}>
                   <div className="h-9 w-9 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0" style={{ backgroundColor: item.avatar_color || '#6C3FD4' }}>
                     {item.author_initials || item.author_name?.slice(0, 2)}
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-white">{item.author_name}</p>
-                    <p className="text-xs" style={{ color: '#C8D4E8' }}>{item.author_role}</p>
-                    <p className="text-xs mt-1 line-clamp-2" style={{ color: '#9B4FDE' }}>&ldquo;{item.quote}&rdquo;</p>
+                    <p className="text-xs" style={{ color: '#94A3B8' }}>{item.author_role}</p>
+                    <p className="text-xs mt-1 line-clamp-2" style={{ color: '#8B5CF6' }}>&ldquo;{item.quote}&rdquo;</p>
                   </div>
                   <div className="flex items-center gap-1 shrink-0">
                     <span className={`text-xs px-2 py-0.5 rounded-full font-semibold ${item.is_active ? 'bg-green-500/20 text-green-300' : 'bg-red-500/20 text-red-300'}`}>
                       {item.is_active ? 'Active' : 'Hidden'}
                     </span>
-                    <button onClick={() => move(item.id, -1)} disabled={i === 0} className="px-1.5 py-1 text-xs text-[#C8D4E8] disabled:opacity-30">↑</button>
-                    <button onClick={() => move(item.id, 1)} disabled={i === items.length - 1} className="px-1.5 py-1 text-xs text-[#C8D4E8] disabled:opacity-30">↓</button>
-                    <button onClick={() => toggleActive(item)} className="px-2 py-1 text-xs rounded border border-[#9B4FDE]/30 text-[#C8D4E8]">{item.is_active ? 'Hide' : 'Show'}</button>
-                    <button onClick={() => startEdit(item)} className="px-2 py-1 text-xs rounded border border-[#9B4FDE]/30 text-[#C8D4E8]">Edit</button>
+                    <button onClick={() => move(item.id, -1)} disabled={i === 0} className="px-1.5 py-1 text-xs text-slate-400 disabled:opacity-30">↑</button>
+                    <button onClick={() => move(item.id, 1)} disabled={i === items.length - 1} className="px-1.5 py-1 text-xs text-slate-400 disabled:opacity-30">↓</button>
+                    <button onClick={() => toggleActive(item)} className="px-2 py-1 text-xs rounded border border-slate-700/50 text-slate-400">{item.is_active ? 'Hide' : 'Show'}</button>
+                    <button onClick={() => startEdit(item)} className="px-2 py-1 text-xs rounded border border-slate-700/50 text-slate-400">Edit</button>
                     <button onClick={() => deleteItem(item.id)} className="px-2 py-1 text-xs rounded border border-red-500/30 text-red-300">Del</button>
                   </div>
                 </div>
@@ -131,10 +131,10 @@ export default function TestimonialsCMSPage() {
         )}
 
         {editing !== null && (
-          <div className="space-y-4 p-6 rounded-xl border" style={{ backgroundColor: '#7B2FBE', borderColor: 'rgba(155,79,222,0.3)' }}>
+          <div className="space-y-4 p-6 rounded-xl border" style={{ backgroundColor: '#1E293B', borderColor: 'rgba(51,65,85,0.6)' }}>
             <div className="flex items-center justify-between">
               <h3 className="text-sm font-bold text-white">{editing === 'new' ? 'New Testimonial' : 'Edit Testimonial'}</h3>
-              <button onClick={() => setAiOpen(o => !o)} className="text-xs font-semibold px-3 py-1.5 rounded-lg border" style={{ borderColor: 'rgba(139,92,246,0.4)', color: '#C8D4E8' }}>
+              <button onClick={() => setAiOpen(o => !o)} className="text-xs font-semibold px-3 py-1.5 rounded-lg border" style={{ borderColor: 'rgba(139,92,246,0.4)', color: '#94A3B8' }}>
                 🤖 AI Help
               </button>
             </div>
@@ -184,7 +184,7 @@ export default function TestimonialsCMSPage() {
               <button onClick={handleSave} disabled={saving} className="px-5 py-2.5 rounded-xl text-white font-bold text-sm disabled:opacity-60" style={{ backgroundColor: '#6C3FD4' }}>
                 {saving ? 'Saving…' : 'Save Testimonial'}
               </button>
-              <button onClick={cancelEdit} className="px-5 py-2.5 rounded-xl text-sm border text-[#C8D4E8]" style={{ borderColor: 'rgba(155,79,222,0.3)' }}>Cancel</button>
+              <button onClick={cancelEdit} className="px-5 py-2.5 rounded-xl text-sm border text-slate-400" style={{ borderColor: 'rgba(51,65,85,0.6)' }}>Cancel</button>
             </div>
           </div>
         )}
@@ -193,5 +193,5 @@ export default function TestimonialsCMSPage() {
   )
 }
 
-const LBL   = 'text-xs font-bold text-[#C8D4E8] block mb-1'
-const INPUT = 'w-full rounded-lg px-3 py-2 text-sm text-white border outline-none focus:border-[#9B4FDE] transition-colors bg-[#3d1270] border-[#9B4FDE]/30'
+const LBL   = 'text-xs font-bold text-slate-400 block mb-1'
+const INPUT = 'w-full rounded-lg px-3 py-2 text-sm text-white border outline-none focus:border-violet-500 transition-colors bg-[#0F172A] border-slate-700/50'

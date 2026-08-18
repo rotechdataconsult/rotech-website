@@ -14,14 +14,14 @@ export default function QuizTimer({ durationMins = 15, onExpire }) {
 
   const mins = Math.floor(seconds / 60)
   const secs = seconds % 60
-  const pct  = (seconds / total) * 100
   const isLow = seconds < 60
 
   return (
-    <div className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-sm font-mono font-bold
-      ${isLow
-        ? 'border-red-500/50 bg-red-500/10 text-red-400'
-        : 'border-[#9B4FDE]/40 bg-[#6B28A8] text-white'}`}
+    <div
+      className="flex items-center gap-2 px-3 py-1.5 rounded-lg border text-sm font-mono font-bold"
+      style={isLow
+        ? { borderColor: 'rgba(239,68,68,0.5)', backgroundColor: 'rgba(239,68,68,0.1)', color: '#f87171' }
+        : { borderColor: 'rgba(51,65,85,0.6)', backgroundColor: '#0F172A', color: 'white' }}
     >
       <svg className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}

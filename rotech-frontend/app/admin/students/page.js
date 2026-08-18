@@ -102,9 +102,9 @@ export default function AdminStudentsPage() {
           { label: 'Certificates Issued', value: certified },
           { label: 'Completion Rate', value: rows.length ? `${Math.round((certified / rows.length) * 100)}%` : '—' },
         ].map(({ label, value }) => (
-          <div key={label} className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl px-5 py-4 text-center">
-            <p className="text-2xl font-extrabold" style={{ color: '#9B4FDE' }}>{value}</p>
-            <p className="text-xs text-[#E8E0F0] mt-1">{label}</p>
+          <div key={label} className="bg-[#1E293B] border border-slate-700/50 rounded-xl px-5 py-4 text-center">
+            <p className="text-2xl font-extrabold" style={{ color: '#8B5CF6' }}>{value}</p>
+            <p className="text-xs text-slate-300 mt-1">{label}</p>
           </div>
         ))}
       </div>
@@ -115,27 +115,27 @@ export default function AdminStudentsPage() {
           value={search}
           onChange={e => setSearch(e.target.value)}
           placeholder="Search by name or email..."
-          className="bg-[#7B2FBE] border border-[#9B4FDE]/40 rounded-lg px-4 py-2 text-sm text-white placeholder-[#C8D4E8] focus:outline-none focus:border-[#9B4FDE] transition w-64"
+          className="bg-[#1E293B] border border-slate-700 rounded-lg px-4 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition w-64"
         />
         <select
           value={filterDomain}
           onChange={e => setFilterDomain(e.target.value)}
-          className="bg-[#7B2FBE] border border-[#9B4FDE]/40 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#9B4FDE] transition cursor-pointer"
+          className="bg-[#1E293B] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-violet-500 transition cursor-pointer"
         >
           <option value="">All domains</option>
           {domains.map(d => <option key={d.id} value={d.id}>{d.icon} {d.title}</option>)}
         </select>
-        <p className="text-xs text-[#C8D4E8] self-center">Showing {filtered.length} of {rows.length}</p>
+        <p className="text-xs text-slate-400 self-center">Showing {filtered.length} of {rows.length}</p>
       </div>
 
       {/* Table */}
-      <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl overflow-hidden">
+      <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-[#9B4FDE]/20">
+              <tr className="border-b border-slate-700/40">
                 {['Student', 'Domain', 'Lessons Done', 'Quiz Passes', 'Certificate', 'Enrolled'].map(h => (
-                  <th key={h} className="text-left px-4 py-3 text-xs font-semibold text-[#C8D4E8] uppercase tracking-wide whitespace-nowrap">
+                  <th key={h} className="text-left px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wide whitespace-nowrap">
                     {h}
                   </th>
                 ))}
@@ -144,7 +144,7 @@ export default function AdminStudentsPage() {
             <tbody>
               {filtered.length === 0 && (
                 <tr>
-                  <td colSpan={6} className="px-4 py-10 text-center text-[#C8D4E8] text-sm">
+                  <td colSpan={6} className="px-4 py-10 text-center text-slate-400 text-sm">
                     No students found.
                   </td>
                 </tr>
@@ -152,13 +152,13 @@ export default function AdminStudentsPage() {
               {filtered.map((row, i) => (
                 <tr
                   key={row.id}
-                  className={`border-b border-[#9B4FDE]/10 hover:bg-[#6B28A8]/30 transition-colors ${
-                    i % 2 === 0 ? '' : 'bg-[#6B28A8]/10'
+                  className={`border-b border-slate-700/30 hover:bg-[#0F172A]/30 transition-colors ${
+                    i % 2 === 0 ? '' : 'bg-[#0F172A]/10'
                   }`}
                 >
                   <td className="px-4 py-3">
                     <p className="font-medium text-white">{row.name}</p>
-                    <p className="text-xs text-[#C8D4E8]">{row.email}</p>
+                    <p className="text-xs text-slate-400">{row.email}</p>
                   </td>
                   <td className="px-4 py-3 whitespace-nowrap">
                     {row.domain ? (
@@ -166,7 +166,7 @@ export default function AdminStudentsPage() {
                     ) : '—'}
                   </td>
                   <td className="px-4 py-3 text-center">
-                    <span className="font-semibold" style={{ color: '#9B4FDE' }}>{row.lessons}</span>
+                    <span className="font-semibold" style={{ color: '#8B5CF6' }}>{row.lessons}</span>
                   </td>
                   <td className="px-4 py-3 text-center">
                     <span className="font-semibold text-white">{row.quizPasses}</span>
@@ -177,11 +177,11 @@ export default function AdminStudentsPage() {
                         &#127942; Issued
                       </span>
                     ) : (
-                      <span className="text-xs text-[#C8D4E8]">—</span>
+                      <span className="text-xs text-slate-400">—</span>
                     )}
                   </td>
                   <td className="px-4 py-3 whitespace-nowrap">
-                    <span className="text-xs text-[#C8D4E8]">
+                    <span className="text-xs text-slate-400">
                       {new Date(row.enrolled_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
                     </span>
                   </td>
