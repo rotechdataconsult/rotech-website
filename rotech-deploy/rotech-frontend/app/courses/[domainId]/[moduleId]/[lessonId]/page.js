@@ -53,7 +53,7 @@ export default function LessonPage() {
   const nextLesson   = allLessons[currentIndex + 1]
 
   return (
-    <div className="min-h-screen bg-[#5a1f9a] text-white">
+    <div className="min-h-screen text-white" style={{ backgroundColor: '#0F172A' }}>
       <Navbar
         profile={profile}
         back={`/courses/${domainId}/${moduleId}`}
@@ -76,11 +76,11 @@ export default function LessonPage() {
         </div>
 
         {/* Lesson content */}
-        <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-2xl p-8">
+        <div className="bg-[#1E293B] border border-slate-700/50 rounded-2xl p-8">
           {lesson?.content ? (
             <MarkdownContent content={lesson.content} />
           ) : (
-            <p className="text-[#C8D4E8] text-sm text-center py-10">
+            <p className="text-slate-400 text-sm text-center py-10">
               Content is being added by your instructor. Check back soon.
             </p>
           )}
@@ -88,18 +88,18 @@ export default function LessonPage() {
 
         {/* Dataset download */}
         {lesson?.dataset_url && (
-          <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-4 flex items-center gap-3">
+          <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-4 flex items-center gap-3">
             <span className="text-xl">&#128190;</span>
             <div className="flex-1">
               <p className="text-sm font-medium text-white">Practice Dataset</p>
-              <p className="text-xs text-[#C8D4E8]">Download and follow along</p>
+              <p className="text-xs text-slate-400">Download and follow along</p>
             </div>
             <a
               href={lesson.dataset_url}
               target="_blank"
               rel="noreferrer"
               className="text-xs font-semibold px-3 py-1.5 rounded-lg text-white"
-              style={{ backgroundColor: '#9B4FDE' }}
+              style={{ backgroundColor: '#6C3FD4' }}
             >
               Download
             </a>
@@ -111,7 +111,7 @@ export default function LessonPage() {
           {prevLesson ? (
             <Link
               href={`/courses/${domainId}/${moduleId}/${prevLesson.id}`}
-              className="text-sm font-medium text-[#C8D4E8] hover:text-white transition-colors flex items-center gap-1"
+              className="text-sm font-medium text-slate-400 hover:text-white transition-colors flex items-center gap-1"
             >
               &#8592; Previous
             </Link>
@@ -128,14 +128,14 @@ export default function LessonPage() {
           {nextLesson ? (
             <Link
               href={`/courses/${domainId}/${moduleId}/${nextLesson.id}`}
-              className="text-sm font-medium text-[#C8D4E8] hover:text-white transition-colors flex items-center gap-1"
+              className="text-sm font-medium text-slate-400 hover:text-white transition-colors flex items-center gap-1"
             >
               Next &#8594;
             </Link>
           ) : (
             <Link
               href={`/courses/${domainId}/${moduleId}`}
-              className="text-sm font-medium text-[#9B4FDE] hover:text-white transition-colors"
+              className="text-sm font-medium text-violet-400 hover:text-white transition-colors"
             >
               Back to Module
             </Link>

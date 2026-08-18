@@ -15,7 +15,7 @@ const SUGGESTIONS = [
 function BotIcon() {
   return (
     <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-sm font-bold text-white"
-      style={{ background: 'linear-gradient(135deg, #7B2FBE, #9B4FDE)' }}>
+      style={{ background: 'linear-gradient(135deg, #6C3FD4, #8B5CF6)' }}>
       R
     </div>
   )
@@ -25,8 +25,8 @@ function TypingDots() {
   return (
     <div className="flex items-center gap-1 px-4 py-3">
       {[0, 1, 2].map(i => (
-        <span key={i} className="w-2 h-2 rounded-full bg-[#9B4FDE] animate-bounce"
-          style={{ animationDelay: `${i * 0.15}s` }} />
+        <span key={i} className="w-2 h-2 rounded-full animate-bounce"
+          style={{ backgroundColor: '#8B5CF6', animationDelay: `${i * 0.15}s` }} />
       ))}
     </div>
   )
@@ -104,7 +104,7 @@ export default function ChatWidget() {
       <button
         onClick={() => setOpen(o => !o)}
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-white transition-transform hover:scale-105 active:scale-95"
-        style={{ background: 'linear-gradient(135deg, #7B2FBE, #9B4FDE)' }}
+        style={{ background: 'linear-gradient(135deg, #6C3FD4, #8B5CF6)' }}
         aria-label="Open chat"
       >
         {open ? (
@@ -121,16 +121,16 @@ export default function ChatWidget() {
 
       {/* Chat panel */}
       {open && (
-        <div className="fixed bottom-24 right-6 z-50 w-80 sm:w-96 flex flex-col rounded-2xl shadow-2xl overflow-hidden border border-[#9B4FDE]/40"
-          style={{ maxHeight: '520px', background: '#3a1570' }}>
+        <div className="fixed bottom-24 right-6 z-50 w-80 sm:w-96 flex flex-col rounded-2xl shadow-2xl overflow-hidden"
+          style={{ maxHeight: '520px', backgroundColor: '#1E293B', border: '1px solid rgba(139,92,246,0.3)' }}>
 
           {/* Header */}
-          <div className="px-4 py-3 flex items-center gap-3 border-b border-[#9B4FDE]/30"
-            style={{ background: 'linear-gradient(135deg, #5a1f9a, #7B2FBE)' }}>
+          <div className="px-4 py-3 flex items-center gap-3"
+            style={{ background: 'linear-gradient(135deg, #1E293B, #2D1B69)', borderBottom: '1px solid rgba(139,92,246,0.25)' }}>
             <BotIcon />
             <div>
               <p className="text-sm font-bold text-white">Rota</p>
-              <p className="text-xs text-[#C8D4E8]">Data Analytics Assistant</p>
+              <p className="text-xs text-slate-400">Data Analytics Assistant</p>
             </div>
             <div className="ml-auto flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
@@ -144,14 +144,13 @@ export default function ChatWidget() {
               <div key={i} className={`flex gap-2 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {msg.role === 'bot' && <BotIcon />}
                 <div className={`max-w-[78%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
-                  msg.role === 'user'
-                    ? 'text-white rounded-br-none'
-                    : 'text-[#E8E0F0] rounded-bl-none'
+                  msg.role === 'user' ? 'text-white rounded-br-none' : 'text-slate-300 rounded-bl-none'
                 }`}
                   style={{
                     background: msg.role === 'user'
-                      ? 'linear-gradient(135deg, #7B2FBE, #9B4FDE)'
-                      : '#4a1a8a',
+                      ? 'linear-gradient(135deg, #6C3FD4, #8B5CF6)'
+                      : '#0F172A',
+                    border: msg.role === 'bot' ? '1px solid rgba(51,65,85,0.5)' : 'none',
                   }}>
                   {msg.text}
                 </div>
@@ -161,7 +160,7 @@ export default function ChatWidget() {
             {loading && (
               <div className="flex gap-2 justify-start">
                 <BotIcon />
-                <div className="rounded-2xl rounded-bl-none" style={{ background: '#4a1a8a' }}>
+                <div className="rounded-2xl rounded-bl-none" style={{ backgroundColor: '#0F172A', border: '1px solid rgba(51,65,85,0.5)' }}>
                   <TypingDots />
                 </div>
               </div>
@@ -169,12 +168,15 @@ export default function ChatWidget() {
             <div ref={bottomRef} />
           </div>
 
-          {/* Suggestions (only on first message) */}
+          {/* Suggestions */}
           {messages.length === 1 && !loading && (
             <div className="px-4 pb-2 flex flex-wrap gap-1.5">
               {SUGGESTIONS.map(s => (
                 <button key={s} onClick={() => sendMessage(s)}
-                  className="text-xs px-2.5 py-1 rounded-full border border-[#9B4FDE]/40 text-[#C8D4E8] hover:text-white hover:border-[#9B4FDE] transition-colors bg-[#4a1a8a]/50">
+                  className="text-xs px-2.5 py-1 rounded-full transition-colors text-slate-400 hover:text-white"
+                  style={{ border: '1px solid rgba(139,92,246,0.3)', backgroundColor: 'rgba(139,92,246,0.08)' }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(139,92,246,0.6)'; e.currentTarget.style.color = 'white' }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(139,92,246,0.3)'; e.currentTarget.style.color = '#94A3B8' }}>
                   {s}
                 </button>
               ))}
@@ -182,20 +184,23 @@ export default function ChatWidget() {
           )}
 
           {/* Input */}
-          <div className="px-3 py-3 border-t border-[#9B4FDE]/30 flex gap-2">
+          <div className="px-3 py-3 flex gap-2" style={{ borderTop: '1px solid rgba(51,65,85,0.5)' }}>
             <input
               value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={handleKey}
               placeholder="Ask a data question..."
               disabled={loading}
-              className="flex-1 bg-[#4a1a8a] border border-[#9B4FDE]/30 rounded-xl px-3 py-2 text-sm text-white placeholder-[#9B4FDE]/60 focus:outline-none focus:border-[#9B4FDE] transition disabled:opacity-50"
+              className="flex-1 rounded-xl px-3 py-2 text-sm text-white focus:outline-none transition disabled:opacity-50"
+              style={{ backgroundColor: '#0F172A', border: '1px solid rgba(51,65,85,0.6)', caretColor: '#8B5CF6' }}
+              onFocus={e => e.target.style.borderColor = 'rgba(139,92,246,0.6)'}
+              onBlur={e => e.target.style.borderColor = 'rgba(51,65,85,0.6)'}
             />
             <button
               onClick={() => sendMessage()}
               disabled={!input.trim() || loading}
               className="w-9 h-9 rounded-xl flex items-center justify-center text-white transition-opacity disabled:opacity-40 shrink-0"
-              style={{ background: 'linear-gradient(135deg, #7B2FBE, #9B4FDE)' }}>
+              style={{ background: 'linear-gradient(135deg, #6C3FD4, #8B5CF6)' }}>
               <svg className="w-4 h-4 rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 19V5M5 12l7-7 7 7" />
               </svg>

@@ -42,7 +42,7 @@ export default function ModulePage() {
   const completedCount = lessons.filter(l => completedIds.has(l.id)).length
 
   return (
-    <div className="min-h-screen bg-[#5a1f9a] text-white">
+    <div className="min-h-screen text-white" style={{ backgroundColor: '#0F172A' }}>
       <Navbar
         profile={profile}
         back={`/courses/${domainId}`}
@@ -52,13 +52,13 @@ export default function ModulePage() {
       <main className="max-w-3xl mx-auto px-6 py-10 space-y-8">
 
         {/* Module header */}
-        <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-2xl p-6">
+        <div className="bg-[#1E293B] border border-slate-700/50 rounded-2xl p-6">
           <div className="flex items-start justify-between gap-3 mb-4">
             <div>
-              <p className="text-xs text-[#C8D4E8] mb-1">{module?.domains?.icon} {module?.domains?.title}</p>
+              <p className="text-xs text-slate-400 mb-1">{module?.domains?.icon} {module?.domains?.title}</p>
               <h1 className="text-xl font-extrabold text-white">{module?.title}</h1>
               {module?.description && (
-                <p className="text-[#E8E0F0] text-sm mt-2">{module.description}</p>
+                <p className="text-slate-300 text-sm mt-2">{module.description}</p>
               )}
             </div>
             {module?.tool && <ToolBadge tool={module.tool} />}
@@ -69,12 +69,12 @@ export default function ModulePage() {
         {/* Lessons list */}
         <section>
           <h2 className="text-base font-bold text-white mb-4">
-            Lessons <span className="text-[#9B4FDE] font-normal text-sm">({completedCount}/{lessons.length} completed)</span>
+            Lessons <span className="text-violet-400 font-normal text-sm">({completedCount}/{lessons.length} completed)</span>
           </h2>
 
           {lessons.length === 0 ? (
-            <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-8 text-center">
-              <p className="text-[#C8D4E8] text-sm">Lessons are being added. Check back soon.</p>
+            <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-8 text-center">
+              <p className="text-slate-400 text-sm">Lessons are being added. Check back soon.</p>
             </div>
           ) : (
             <div className="space-y-2">
@@ -94,16 +94,16 @@ export default function ModulePage() {
 
         {/* Module quiz CTA */}
         {lessons.length > 0 && completedCount === lessons.length && (
-          <div className="bg-[#7B2FBE] border border-[#9B4FDE]/40 rounded-xl p-5 flex items-center gap-4">
+          <div className="bg-[#1E293B] border border-slate-700 rounded-xl p-5 flex items-center gap-4">
             <span className="text-2xl">&#9997;&#65039;</span>
             <div className="flex-1">
               <h3 className="text-sm font-bold text-white">Module Complete! Take the Quiz</h3>
-              <p className="text-xs text-[#E8E0F0] mt-0.5">Test your knowledge before moving on.</p>
+              <p className="text-xs text-slate-300 mt-0.5">Test your knowledge before moving on.</p>
             </div>
             <a
               href={`/courses/${domainId}/${moduleId}/quiz`}
               className="shrink-0 text-sm font-semibold px-4 py-2 rounded-lg text-white"
-              style={{ backgroundColor: '#9B4FDE' }}
+              style={{ backgroundColor: '#6C3FD4' }}
             >
               Start Quiz
             </a>

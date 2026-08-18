@@ -49,7 +49,7 @@ export default function ResourcesPage() {
   if (authLoading || dataLoading) return <PageSpinner />
 
   return (
-    <div className="min-h-screen bg-[#5a1f9a] text-white">
+    <div className="min-h-screen text-white" style={{ backgroundColor: '#0F172A' }}>
       <Navbar profile={profile} back="/dashboard" backLabel="Dashboard" />
 
       <main className="max-w-6xl mx-auto px-6 py-10 space-y-8">
@@ -57,7 +57,7 @@ export default function ResourcesPage() {
         {/* Header */}
         <div>
           <h1 className="text-2xl font-extrabold text-white">Learning Resources</h1>
-          <p className="mt-1 text-[#E8E0F0] text-sm">
+          <p className="mt-1 text-slate-300 text-sm">
             Revisit concepts through curated video lessons. Filter by domain or tool.
           </p>
         </div>
@@ -70,14 +70,14 @@ export default function ResourcesPage() {
             placeholder="Search videos..."
             value={search}
             onChange={e => setSearch(e.target.value)}
-            className="flex-1 bg-[#7B2FBE] border border-[#9B4FDE]/40 rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#C8D4E8] focus:outline-none focus:border-[#9B4FDE] transition"
+            className="flex-1 bg-[#1E293B] border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition"
           />
 
           {/* Domain filter */}
           <select
             value={domainFilter}
             onChange={e => setDomainFilter(e.target.value)}
-            className="bg-[#7B2FBE] border border-[#9B4FDE]/40 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-[#9B4FDE] transition cursor-pointer"
+            className="bg-[#1E293B] border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-violet-500 transition cursor-pointer"
           >
             <option value={ALL}>All Domains</option>
             {domains.map(d => (
@@ -89,7 +89,7 @@ export default function ResourcesPage() {
           <select
             value={toolFilter}
             onChange={e => setToolFilter(e.target.value)}
-            className="bg-[#7B2FBE] border border-[#9B4FDE]/40 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-[#9B4FDE] transition cursor-pointer"
+            className="bg-[#1E293B] border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-violet-500 transition cursor-pointer"
           >
             <option value={ALL}>All Tools</option>
             {TOOLS.filter(t => t !== 'Capstone').map(t => (
@@ -99,16 +99,16 @@ export default function ResourcesPage() {
         </div>
 
         {/* Results count */}
-        <p className="text-xs text-[#C8D4E8]">
+        <p className="text-xs text-slate-400">
           {filtered.length} video{filtered.length !== 1 ? 's' : ''} found
         </p>
 
         {/* Video grid */}
         {filtered.length === 0 ? (
-          <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-16 text-center">
+          <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-16 text-center">
             <p className="text-4xl mb-3">&#127909;</p>
             <p className="text-white font-semibold mb-1">No videos found</p>
-            <p className="text-[#C8D4E8] text-sm">
+            <p className="text-slate-400 text-sm">
               {resources.length === 0
                 ? 'Your instructor has not added any videos yet.'
                 : 'Try adjusting your filters.'}

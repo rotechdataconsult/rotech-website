@@ -15,13 +15,13 @@ const TOOL_COLORS = {
 
 function ConfirmModal({ domain, onConfirm, onCancel, loading }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4">
-      <div className="bg-[#7B2FBE] border border-[#9B4FDE]/40 rounded-2xl p-8 max-w-md w-full shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-4" style={{ backgroundColor: 'rgba(0,0,0,0.7)' }}>
+      <div className="rounded-2xl p-8 max-w-md w-full shadow-2xl" style={{ backgroundColor: '#1E293B', border: '1px solid rgba(51,65,85,0.7)' }}>
         <div className="text-4xl text-center mb-4">{domain.icon}</div>
         <h2 className="text-xl font-bold text-white text-center mb-2">
           Enroll in {domain.title}?
         </h2>
-        <p className="text-[#E8E0F0] text-sm text-center mb-6">
+        <p className="text-slate-300 text-sm text-center mb-6">
           You can only be enrolled in{' '}
           <span className="text-white font-semibold">one domain at a time</span>.
           Choose carefully — this will be your learning track until you complete it.
@@ -29,15 +29,16 @@ function ConfirmModal({ domain, onConfirm, onCancel, loading }) {
         <div className="flex gap-3">
           <button
             onClick={onCancel}
-            className="flex-1 py-2.5 rounded-lg border border-[#9B4FDE]/40 text-[#E8E0F0] text-sm font-medium hover:border-[#9B4FDE] transition-colors"
+            className="flex-1 py-2.5 rounded-lg text-slate-300 text-sm font-medium hover:text-white transition-colors"
+            style={{ border: '1px solid rgba(100,116,139,0.4)' }}
           >
             Cancel
           </button>
           <button
             onClick={onConfirm}
             disabled={loading}
-            className="flex-1 py-2.5 rounded-lg text-white text-sm font-semibold disabled:opacity-60 flex items-center justify-center gap-2"
-            style={{ backgroundColor: '#9B4FDE' }}
+            className="flex-1 py-2.5 rounded-lg text-white text-sm font-semibold disabled:opacity-60 flex items-center justify-center gap-2 transition-all hover:opacity-90"
+            style={{ backgroundColor: '#6C3FD4' }}
           >
             {loading ? (
               <>
@@ -60,13 +61,18 @@ function DomainCard({ domain, enrollment, onSelect }) {
   const isLocked   = enrollment && !isEnrolled
 
   return (
-    <div className={`bg-[#7B2FBE] border rounded-xl p-6 flex flex-col gap-4 transition-all ${
-      isEnrolled
-        ? 'border-[#9B4FDE] ring-1 ring-[#9B4FDE]/30'
-        : isLocked
-        ? 'border-[#9B4FDE]/15 opacity-50'
-        : 'border-[#9B4FDE]/30 hover:border-[#9B4FDE]/60'
-    }`}>
+    <div
+      className={`rounded-xl p-6 flex flex-col gap-4 transition-all ${isLocked ? 'opacity-50' : ''}`}
+      style={{
+        backgroundColor: '#1E293B',
+        border: isEnrolled
+          ? '1px solid rgba(139,92,246,0.6)'
+          : '1px solid rgba(51,65,85,0.5)',
+        boxShadow: isEnrolled ? '0 0 0 1px rgba(139,92,246,0.2)' : 'none',
+      }}
+      onMouseEnter={e => { if (!isLocked && !isEnrolled) e.currentTarget.style.borderColor = 'rgba(139,92,246,0.4)' }}
+      onMouseLeave={e => { if (!isLocked && !isEnrolled) e.currentTarget.style.borderColor = 'rgba(51,65,85,0.5)' }}
+    >
       <div className="flex items-center gap-3">
         <span className="text-3xl">{domain.icon}</span>
         <div className="flex-1 min-w-0">
@@ -79,7 +85,7 @@ function DomainCard({ domain, enrollment, onSelect }) {
         </div>
       </div>
 
-      <p className="text-[#E8E0F0] text-sm leading-relaxed flex-1 line-clamp-3">
+      <p className="text-slate-300 text-sm leading-relaxed flex-1 line-clamp-3">
         {domain.description}
       </p>
 
@@ -94,19 +100,23 @@ function DomainCard({ domain, enrollment, onSelect }) {
       {isEnrolled ? (
         <Link
           href={`/courses/${domain.id}`}
-          className="w-full text-center text-sm font-semibold py-2.5 rounded-lg text-white transition-opacity hover:opacity-85"
-          style={{ backgroundColor: '#9B4FDE' }}
+          className="w-full text-center text-sm font-semibold py-2.5 rounded-lg text-white transition-all hover:opacity-90"
+          style={{ backgroundColor: '#6C3FD4' }}
         >
           Continue Learning →
         </Link>
       ) : isLocked ? (
-        <div className="w-full text-center text-xs py-2.5 rounded-lg border border-[#9B4FDE]/20 text-[#9B4FDE]/40 cursor-not-allowed">
+        <div className="w-full text-center text-xs py-2.5 rounded-lg cursor-not-allowed text-slate-600"
+          style={{ border: '1px solid rgba(51,65,85,0.3)' }}>
           Complete your current domain first
         </div>
       ) : (
         <button
           onClick={() => onSelect(domain)}
-          className="w-full text-sm font-semibold py-2.5 rounded-lg border border-[#9B4FDE]/50 text-[#9B4FDE] hover:bg-[#9B4FDE] hover:text-white transition-all"
+          className="w-full text-sm font-semibold py-2.5 rounded-lg transition-all hover:text-white"
+          style={{ border: '1px solid rgba(139,92,246,0.4)', color: '#8B5CF6' }}
+          onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#6C3FD4'; e.currentTarget.style.borderColor = '#6C3FD4'; e.currentTarget.style.color = 'white' }}
+          onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.borderColor = 'rgba(139,92,246,0.4)'; e.currentTarget.style.color = '#8B5CF6' }}
         >
           Select Domain
         </button>
@@ -160,8 +170,8 @@ export default function CoursesPage() {
 
   if (authLoading || dataLoading) {
     return (
-      <div className="min-h-screen bg-[#5a1f9a] flex items-center justify-center">
-        <svg className="animate-spin h-8 w-8" style={{ color: '#9B4FDE' }} fill="none" viewBox="0 0 24 24">
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#0F172A' }}>
+        <svg className="animate-spin h-8 w-8" style={{ color: '#8B5CF6' }} fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
         </svg>
@@ -170,13 +180,16 @@ export default function CoursesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#5a1f9a] text-white">
-      <nav className="bg-[#5a1f9a] border-b border-[#9B4FDE]/30 px-6 py-4">
+    <div className="min-h-screen text-white" style={{ backgroundColor: '#0F172A' }}>
+
+      {/* Nav */}
+      <nav className="px-6 py-4 sticky top-0 z-40"
+        style={{ backgroundColor: 'rgba(15,23,42,0.97)', borderBottom: '1px solid rgba(51,65,85,0.6)', backdropFilter: 'blur(14px)' }}>
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Link href="/dashboard" className="text-lg font-bold tracking-tight">
-            Rotech <span style={{ color: '#C8D4E8' }}>Data Consult</span>
+          <Link href="/dashboard" className="text-lg font-extrabold tracking-tight text-white">
+            Rotech <span style={{ color: '#8B5CF6' }}>Data Consult</span>
           </Link>
-          <Link href="/dashboard" className="text-sm text-[#E8E0F0] hover:text-white transition-colors">
+          <Link href="/dashboard" className="text-sm text-slate-400 hover:text-white transition-colors">
             ← Dashboard
           </Link>
         </div>
@@ -185,7 +198,7 @@ export default function CoursesPage() {
       <main className="max-w-6xl mx-auto px-6 py-10">
         <div className="mb-10 text-center">
           <h1 className="text-3xl font-extrabold text-white">Choose Your Domain</h1>
-          <p className="mt-2 text-[#E8E0F0] text-sm max-w-xl mx-auto">
+          <p className="mt-2 text-slate-300 text-sm max-w-xl mx-auto">
             Each domain teaches data analysis with Excel, SQL, Power BI, and Python —
             applied to real industry problems.{' '}
             <span className="text-white font-semibold">You can only enroll in one domain at a time.</span>
@@ -201,7 +214,7 @@ export default function CoursesPage() {
         </div>
 
         {error && (
-          <div className="mb-6 bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-3 text-red-400 text-sm text-center">
+          <div className="mb-6 bg-red-500/10 border border-red-500/20 rounded-lg px-4 py-3 text-red-400 text-sm text-center">
             {error}
           </div>
         )}

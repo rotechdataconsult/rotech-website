@@ -12,7 +12,7 @@ export default function QuizResult({ score, total, passed, onRetry, nextHref, mo
       {/* Score circle */}
       <div className="relative w-32 h-32 mx-auto">
         <svg viewBox="0 0 36 36" className="w-32 h-32 -rotate-90">
-          <circle cx="18" cy="18" r="15.9" fill="none" stroke="#1f2937" strokeWidth="2.5" />
+          <circle cx="18" cy="18" r="15.9" fill="none" stroke="#1E293B" strokeWidth="2.5" />
           <circle
             cx="18" cy="18" r="15.9" fill="none"
             stroke={passed ? '#22c55e' : '#ef4444'}
@@ -23,7 +23,7 @@ export default function QuizResult({ score, total, passed, onRetry, nextHref, mo
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className="text-2xl font-extrabold text-white">{pct}%</span>
-          <span className="text-xs text-[#C8D4E8]">{score}/{total}</span>
+          <span className="text-xs text-slate-400">{score}/{total}</span>
         </div>
       </div>
 
@@ -32,7 +32,7 @@ export default function QuizResult({ score, total, passed, onRetry, nextHref, mo
         <p className={`text-2xl font-extrabold mb-1 ${passed ? 'text-green-400' : 'text-red-400'}`}>
           {passed ? 'Quiz Passed!' : 'Not Quite'}
         </p>
-        <p className="text-[#E8E0F0] text-sm">
+        <p className="text-slate-300 text-sm">
           {passed
             ? `Great work on ${moduleTitle}. You scored ${pct}%.`
             : `You need ${PASS_MARK}% to pass. You scored ${pct}%. Keep going!`}
@@ -47,8 +47,8 @@ export default function QuizResult({ score, total, passed, onRetry, nextHref, mo
         {passed && nextHref && (
           <Link
             href={nextHref}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-lg"
-            style={{ backgroundColor: '#9B4FDE' }}
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-lg transition-all hover:opacity-90"
+            style={{ backgroundColor: '#6C3FD4' }}
           >
             Continue Learning
           </Link>

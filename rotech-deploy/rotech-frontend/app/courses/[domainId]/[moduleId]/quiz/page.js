@@ -128,7 +128,7 @@ export default function QuizPage() {
     : `/courses/${domainId}`
 
   return (
-    <div className="min-h-screen bg-[#5a1f9a] text-white">
+    <div className="min-h-screen text-white" style={{ backgroundColor: '#0F172A' }}>
       <Navbar
         profile={profile}
         back={`/courses/${domainId}/${moduleId}`}
@@ -139,17 +139,17 @@ export default function QuizPage() {
 
         {/* ── INTRO ─────────────────────────────────────────────────────── */}
         {stage === S.INTRO && (
-          <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-2xl p-8 space-y-6 text-center">
+          <div className="bg-[#1E293B] border border-slate-700/50 rounded-2xl p-8 space-y-6 text-center">
             <div>
               <p className="text-4xl mb-3">&#9997;&#65039;</p>
               <h1 className="text-xl font-extrabold text-white">
                 {quiz ? quiz.title : 'Module Quiz'}
               </h1>
-              <p className="text-[#E8E0F0] text-sm mt-1">{module?.title}</p>
+              <p className="text-slate-300 text-sm mt-1">{module?.title}</p>
             </div>
 
             {!quiz ? (
-              <p className="text-[#C8D4E8] text-sm">
+              <p className="text-slate-400 text-sm">
                 The quiz for this module is being prepared. Check back soon.
               </p>
             ) : (
@@ -160,9 +160,9 @@ export default function QuizPage() {
                     { label: 'Time Limit',  value: `${quiz.time_limit_mins ?? 15} min` },
                     { label: 'Pass Mark',   value: `${quiz.pass_mark ?? PASS_MARK}%` },
                   ].map(({ label, value }) => (
-                    <div key={label} className="bg-[#6B28A8] rounded-xl px-3 py-4">
-                      <p className="text-lg font-extrabold" style={{ color: '#9B4FDE' }}>{value}</p>
-                      <p className="text-xs text-[#E8E0F0] mt-0.5">{label}</p>
+                    <div key={label} className="bg-[#0F172A] rounded-xl px-3 py-4">
+                      <p className="text-lg font-extrabold" style={{ color: '#8B5CF6' }}>{value}</p>
+                      <p className="text-xs text-slate-300 mt-0.5">{label}</p>
                     </div>
                   ))}
                 </div>
@@ -201,13 +201,13 @@ export default function QuizPage() {
             <div className="flex items-center justify-between gap-4">
               <div className="flex-1">
                 <ProgressBar value={answeredCount} max={questions.length} size="sm" showLabel={false} />
-                <p className="text-xs text-[#C8D4E8] mt-1">{answeredCount}/{questions.length} answered</p>
+                <p className="text-xs text-slate-400 mt-1">{answeredCount}/{questions.length} answered</p>
               </div>
               <QuizTimer durationMins={quiz?.time_limit_mins ?? 15} onExpire={handleExpire} />
             </div>
 
             {/* Question card */}
-            <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-2xl p-6">
+            <div className="bg-[#1E293B] border border-slate-700/50 rounded-2xl p-6">
               <QuizQuestion
                 question={questions[current].question}
                 options={questions[current].options}
@@ -238,7 +238,7 @@ export default function QuizPage() {
                         ? 'opacity-100'
                         : 'opacity-30'
                     }`}
-                    style={{ backgroundColor: '#9B4FDE' }}
+                    style={{ backgroundColor: '#6C3FD4' }}
                   />
                 ))}
               </div>
@@ -265,7 +265,7 @@ export default function QuizPage() {
 
         {/* ── RESULT ────────────────────────────────────────────────────── */}
         {stage === S.RESULT && (
-          <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-2xl p-8 space-y-6">
+          <div className="bg-[#1E293B] border border-slate-700/50 rounded-2xl p-8 space-y-6">
             <QuizResult
               score={score}
               total={questions.length}
@@ -274,7 +274,7 @@ export default function QuizPage() {
               nextHref={nextHref}
               moduleTitle={module?.title}
             />
-            <div className="pt-2 border-t border-[#9B4FDE]/20">
+            <div className="pt-2 border-t border-slate-700/40">
               <Button fullWidth variant="ghost" onClick={startReview}>
                 Review Answers & Explanations
               </Button>
@@ -293,7 +293,7 @@ export default function QuizPage() {
             </div>
 
             {questions.map((q, i) => (
-              <div key={q.id} className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-2xl p-6">
+              <div key={q.id} className="bg-[#1E293B] border border-slate-700/50 rounded-2xl p-6">
                 <QuizQuestion
                   question={q.question}
                   options={q.options}

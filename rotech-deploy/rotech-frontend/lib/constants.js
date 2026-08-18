@@ -1,11 +1,11 @@
 // ─── Brand ───────────────────────────────────────────────────────────────────
 export const COLORS = {
-  bg:       '#5a1f9a',
-  card:     '#7B2FBE',
-  input:    '#6B28A8',
-  primary:  '#9B4FDE',
-  silver:   '#C8D4E8',
-  soft:     '#E8E0F0',
+  bg:       '#0F172A',
+  card:     '#1E293B',
+  input:    '#0F172A',
+  primary:  '#6C3FD4',
+  silver:   '#94A3B8',
+  soft:     '#CBD5E1',
 }
 
 // ─── Tools ───────────────────────────────────────────────────────────────────
@@ -21,7 +21,7 @@ export const TOOL_STYLES = {
 
 export const TOOL_CLASS = (tool) => {
   const s = TOOL_STYLES[tool]
-  return s ? `${s.bg} ${s.text} border ${s.border}` : 'bg-[#9B4FDE]/20 text-[#E8E0F0]'
+  return s ? `${s.bg} ${s.text} border ${s.border}` : 'bg-violet-500/20 text-slate-300'
 }
 
 // ─── Lesson types ─────────────────────────────────────────────────────────────

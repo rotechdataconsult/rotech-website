@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 
+const INP_STYLE = { backgroundColor: '#0F172A', border: '1px solid rgba(51,65,85,0.8)' }
+
 export default function ResetPasswordPage() {
   const router = useRouter()
   const [form, setForm] = useState({ password: '', confirmPassword: '' })
@@ -44,22 +46,32 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#5a1f9a] flex items-center justify-center px-4 py-12">
+    <main className="min-h-screen flex items-center justify-center px-4 py-12" style={{ backgroundColor: '#0F172A' }}>
       <div className="w-full max-w-md">
 
-        <div className="text-center mb-8">
-          <span className="text-2xl font-bold tracking-tight text-white">
-            Rotech <span style={{ color: '#C8D4E8' }}>Data Consult</span>
-          </span>
-          <h1 className="mt-4 text-3xl font-extrabold text-white">Set New Password</h1>
-          <p className="mt-1 text-[#E8E0F0] text-sm">Choose a strong new password.</p>
+        {/* Back to home */}
+        <div className="mb-6">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1.5 text-sm text-slate-400 hover:text-white transition-colors"
+          >
+            &#8592; Back to Home
+          </Link>
         </div>
 
-        <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-2xl p-8 shadow-2xl">
+        <div className="text-center mb-8">
+          <Link href="/" className="inline-block text-2xl font-extrabold tracking-tight text-white">
+            Rotech <span style={{ color: '#8B5CF6' }}>Data Consult</span>
+          </Link>
+          <h1 className="mt-4 text-3xl font-extrabold text-white">Set New Password</h1>
+          <p className="mt-1.5 text-sm text-slate-400">Choose a strong new password.</p>
+        </div>
+
+        <div className="rounded-2xl p-8 shadow-2xl" style={{ backgroundColor: '#1E293B', border: '1px solid rgba(51,65,85,0.6)' }}>
           <form onSubmit={handleSubmit} noValidate className="space-y-5">
 
             <div>
-              <label className="block text-sm font-medium text-[#E8E0F0] mb-1.5">New Password</label>
+              <label className="block text-sm font-medium text-slate-300 mb-1.5">New Password</label>
               <input
                 type="password"
                 name="password"
@@ -67,8 +79,9 @@ export default function ResetPasswordPage() {
                 onChange={handleChange}
                 required
                 placeholder="Min. 6 characters"
-                className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#C8D4E8] focus:outline-none transition"
-                onFocus={e => e.target.style.boxShadow = '0 0 0 2px #9B4FDE'}
+                className="w-full rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none transition"
+                style={INP_STYLE}
+                onFocus={e => e.target.style.boxShadow = '0 0 0 2px #8B5CF6'}
                 onBlur={e => e.target.style.boxShadow = 'none'}
               />
               <ul className="mt-2 space-y-1">
@@ -77,7 +90,8 @@ export default function ResetPasswordPage() {
                   { label: 'Contains a letter', ok: /[a-zA-Z]/.test(form.password) },
                   { label: 'Contains a number', ok: /[0-9]/.test(form.password) },
                 ].map(({ label, ok }) => (
-                  <li key={label} className="flex items-center gap-1.5 text-xs" style={{ color: ok ? '#86efac' : '#C8D4E8' }}>
+                  <li key={label} className="flex items-center gap-1.5 text-xs"
+                    style={{ color: ok ? '#86efac' : '#64748B' }}>
                     <span>{ok ? '✓' : '○'}</span>
                     {label}
                   </li>
@@ -86,7 +100,7 @@ export default function ResetPasswordPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-[#E8E0F0] mb-1.5">Confirm Password</label>
+              <label className="block text-sm font-medium text-slate-300 mb-1.5">Confirm Password</label>
               <input
                 type="password"
                 name="confirmPassword"
@@ -94,14 +108,15 @@ export default function ResetPasswordPage() {
                 onChange={handleChange}
                 required
                 placeholder="Re-enter your password"
-                className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#C8D4E8] focus:outline-none transition"
-                onFocus={e => e.target.style.boxShadow = '0 0 0 2px #9B4FDE'}
+                className="w-full rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none transition"
+                style={INP_STYLE}
+                onFocus={e => e.target.style.boxShadow = '0 0 0 2px #8B5CF6'}
                 onBlur={e => e.target.style.boxShadow = 'none'}
               />
             </div>
 
             {error && (
-              <div className="bg-red-500/10 border border-red-500/30 rounded-lg px-4 py-3">
+              <div className="bg-red-500/10 border border-red-500/20 rounded-lg px-4 py-3">
                 <p className="text-red-400 text-sm">{error}</p>
               </div>
             )}
@@ -109,10 +124,8 @@ export default function ResetPasswordPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full font-semibold rounded-lg px-4 py-3 text-sm text-white flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
-              style={{ backgroundColor: '#9B4FDE' }}
-              onMouseEnter={e => { if (!loading) e.target.style.opacity = '0.88' }}
-              onMouseLeave={e => { e.target.style.opacity = '1' }}
+              className="w-full font-semibold rounded-lg px-4 py-3 text-sm text-white flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed transition-all hover:opacity-90"
+              style={{ backgroundColor: '#6C3FD4' }}
             >
               {loading ? (
                 <>
@@ -125,8 +138,8 @@ export default function ResetPasswordPage() {
               ) : 'Update Password'}
             </button>
 
-            <p className="text-center text-sm text-[#C8D4E8] mt-2">
-              <Link href="/auth/login" className="font-medium" style={{ color: '#9B4FDE' }}>
+            <p className="text-center text-sm text-slate-400 mt-2">
+              <Link href="/auth/login" className="font-semibold text-violet-400 hover:text-white transition-colors">
                 Back to Login
               </Link>
             </p>

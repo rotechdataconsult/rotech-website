@@ -52,7 +52,7 @@ export default function AIContentSidebar({ context = 'general', onInsert }) {
       <div className="flex items-center gap-2">
         <span className="text-base">🤖</span>
         <p className="text-sm font-bold text-white">AI Content Assistant</p>
-        <span className="text-xs px-2 py-0.5 rounded-full" style={{ backgroundColor: 'rgba(139,92,246,0.2)', color: '#C8D4E8' }}>
+        <span className="text-xs px-2 py-0.5 rounded-full" style={{ backgroundColor: 'rgba(139,92,246,0.2)', color: '#94A3B8' }}>
           {context}
         </span>
       </div>
@@ -65,7 +65,7 @@ export default function AIContentSidebar({ context = 'general', onInsert }) {
             onClick={() => run(action)}
             disabled={loading}
             className="text-xs font-medium px-3 py-1.5 rounded-lg border transition-colors hover:text-white disabled:opacity-50"
-            style={{ borderColor: 'rgba(139,92,246,0.35)', color: '#C8D4E8' }}
+            style={{ borderColor: 'rgba(139,92,246,0.35)', color: '#94A3B8' }}
           >
             {action}
           </button>
@@ -74,10 +74,10 @@ export default function AIContentSidebar({ context = 'general', onInsert }) {
 
       {/* Custom prompt */}
       <div className="space-y-2">
-        <label className="text-xs font-bold text-[#C8D4E8]">Or write a custom request:</label>
+        <label className="text-xs font-bold text-slate-400">Or write a custom request:</label>
         <div className="flex gap-2">
           <input
-            className="flex-1 rounded-lg px-3 py-2 text-sm text-white border outline-none focus:border-[#9B4FDE] transition-colors bg-[#3d1270] border-[#9B4FDE]/30"
+            className="flex-1 rounded-lg px-3 py-2 text-sm text-white border outline-none focus:border-violet-500 transition-colors bg-[#0F172A] border-slate-700/50"
             placeholder='e.g. "Write a headline for the SQL course…"'
             value={prompt}
             onChange={e => setPrompt(e.target.value)}
@@ -102,10 +102,10 @@ export default function AIContentSidebar({ context = 'general', onInsert }) {
       {/* Result */}
       {result && (
         <div className="space-y-2">
-          <p className="text-xs font-bold text-[#C8D4E8]">Result:</p>
+          <p className="text-xs font-bold text-slate-400">Result:</p>
           <div
             className="rounded-lg p-4 text-sm leading-relaxed border whitespace-pre-wrap"
-            style={{ backgroundColor: '#3d1270', borderColor: 'rgba(155,79,222,0.3)', color: '#E8E0F0' }}
+            style={{ backgroundColor: '#0F172A', borderColor: 'rgba(51,65,85,0.6)', color: '#CBD5E1' }}
           >
             {result}
           </div>
@@ -119,14 +119,14 @@ export default function AIContentSidebar({ context = 'general', onInsert }) {
             </button>
             <button
               onClick={() => navigator.clipboard?.writeText(result)}
-              className="text-xs font-medium px-4 py-2 rounded-lg border text-[#C8D4E8] hover:text-white"
-              style={{ borderColor: 'rgba(155,79,222,0.3)' }}
+              className="text-xs font-medium px-4 py-2 rounded-lg border text-slate-400 hover:text-white"
+              style={{ borderColor: 'rgba(51,65,85,0.6)' }}
             >
               Copy
             </button>
             <button
               onClick={() => setResult('')}
-              className="text-xs text-[#9B4FDE] hover:text-white"
+              className="text-xs text-violet-400 hover:text-white"
             >
               Clear
             </button>

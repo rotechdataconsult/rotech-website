@@ -139,11 +139,11 @@ export default function AdminLessonsPage() {
       {/* Domain + Module selectors */}
       <div className="flex flex-wrap items-center gap-4 mb-6">
         <div className="flex items-center gap-2">
-          <label className="text-xs font-medium text-[#E8E0F0] shrink-0">Domain:</label>
+          <label className="text-xs font-medium text-slate-300 shrink-0">Domain:</label>
           <select
             value={selectedDomain}
             onChange={e => setSelectedDomain(e.target.value)}
-            className="bg-[#7B2FBE] border border-[#9B4FDE]/40 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#9B4FDE] transition cursor-pointer"
+            className="bg-[#1E293B] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-violet-500 transition cursor-pointer"
           >
             <option value="">Choose domain...</option>
             {domains.map(d => <option key={d.id} value={d.id}>{d.icon} {d.title}</option>)}
@@ -151,11 +151,11 @@ export default function AdminLessonsPage() {
         </div>
         {selectedDomain && (
           <div className="flex items-center gap-2">
-            <label className="text-xs font-medium text-[#E8E0F0] shrink-0">Module:</label>
+            <label className="text-xs font-medium text-slate-300 shrink-0">Module:</label>
             <select
               value={selectedModule}
               onChange={e => setSelectedModule(e.target.value)}
-              className="bg-[#7B2FBE] border border-[#9B4FDE]/40 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-[#9B4FDE] transition cursor-pointer"
+              className="bg-[#1E293B] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-violet-500 transition cursor-pointer"
             >
               <option value="">Choose module...</option>
               {modules.map(m => <option key={m.id} value={m.id}>{m.order_index}. {m.title}</option>)}
@@ -167,7 +167,7 @@ export default function AdminLessonsPage() {
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
 
         {/* ── Form ────────────────────────────────────────────────────────── */}
-        <div className={`border rounded-xl p-6 ${editingId ? 'bg-[#4a1580] border-[#9B4FDE]/60' : 'bg-[#7B2FBE] border-[#9B4FDE]/30'}`}>
+        <div className={`border rounded-xl p-6 ${editingId ? 'bg-[#1E3A5F] border-violet-500/50' : 'bg-[#1E293B] border-slate-700/50'}`}>
           <div className="flex items-center justify-between mb-5">
             <h2 className="text-sm font-bold text-white">
               {editingId ? '&#9998; Edit Lesson' : 'Add Lesson'}
@@ -175,7 +175,7 @@ export default function AdminLessonsPage() {
             {editingId && (
               <button
                 onClick={cancelEdit}
-                className="text-xs px-3 py-1.5 rounded-lg border border-[#9B4FDE]/40 text-[#C8D4E8] hover:text-white hover:border-[#9B4FDE] transition-colors"
+                className="text-xs px-3 py-1.5 rounded-lg border border-slate-700 text-slate-400 hover:text-white hover:border-violet-500 transition-colors"
               >
                 &#10005; Cancel Edit
               </button>
@@ -185,20 +185,20 @@ export default function AdminLessonsPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
 
             <div>
-              <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">Title *</label>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">Title *</label>
               <input
                 name="title" value={form.title} onChange={handleChange}
                 placeholder="e.g. What is Financial Data?"
-                className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#C8D4E8] focus:outline-none focus:border-[#9B4FDE] transition"
+                className="w-full bg-[#0F172A] border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">Type *</label>
+                <label className="block text-xs font-medium text-slate-300 mb-1.5">Type *</label>
                 <select
                   name="lesson_type" value={form.lesson_type} onChange={handleChange}
-                  className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-[#9B4FDE] transition cursor-pointer"
+                  className="w-full bg-[#0F172A] border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-violet-500 transition cursor-pointer"
                 >
                   {LESSON_TYPES.map(t => (
                     <option key={t} value={t}>{t.charAt(0).toUpperCase() + t.slice(1)}</option>
@@ -206,33 +206,33 @@ export default function AdminLessonsPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">Order</label>
+                <label className="block text-xs font-medium text-slate-300 mb-1.5">Order</label>
                 <input
                   name="order_index" value={form.order_index} onChange={handleChange}
                   type="number" min="1" placeholder={lessons.length + 1}
-                  className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-3 py-2.5 text-sm text-white placeholder-[#C8D4E8] focus:outline-none focus:border-[#9B4FDE] transition"
+                  className="w-full bg-[#0F172A] border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">
-                Content * <span className="text-[#C8D4E8] font-normal">(markdown supported)</span>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                Content * <span className="text-slate-400 font-normal">(markdown supported)</span>
               </label>
               <textarea
                 name="content" value={form.content} onChange={handleChange}
                 rows={12}
                 placeholder="## Lesson Title&#10;&#10;Write lesson content here..."
-                className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#C8D4E8] focus:outline-none focus:border-[#9B4FDE] transition resize-y font-mono"
+                className="w-full bg-[#0F172A] border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition resize-y font-mono"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">Dataset URL (optional)</label>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">Dataset URL (optional)</label>
               <input
                 name="dataset_url" value={form.dataset_url} onChange={handleChange}
                 placeholder="https://drive.google.com/..."
-                className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#C8D4E8] focus:outline-none focus:border-[#9B4FDE] transition"
+                className="w-full bg-[#0F172A] border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition"
               />
             </div>
 
@@ -259,8 +259,8 @@ export default function AdminLessonsPage() {
           </h2>
 
           {lessons.length === 0 && selectedModule && (
-            <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-8 text-center">
-              <p className="text-[#C8D4E8] text-sm">No lessons yet for this module.</p>
+            <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-8 text-center">
+              <p className="text-slate-400 text-sm">No lessons yet for this module.</p>
             </div>
           )}
 
@@ -270,19 +270,19 @@ export default function AdminLessonsPage() {
                 key={lesson.id}
                 className={`border rounded-xl px-4 py-3 flex items-center gap-3 transition-colors ${
                   editingId === lesson.id
-                    ? 'bg-[#4a1580] border-[#9B4FDE]/60'
-                    : 'bg-[#7B2FBE] border-[#9B4FDE]/30'
+                    ? 'bg-[#1E3A5F] border-violet-500/50'
+                    : 'bg-[#1E293B] border-slate-700/50'
                 }`}
               >
-                <span className="text-xs font-bold text-[#9B4FDE] w-6 shrink-0">{lesson.order_index ?? i + 1}</span>
+                <span className="text-xs font-bold text-violet-400 w-6 shrink-0">{lesson.order_index ?? i + 1}</span>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-white truncate">{lesson.title}</p>
-                  <p className="text-xs text-[#C8D4E8] mt-0.5 capitalize">{lesson.lesson_type}</p>
+                  <p className="text-xs text-slate-400 mt-0.5 capitalize">{lesson.lesson_type}</p>
                 </div>
                 <div className="flex gap-2 shrink-0">
                   <button
                     onClick={() => startEdit(lesson)}
-                    className="text-xs px-2.5 py-1 rounded-lg border border-[#9B4FDE]/40 text-[#C8D4E8] hover:text-white hover:border-[#9B4FDE] transition-colors"
+                    className="text-xs px-2.5 py-1 rounded-lg border border-slate-700 text-slate-400 hover:text-white hover:border-violet-500 transition-colors"
                   >
                     Edit
                   </button>

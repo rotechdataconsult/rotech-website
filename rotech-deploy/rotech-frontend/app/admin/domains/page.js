@@ -79,34 +79,34 @@ export default function AdminDomainsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
         {/* ── Form ────────────────────────────────────────────────────────── */}
-        <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-6">
+        <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-6">
           <h2 className="text-sm font-bold text-white mb-5">Add New Domain</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
 
             <div>
-              <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">Title *</label>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">Title *</label>
               <input
                 name="title" value={form.title} onChange={handleChange}
                 placeholder="e.g. Fintech Analytics"
-                className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#C8D4E8] focus:outline-none focus:border-[#9B4FDE] transition"
+                className="w-full bg-[#0F172A] border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">Icon (paste emoji) *</label>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">Icon (paste emoji) *</label>
               <input
                 name="icon" value={form.icon} onChange={handleChange}
                 placeholder="e.g. 💰"
-                className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#C8D4E8] focus:outline-none focus:border-[#9B4FDE] transition"
+                className="w-full bg-[#0F172A] border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-[#E8E0F0] mb-1.5">Description</label>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">Description</label>
               <textarea
                 name="description" value={form.description} onChange={handleChange}
                 rows={3} placeholder="What students will learn in this domain..."
-                className="w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-4 py-2.5 text-sm text-white placeholder-[#C8D4E8] focus:outline-none focus:border-[#9B4FDE] transition resize-none"
+                className="w-full bg-[#0F172A] border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition resize-none"
               />
             </div>
 
@@ -123,17 +123,17 @@ export default function AdminDomainsPage() {
         <div className="space-y-3">
           <h2 className="text-sm font-bold text-white">Domains ({domains.length})</h2>
           {domains.length === 0 ? (
-            <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-8 text-center">
-              <p className="text-[#C8D4E8] text-sm">No domains yet.</p>
+            <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-8 text-center">
+              <p className="text-slate-400 text-sm">No domains yet.</p>
             </div>
           ) : (
             <div className="space-y-2 max-h-[520px] overflow-y-auto pr-1">
               {domains.map(d => (
-                <div key={d.id} className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl px-4 py-3 flex items-center gap-3">
+                <div key={d.id} className="bg-[#1E293B] border border-slate-700/50 rounded-xl px-4 py-3 flex items-center gap-3">
                   <span className="text-2xl shrink-0">{d.icon}</span>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-white truncate">{d.title}</p>
-                    <p className="text-xs text-[#C8D4E8] truncate">{d.description ?? '—'}</p>
+                    <p className="text-xs text-slate-400 truncate">{d.description ?? '—'}</p>
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
                     <button

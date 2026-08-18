@@ -104,12 +104,12 @@ export default function TeamCMSPage() {
 
         {editing === null && (
           <>
-            <p className="text-xs" style={{ color: '#C8D4E8' }}>
+            <p className="text-xs" style={{ color: '#94A3B8' }}>
               {items.length === 0 ? 'No team members yet — built-in placeholder cards will display until you add real profiles.' : `${items.length} team member(s).`}
             </p>
             <div className="space-y-2">
               {items.map((item, i) => (
-                <div key={item.id} className="flex items-center gap-3 p-4 rounded-xl border" style={{ backgroundColor: '#7B2FBE', borderColor: 'rgba(155,79,222,0.3)' }}>
+                <div key={item.id} className="flex items-center gap-3 p-4 rounded-xl border" style={{ backgroundColor: '#1E293B', borderColor: 'rgba(51,65,85,0.6)' }}>
                   {item.photo_url ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={item.photo_url} alt={item.name} className="h-10 w-10 rounded-full object-cover shrink-0" />
@@ -120,12 +120,12 @@ export default function TeamCMSPage() {
                   )}
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-white truncate">{item.name}</p>
-                    <p className="text-xs" style={{ color: '#C8D4E8' }}>{item.role}</p>
+                    <p className="text-xs" style={{ color: '#94A3B8' }}>{item.role}</p>
                   </div>
                   <div className="flex items-center gap-1 shrink-0">
-                    <button onClick={() => move(item.id, -1)} disabled={i === 0} className="px-1.5 py-1 text-xs text-[#C8D4E8] disabled:opacity-30">↑</button>
-                    <button onClick={() => move(item.id, 1)} disabled={i === items.length - 1} className="px-1.5 py-1 text-xs text-[#C8D4E8] disabled:opacity-30">↓</button>
-                    <button onClick={() => startEdit(item)} className="px-2 py-1 text-xs rounded border border-[#9B4FDE]/30 text-[#C8D4E8]">Edit</button>
+                    <button onClick={() => move(item.id, -1)} disabled={i === 0} className="px-1.5 py-1 text-xs text-slate-400 disabled:opacity-30">↑</button>
+                    <button onClick={() => move(item.id, 1)} disabled={i === items.length - 1} className="px-1.5 py-1 text-xs text-slate-400 disabled:opacity-30">↓</button>
+                    <button onClick={() => startEdit(item)} className="px-2 py-1 text-xs rounded border border-slate-700/50 text-slate-400">Edit</button>
                     <button onClick={() => deleteItem(item.id)} className="px-2 py-1 text-xs rounded border border-red-500/30 text-red-300">Del</button>
                   </div>
                 </div>
@@ -138,7 +138,7 @@ export default function TeamCMSPage() {
         )}
 
         {editing !== null && (
-          <div className="space-y-4 p-6 rounded-xl border" style={{ backgroundColor: '#7B2FBE', borderColor: 'rgba(155,79,222,0.3)' }}>
+          <div className="space-y-4 p-6 rounded-xl border" style={{ backgroundColor: '#1E293B', borderColor: 'rgba(51,65,85,0.6)' }}>
             <h3 className="text-sm font-bold text-white">{editing === 'new' ? 'New Team Member' : 'Edit Team Member'}</h3>
 
             <div className="grid grid-cols-2 gap-3">
@@ -173,10 +173,10 @@ export default function TeamCMSPage() {
                 <div className="flex items-center gap-4">
                   {form.photo_url && (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={form.photo_url} alt="Preview" className="h-12 w-12 rounded-full object-cover border-2 border-[#9B4FDE]/40" />
+                    <img src={form.photo_url} alt="Preview" className="h-12 w-12 rounded-full object-cover border-2 border-slate-700" />
                   )}
                   <div>
-                    <label className="cursor-pointer text-xs font-semibold px-4 py-2 rounded-lg border inline-block" style={{ borderColor: 'rgba(155,79,222,0.4)', color: '#C8D4E8' }}>
+                    <label className="cursor-pointer text-xs font-semibold px-4 py-2 rounded-lg border inline-block" style={{ borderColor: 'rgba(51,65,85,0.6)', color: '#94A3B8' }}>
                       {uploading ? 'Uploading…' : 'Upload Photo'}
                       <input type="file" accept="image/*" className="hidden" onChange={handlePhotoUpload} disabled={uploading} />
                     </label>
@@ -185,8 +185,8 @@ export default function TeamCMSPage() {
                     )}
                   </div>
                 </div>
-                <p className="text-xs mt-1" style={{ color: '#9B4FDE' }}>
-                  Or paste a URL: <input className="bg-transparent border-b border-[#9B4FDE]/40 outline-none text-white text-xs px-1 w-48" {...field('photo_url')} placeholder="https://…" />
+                <p className="text-xs mt-1" style={{ color: '#8B5CF6' }}>
+                  Or paste a URL: <input className="bg-transparent border-b border-slate-700 outline-none text-white text-xs px-1 w-48" {...field('photo_url')} placeholder="https://…" />
                 </p>
               </div>
             </div>
@@ -195,7 +195,7 @@ export default function TeamCMSPage() {
               <button onClick={handleSave} disabled={saving} className="px-5 py-2.5 rounded-xl text-white font-bold text-sm disabled:opacity-60" style={{ backgroundColor: '#6C3FD4' }}>
                 {saving ? 'Saving…' : 'Save Member'}
               </button>
-              <button onClick={cancelEdit} className="px-5 py-2.5 rounded-xl text-sm border text-[#C8D4E8]" style={{ borderColor: 'rgba(155,79,222,0.3)' }}>Cancel</button>
+              <button onClick={cancelEdit} className="px-5 py-2.5 rounded-xl text-sm border text-slate-400" style={{ borderColor: 'rgba(51,65,85,0.6)' }}>Cancel</button>
             </div>
           </div>
         )}
@@ -204,5 +204,5 @@ export default function TeamCMSPage() {
   )
 }
 
-const LBL   = 'text-xs font-bold text-[#C8D4E8] block mb-1'
-const INPUT = 'w-full rounded-lg px-3 py-2 text-sm text-white border outline-none focus:border-[#9B4FDE] transition-colors bg-[#3d1270] border-[#9B4FDE]/30'
+const LBL   = 'text-xs font-bold text-slate-400 block mb-1'
+const INPUT = 'w-full rounded-lg px-3 py-2 text-sm text-white border outline-none focus:border-violet-500 transition-colors bg-[#0F172A] border-slate-700/50'

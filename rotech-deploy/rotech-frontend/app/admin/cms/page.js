@@ -62,7 +62,7 @@ export default function CMSDashboard() {
 
         <div className="mb-8 p-5 rounded-xl border" style={{ backgroundColor: 'rgba(108,63,212,0.1)', borderColor: 'rgba(139,92,246,0.25)' }}>
           <p className="text-sm font-semibold text-white mb-1">How it works</p>
-          <p className="text-xs" style={{ color: '#C8D4E8' }}>
+          <p className="text-xs" style={{ color: '#94A3B8' }}>
             Edit any section below and save. The landing page automatically updates within 5 minutes,
             or instantly if you click <strong className="text-white">Publish Changes</strong> inside each editor.
             All sections fall back to built-in defaults if left empty.
@@ -74,8 +74,8 @@ export default function CMSDashboard() {
             <Link
               key={href}
               href={href}
-              className="rounded-xl p-5 border transition-all hover:border-[#9B4FDE]/60 hover:-translate-y-0.5 hover:shadow-lg group"
-              style={{ backgroundColor: '#7B2FBE', borderColor: 'rgba(155,79,222,0.3)' }}
+              className="rounded-xl p-5 border transition-all hover:border-violet-500/50 hover:-translate-y-0.5 hover:shadow-lg group"
+              style={{ backgroundColor: '#1E293B', borderColor: 'rgba(51,65,85,0.6)' }}
             >
               <div className="flex items-center gap-3 mb-3">
                 <div className="h-10 w-10 rounded-lg flex items-center justify-center text-xl" style={{ backgroundColor: color + '25' }}>
@@ -83,16 +83,16 @@ export default function CMSDashboard() {
                 </div>
                 <p className="font-semibold text-white text-sm">{title}</p>
               </div>
-              <p className="text-xs" style={{ color: '#C8D4E8' }}>{desc}</p>
-              <p className="text-xs font-semibold mt-3 transition-colors group-hover:text-white" style={{ color: '#9B4FDE' }}>
+              <p className="text-xs" style={{ color: '#94A3B8' }}>{desc}</p>
+              <p className="text-xs font-semibold mt-3 transition-colors group-hover:text-white" style={{ color: '#8B5CF6' }}>
                 Edit →
               </p>
             </Link>
           ))}
         </div>
 
-        <div className="mt-8 pt-6 border-t" style={{ borderColor: 'rgba(155,79,222,0.2)' }}>
-          <p className="text-xs" style={{ color: '#9B4FDE' }}>
+        <div className="mt-8 pt-6 border-t" style={{ borderColor: 'rgba(51,65,85,0.4)' }}>
+          <p className="text-xs" style={{ color: '#8B5CF6' }}>
             💡 <strong className="text-white">Tip:</strong> Use the AI Assistant (available inside each editor) to generate headlines, course descriptions, and testimonials in seconds.
           </p>
         </div>

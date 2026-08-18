@@ -13,7 +13,7 @@ export function StatusBadge({ status }) {
   const styles = {
     active:    'bg-green-500/15 text-green-400 border-green-500/30',
     completed: 'bg-blue-500/15 text-blue-400 border-blue-500/30',
-    locked:    'bg-[#9B4FDE]/20 text-[#C8D4E8] border-[#9B4FDE]/20',
+    locked:    'bg-violet-500/15 text-slate-400 border-violet-500/20',
   }
   return (
     <span className={`text-xs px-2 py-0.5 rounded-full border capitalize ${styles[status] ?? styles.locked}`}>
@@ -24,7 +24,7 @@ export function StatusBadge({ status }) {
 
 export function LessonTypeBadge({ type }) {
   const styles = {
-    reading:  'bg-[#9B4FDE]/20 text-[#E8E0F0]',
+    reading:  'bg-violet-500/15 text-slate-300',
     exercise: 'bg-yellow-500/15 text-yellow-400',
     project:  'bg-pink-500/15 text-pink-400',
   }

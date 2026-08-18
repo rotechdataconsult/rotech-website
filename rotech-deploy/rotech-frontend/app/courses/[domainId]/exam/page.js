@@ -151,7 +151,7 @@ export default function FinalExamPage() {
   const answeredCount = Object.keys(answers).length
 
   return (
-    <div className="min-h-screen bg-[#5a1f9a] text-white">
+    <div className="min-h-screen text-white" style={{ backgroundColor: '#0F172A' }}>
       <Navbar
         profile={profile}
         back={`/courses/${domainId}`}
@@ -162,10 +162,10 @@ export default function FinalExamPage() {
 
         {/* ── LOCKED ──────────────────────────────────────────────────────── */}
         {stage === S.LOCKED && (
-          <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-2xl p-10 text-center space-y-4">
+          <div className="bg-[#1E293B] border border-slate-700/50 rounded-2xl p-10 text-center space-y-4">
             <p className="text-5xl">&#128274;</p>
             <h1 className="text-xl font-extrabold text-white">Final Exam Locked</h1>
-            <p className="text-[#E8E0F0] text-sm max-w-xs mx-auto">
+            <p className="text-slate-300 text-sm max-w-xs mx-auto">
               Complete all module lessons and quizzes to unlock the final exam.
             </p>
             <Button onClick={() => router.push(`/courses/${domainId}`)}>
@@ -176,24 +176,24 @@ export default function FinalExamPage() {
 
         {/* ── INTRO ───────────────────────────────────────────────────────── */}
         {stage === S.INTRO && (
-          <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-2xl p-8 space-y-6 text-center">
+          <div className="bg-[#1E293B] border border-slate-700/50 rounded-2xl p-8 space-y-6 text-center">
             <div>
               <p className="text-4xl mb-3">&#127891;</p>
               <h1 className="text-xl font-extrabold text-white">Final Exam</h1>
-              <p className="text-[#E8E0F0] text-sm mt-1">{domain?.title} — Data Analytics Programme</p>
+              <p className="text-slate-300 text-sm mt-1">{domain?.title} — Data Analytics Programme</p>
             </div>
 
             {/* Already certified */}
             {certificate && (
               <div className="bg-green-500/10 border border-green-500/30 rounded-xl px-4 py-5 space-y-3">
                 <p className="text-green-400 font-bold">&#127942; Certificate Earned — Score: {certificate.score}%</p>
-                <p className="text-xs text-[#C8D4E8]">
+                <p className="text-xs text-slate-400">
                   Code: <span className="font-mono text-white">{certificate.verification_code}</span>
                 </p>
                 <Link
                   href={`/courses/${domainId}/certificate`}
                   className="inline-flex items-center justify-center px-5 py-2 text-sm font-semibold text-white rounded-lg"
-                  style={{ backgroundColor: '#9B4FDE' }}
+                  style={{ backgroundColor: '#6C3FD4' }}
                 >
                   View Certificate &#8594;
                 </Link>
@@ -202,7 +202,7 @@ export default function FinalExamPage() {
 
             {/* No questions yet */}
             {!certificate && questions.length === 0 && (
-              <p className="text-[#C8D4E8] text-sm">
+              <p className="text-slate-400 text-sm">
                 The final exam is being prepared. Check back soon.
               </p>
             )}
@@ -216,9 +216,9 @@ export default function FinalExamPage() {
                     { label: 'Time Limit', value: `${EXAM_MINS} min` },
                     { label: 'Pass Mark',  value: `${PASS_MARK}%`  },
                   ].map(({ label, value }) => (
-                    <div key={label} className="bg-[#6B28A8] rounded-xl px-3 py-4">
-                      <p className="text-lg font-extrabold" style={{ color: '#9B4FDE' }}>{value}</p>
-                      <p className="text-xs text-[#E8E0F0] mt-0.5">{label}</p>
+                    <div key={label} className="bg-[#0F172A] rounded-xl px-3 py-4">
+                      <p className="text-lg font-extrabold" style={{ color: '#8B5CF6' }}>{value}</p>
+                      <p className="text-xs text-slate-300 mt-0.5">{label}</p>
                     </div>
                   ))}
                 </div>
@@ -234,7 +234,7 @@ export default function FinalExamPage() {
                   </div>
                 )}
 
-                <div className="bg-[#6B28A8] rounded-xl px-4 py-3 text-xs text-[#C8D4E8] text-left space-y-1">
+                <div className="bg-[#0F172A] rounded-xl px-4 py-3 text-xs text-slate-400 text-left space-y-1">
                   <p className="font-semibold text-white mb-1">Before you begin:</p>
                   <p>&#8226; The timer starts immediately when you click Start.</p>
                   <p>&#8226; You can navigate between questions freely.</p>
@@ -257,13 +257,13 @@ export default function FinalExamPage() {
             <div className="flex items-center justify-between gap-4">
               <div className="flex-1">
                 <ProgressBar value={answeredCount} max={questions.length} size="sm" showLabel={false} />
-                <p className="text-xs text-[#C8D4E8] mt-1">{answeredCount}/{questions.length} answered</p>
+                <p className="text-xs text-slate-400 mt-1">{answeredCount}/{questions.length} answered</p>
               </div>
               <QuizTimer durationMins={EXAM_MINS} onExpire={handleExpire} />
             </div>
 
             {/* Question card */}
-            <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-2xl p-6">
+            <div className="bg-[#1E293B] border border-slate-700/50 rounded-2xl p-6">
               <QuizQuestion
                 question={questions[current].question}
                 options={questions[current].options}
@@ -289,7 +289,7 @@ export default function FinalExamPage() {
                     className={`w-2.5 h-2.5 rounded-full transition-all ${
                       i === current ? 'scale-125' : answers[q.id] ? 'opacity-100' : 'opacity-30'
                     }`}
-                    style={{ backgroundColor: '#9B4FDE' }}
+                    style={{ backgroundColor: '#6C3FD4' }}
                   />
                 ))}
               </div>
@@ -317,7 +317,7 @@ export default function FinalExamPage() {
 
         {/* ── RESULT ──────────────────────────────────────────────────────── */}
         {stage === S.RESULT && (
-          <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-2xl p-8 space-y-6 text-center">
+          <div className="bg-[#1E293B] border border-slate-700/50 rounded-2xl p-8 space-y-6 text-center">
             {/* Score circle */}
             <div className="relative w-36 h-36 mx-auto">
               <svg viewBox="0 0 36 36" className="w-36 h-36 -rotate-90">
@@ -332,7 +332,7 @@ export default function FinalExamPage() {
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <span className="text-3xl font-extrabold text-white">{score}%</span>
-                <span className="text-xs text-[#C8D4E8]">{passed ? 'Passed' : 'Failed'}</span>
+                <span className="text-xs text-slate-400">{passed ? 'Passed' : 'Failed'}</span>
               </div>
             </div>
 
@@ -340,7 +340,7 @@ export default function FinalExamPage() {
               <p className={`text-2xl font-extrabold mb-1 ${passed ? 'text-green-400' : 'text-red-400'}`}>
                 {passed ? '&#127942; Exam Passed!' : 'Not Quite'}
               </p>
-              <p className="text-[#E8E0F0] text-sm">
+              <p className="text-slate-300 text-sm">
                 {passed
                   ? 'Outstanding! Your certificate has been issued.'
                   : `You need ${PASS_MARK}% to pass. You scored ${score}%. Keep going!`}
@@ -353,14 +353,14 @@ export default function FinalExamPage() {
                 <Link
                   href={`/courses/${domainId}/certificate`}
                   className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-semibold text-white rounded-lg"
-                  style={{ backgroundColor: '#9B4FDE' }}
+                  style={{ backgroundColor: '#6C3FD4' }}
                 >
                   View Certificate &#8594;
                 </Link>
               )}
             </div>
 
-            <div className="pt-2 border-t border-[#9B4FDE]/20">
+            <div className="pt-2 border-t border-slate-700/40">
               <Button fullWidth variant="ghost" onClick={() => { setCurrent(0); setStage(S.REVIEW) }}>
                 Review Answers &amp; Explanations
               </Button>
@@ -379,7 +379,7 @@ export default function FinalExamPage() {
             </div>
 
             {questions.map((q, i) => (
-              <div key={q.id} className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-2xl p-6">
+              <div key={q.id} className="bg-[#1E293B] border border-slate-700/50 rounded-2xl p-6">
                 <QuizQuestion
                   question={q.question}
                   options={q.options}

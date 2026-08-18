@@ -56,8 +56,8 @@ function downloadCSV(rows, filename) {
 }
 
 // ── Input style ────────────────────────────────────────────────────────────────
-const INP = 'w-full bg-[#6B28A8] border border-[#9B4FDE]/40 rounded-lg px-3 py-2.5 text-sm text-white placeholder-[#C8D4E8] focus:outline-none focus:border-[#9B4FDE] transition'
-const LBL = 'block text-xs font-medium text-[#E8E0F0] mb-1.5'
+const INP = 'w-full bg-[#0F172A] border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 transition'
+const LBL = 'block text-xs font-medium text-slate-300 mb-1.5'
 
 // ── Sales Tab ──────────────────────────────────────────────────────────────────
 function SalesTab({ userId }) {
@@ -112,7 +112,7 @@ function SalesTab({ userId }) {
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
       {/* Form */}
-      <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-6">
+      <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-6">
         <h3 className="text-sm font-bold text-white mb-5">Record a Sale</h3>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
@@ -153,7 +153,7 @@ function SalesTab({ userId }) {
           </div>
           {error && <p className="text-red-400 text-xs bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">{error}</p>}
           <button type="submit" disabled={saving}
-            className="w-full py-2.5 rounded-xl text-sm font-semibold text-white bg-[#9B4FDE] hover:opacity-90 disabled:opacity-50 transition">
+            className="w-full py-2.5 rounded-xl text-sm font-semibold text-white bg-violet-600 hover:opacity-90 disabled:opacity-50 transition">
             {saving ? 'Saving...' : '+ Add Sale Record'}
           </button>
         </form>
@@ -164,28 +164,28 @@ function SalesTab({ userId }) {
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-sm font-bold text-white">Recent Sales ({records.length})</h3>
-            <p className="text-xs text-[#C8D4E8] mt-0.5">Total: <span className="text-white font-semibold">{fmtNGN(totalRevenue)}</span></p>
+            <p className="text-xs text-slate-400 mt-0.5">Total: <span className="text-white font-semibold">{fmtNGN(totalRevenue)}</span></p>
           </div>
           <button onClick={() => downloadCSV(records, 'sales_records.csv')}
-            className="text-xs px-3 py-1.5 rounded-lg border border-[#9B4FDE]/40 text-[#C8D4E8] hover:text-white hover:border-[#9B4FDE] transition-colors">
+            className="text-xs px-3 py-1.5 rounded-lg border border-slate-700 text-slate-400 hover:text-white hover:border-violet-500 transition-colors">
             Export CSV
           </button>
         </div>
 
         {loading ? (
-          <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-8 text-center text-[#C8D4E8] text-sm">Loading...</div>
+          <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-8 text-center text-slate-400 text-sm">Loading...</div>
         ) : records.length === 0 ? (
-          <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-8 text-center text-[#C8D4E8] text-sm">No sales recorded yet. Add your first sale.</div>
+          <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-8 text-center text-slate-400 text-sm">No sales recorded yet. Add your first sale.</div>
         ) : (
           <div className="space-y-2 max-h-[520px] overflow-y-auto pr-1">
             {records.map(r => (
-              <div key={r.id} className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl px-4 py-3 flex items-center gap-3">
+              <div key={r.id} className="bg-[#1E293B] border border-slate-700/50 rounded-xl px-4 py-3 flex items-center gap-3">
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-white truncate">{r.product}</p>
-                  <p className="text-xs text-[#C8D4E8] mt-0.5">
+                  <p className="text-xs text-slate-400 mt-0.5">
                     {r.date} · Qty {r.quantity} · {fmtNGN(r.unit_price)} each · <span className="text-white font-medium">{fmtNGN(r.quantity * r.unit_price)}</span>
                   </p>
-                  <p className="text-xs text-[#C8D4E8]">{r.customer_type} · {r.payment_method}</p>
+                  <p className="text-xs text-slate-400">{r.customer_type} · {r.payment_method}</p>
                 </div>
                 <button onClick={() => handleDelete(r.id)}
                   className="shrink-0 text-xs px-2 py-1 rounded border border-red-500/30 text-red-400 hover:bg-red-500/10 transition-colors">✕</button>
@@ -249,7 +249,7 @@ function ExpensesTab({ userId }) {
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
       {/* Form */}
-      <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-6">
+      <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-6">
         <h3 className="text-sm font-bold text-white mb-5">Record an Expense</h3>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
@@ -282,7 +282,7 @@ function ExpensesTab({ userId }) {
           </div>
           {error && <p className="text-red-400 text-xs bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">{error}</p>}
           <button type="submit" disabled={saving}
-            className="w-full py-2.5 rounded-xl text-sm font-semibold text-white bg-[#9B4FDE] hover:opacity-90 disabled:opacity-50 transition">
+            className="w-full py-2.5 rounded-xl text-sm font-semibold text-white bg-violet-600 hover:opacity-90 disabled:opacity-50 transition">
             {saving ? 'Saving...' : '+ Add Expense Record'}
           </button>
         </form>
@@ -293,29 +293,29 @@ function ExpensesTab({ userId }) {
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-sm font-bold text-white">Recent Expenses ({records.length})</h3>
-            <p className="text-xs text-[#C8D4E8] mt-0.5">Total: <span className="text-white font-semibold">{fmtNGN(totalExpenses)}</span></p>
+            <p className="text-xs text-slate-400 mt-0.5">Total: <span className="text-white font-semibold">{fmtNGN(totalExpenses)}</span></p>
           </div>
           <button onClick={() => downloadCSV(records, 'expense_records.csv')}
-            className="text-xs px-3 py-1.5 rounded-lg border border-[#9B4FDE]/40 text-[#C8D4E8] hover:text-white hover:border-[#9B4FDE] transition-colors">
+            className="text-xs px-3 py-1.5 rounded-lg border border-slate-700 text-slate-400 hover:text-white hover:border-violet-500 transition-colors">
             Export CSV
           </button>
         </div>
 
         {loading ? (
-          <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-8 text-center text-[#C8D4E8] text-sm">Loading...</div>
+          <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-8 text-center text-slate-400 text-sm">Loading...</div>
         ) : records.length === 0 ? (
-          <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-8 text-center text-[#C8D4E8] text-sm">No expenses recorded yet.</div>
+          <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-8 text-center text-slate-400 text-sm">No expenses recorded yet.</div>
         ) : (
           <div className="space-y-2 max-h-[520px] overflow-y-auto pr-1">
             {records.map(r => (
-              <div key={r.id} className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl px-4 py-3 flex items-center gap-3">
+              <div key={r.id} className="bg-[#1E293B] border border-slate-700/50 rounded-xl px-4 py-3 flex items-center gap-3">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <p className="text-sm font-medium text-white truncate">{r.category}</p>
-                    <span className="text-xs px-1.5 py-0.5 rounded bg-[#9B4FDE]/20 text-[#C8D4E8] shrink-0">{fmtNGN(r.amount)}</span>
+                    <span className="text-xs px-1.5 py-0.5 rounded bg-violet-600/20 text-slate-400 shrink-0">{fmtNGN(r.amount)}</span>
                   </div>
-                  {r.description && <p className="text-xs text-[#E8E0F0] mt-0.5 truncate">{r.description}</p>}
-                  <p className="text-xs text-[#C8D4E8]">{r.date}{r.paid_to ? ` · ${r.paid_to}` : ''}</p>
+                  {r.description && <p className="text-xs text-slate-300 mt-0.5 truncate">{r.description}</p>}
+                  <p className="text-xs text-slate-400">{r.date}{r.paid_to ? ` · ${r.paid_to}` : ''}</p>
                 </div>
                 <button onClick={() => handleDelete(r.id)}
                   className="shrink-0 text-xs px-2 py-1 rounded border border-red-500/30 text-red-400 hover:bg-red-500/10 transition-colors">✕</button>
@@ -403,12 +403,12 @@ function InventoryTab({ userId }) {
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
       {/* Form */}
-      <div className={`border rounded-xl p-6 ${editId ? 'bg-[#4a1580] border-[#9B4FDE]/60' : 'bg-[#7B2FBE] border-[#9B4FDE]/30'}`}>
+      <div className={`border rounded-xl p-6 ${editId ? 'bg-[#1E3A5F] border-violet-500/50' : 'bg-[#1E293B] border-slate-700/50'}`}>
         <div className="flex items-center justify-between mb-5">
           <h3 className="text-sm font-bold text-white">{editId ? 'Edit Product' : 'Add Product'}</h3>
           {editId && (
             <button onClick={cancelEdit}
-              className="text-xs px-3 py-1.5 rounded-lg border border-[#9B4FDE]/40 text-[#C8D4E8] hover:text-white transition-colors">
+              className="text-xs px-3 py-1.5 rounded-lg border border-slate-700 text-slate-400 hover:text-white transition-colors">
               ✕ Cancel
             </button>
           )}
@@ -446,7 +446,7 @@ function InventoryTab({ userId }) {
           </div>
           {error && <p className="text-red-400 text-xs bg-red-500/10 border border-red-500/30 rounded-lg px-3 py-2">{error}</p>}
           <button type="submit" disabled={saving}
-            className="w-full py-2.5 rounded-xl text-sm font-semibold text-white bg-[#9B4FDE] hover:opacity-90 disabled:opacity-50 transition">
+            className="w-full py-2.5 rounded-xl text-sm font-semibold text-white bg-violet-600 hover:opacity-90 disabled:opacity-50 transition">
             {saving ? 'Saving...' : editId ? 'Update Product' : '+ Add Product'}
           </button>
         </form>
@@ -462,38 +462,38 @@ function InventoryTab({ userId }) {
             )}
           </div>
           <button onClick={() => downloadCSV(records, 'inventory_records.csv')}
-            className="text-xs px-3 py-1.5 rounded-lg border border-[#9B4FDE]/40 text-[#C8D4E8] hover:text-white hover:border-[#9B4FDE] transition-colors">
+            className="text-xs px-3 py-1.5 rounded-lg border border-slate-700 text-slate-400 hover:text-white hover:border-violet-500 transition-colors">
             Export CSV
           </button>
         </div>
 
         {loading ? (
-          <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-8 text-center text-[#C8D4E8] text-sm">Loading...</div>
+          <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-8 text-center text-slate-400 text-sm">Loading...</div>
         ) : records.length === 0 ? (
-          <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-8 text-center text-[#C8D4E8] text-sm">No products added yet.</div>
+          <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-8 text-center text-slate-400 text-sm">No products added yet.</div>
         ) : (
           <div className="space-y-2 max-h-[520px] overflow-y-auto pr-1">
             {records.map(r => {
               const isLow = r.quantity_in_stock <= r.reorder_level
               return (
                 <div key={r.id} className={`border rounded-xl px-4 py-3 flex items-center gap-3 ${
-                  editId === r.id ? 'bg-[#4a1580] border-[#9B4FDE]/60' : 'bg-[#7B2FBE] border-[#9B4FDE]/30'
+                  editId === r.id ? 'bg-[#1E3A5F] border-violet-500/50' : 'bg-[#1E293B] border-slate-700/50'
                 }`}>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <p className="text-sm font-medium text-white truncate">{r.product_name}</p>
                       {isLow && <span className="text-xs text-yellow-400 shrink-0">⚠ Low</span>}
                     </div>
-                    <p className="text-xs text-[#C8D4E8] mt-0.5">
+                    <p className="text-xs text-slate-400 mt-0.5">
                       Stock: <span className={`font-semibold ${isLow ? 'text-yellow-400' : 'text-white'}`}>{r.quantity_in_stock}</span>
                       {r.selling_price ? ` · Sell: ${fmtNGN(r.selling_price)}` : ''}
                       {r.unit_cost ? ` · Cost: ${fmtNGN(r.unit_cost)}` : ''}
                     </p>
-                    <p className="text-xs text-[#C8D4E8]">{r.category}</p>
+                    <p className="text-xs text-slate-400">{r.category}</p>
                   </div>
                   <div className="flex gap-2 shrink-0">
                     <button onClick={() => startEdit(r)}
-                      className="text-xs px-2 py-1 rounded border border-[#9B4FDE]/40 text-[#C8D4E8] hover:text-white hover:border-[#9B4FDE] transition-colors">
+                      className="text-xs px-2 py-1 rounded border border-slate-700 text-slate-400 hover:text-white hover:border-violet-500 transition-colors">
                       Edit
                     </button>
                     <button onClick={() => handleDelete(r.id)}
@@ -522,18 +522,18 @@ export default function DataEntryPage() {
   if (authLoading || !user) return <PageSpinner />
 
   return (
-    <div className="min-h-screen bg-[#5a1f9a] text-white">
+    <div className="min-h-screen bg-[#0F172A] text-white">
       {/* Nav */}
-      <header className="border-b border-[#9B4FDE]/30 px-6 py-4 flex items-center justify-between">
+      <header className="border-b border-slate-700/50 px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Link href="/dashboard" className="text-[#E8E0F0] hover:text-white text-sm transition-colors">
+          <Link href="/dashboard" className="text-slate-300 hover:text-white text-sm transition-colors">
             ← Dashboard
           </Link>
-          <span className="text-[#9B4FDE]/40">|</span>
+          <span className="text-violet-400/40">|</span>
           <h1 className="text-sm font-semibold text-white">Business Data Entry</h1>
         </div>
         <Link href="/analyst"
-          className="text-xs px-4 py-2 rounded-lg text-white font-semibold bg-[#9B4FDE] hover:opacity-90 transition">
+          className="text-xs px-4 py-2 rounded-lg text-white font-semibold bg-violet-600 hover:opacity-90 transition">
           Analyse Data →
         </Link>
       </header>
@@ -543,19 +543,19 @@ export default function DataEntryPage() {
         {/* Header */}
         <div>
           <h2 className="text-xl font-extrabold text-white">Record Your Business Data</h2>
-          <p className="text-[#E8E0F0] text-sm mt-1">
+          <p className="text-slate-300 text-sm mt-1">
             Enter your daily business data here. Export as CSV at any time to analyse with the AI Analyst Tool.
           </p>
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-1 bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-1 w-fit">
+        <div className="flex gap-1 bg-[#1E293B] border border-slate-700/50 rounded-xl p-1 w-fit">
           {TABS.map(tab => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={`px-5 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 ${
-                activeTab === tab.id ? 'text-white bg-[#9B4FDE]' : 'text-[#E8E0F0] hover:text-white'
+                activeTab === tab.id ? 'text-white bg-violet-600' : 'text-slate-300 hover:text-white'
               }`}
             >
               <span>{tab.icon}</span>
@@ -565,22 +565,22 @@ export default function DataEntryPage() {
         </div>
 
         {/* Privacy notice */}
-        <div className="bg-[#4a1580]/40 border border-[#9B4FDE]/20 rounded-xl px-5 py-3 flex items-center gap-3">
+        <div className="bg-slate-800/60 border border-slate-700/40 rounded-xl px-5 py-3 flex items-center gap-3">
           <span className="text-base shrink-0">🔒</span>
-          <p className="text-xs text-[#C8D4E8]">
+          <p className="text-xs text-slate-400">
             Your business data is private and encrypted. Only you can see it — no other user, staff, or third party has access.{' '}
-            <Link href="/privacy" className="text-[#9B4FDE] hover:underline">Read our Data Protection Policy</Link>
+            <Link href="/privacy" className="text-violet-400 hover:underline">Read our Data Protection Policy</Link>
           </p>
         </div>
 
         {/* Tip */}
-        <div className="bg-[#9B4FDE]/15 border border-[#9B4FDE]/30 rounded-xl px-5 py-4 flex items-start gap-3">
+        <div className="bg-violet-600/15 border border-slate-700/50 rounded-xl px-5 py-4 flex items-start gap-3">
           <span className="text-lg">💡</span>
           <div>
             <p className="text-sm font-semibold text-white">Tip: How to use this with the AI Analyst</p>
-            <p className="text-xs text-[#E8E0F0] mt-1">
+            <p className="text-xs text-slate-300 mt-1">
               Record your data here regularly. When you have enough data (30+ records), click <strong>Export CSV</strong>,
-              then go to the <Link href="/analyst" className="text-[#C8D4E8] underline">AI Analyst Tool</Link> and
+              then go to the <Link href="/analyst" className="text-slate-400 underline">AI Analyst Tool</Link> and
               upload the file to get AI-powered insights and recommendations.
             </p>
           </div>
@@ -592,8 +592,8 @@ export default function DataEntryPage() {
         {activeTab === 'inventory' && <InventoryTab userId={user.id} />}
 
         {/* Coming soon features */}
-        <div className="border-t border-[#9B4FDE]/20 pt-8 space-y-3">
-          <p className="text-xs font-semibold text-[#C8D4E8] uppercase tracking-wider">More features coming soon</p>
+        <div className="border-t border-slate-700/40 pt-8 space-y-3">
+          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">More features coming soon</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <ComingSoonButton icon="🧾" label="Invoice & Receipt Generator"  description="Generate a PDF invoice from your sales records" />
             <ComingSoonButton icon="🔔" label="Inventory Low-Stock Alerts"   description="Get email alerts when stock falls below reorder level" />

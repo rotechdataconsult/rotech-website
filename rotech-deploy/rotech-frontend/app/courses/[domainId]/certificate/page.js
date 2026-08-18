@@ -40,7 +40,7 @@ export default function CertificatePage() {
   })
 
   return (
-    <div className="min-h-screen bg-[#5a1f9a] text-white">
+    <div className="min-h-screen text-white" style={{ backgroundColor: '#0F172A' }}>
       {/* Hide navbar on print */}
       <div className="print:hidden">
         <Navbar profile={profile} back="/dashboard" backLabel="Dashboard" />
@@ -57,7 +57,7 @@ export default function CertificatePage() {
             </Button>
             <Link
               href="/dashboard"
-              className="text-sm px-4 py-2 rounded-lg border border-[#9B4FDE]/40 text-[#E8E0F0] hover:border-[#9B4FDE] hover:text-white transition-colors"
+              className="text-sm px-4 py-2 rounded-lg border border-slate-700 text-slate-300 hover:border-violet-500 hover:text-white transition-colors"
             >
               Dashboard
             </Link>
@@ -81,8 +81,8 @@ export default function CertificatePage() {
             {/* Rotech branding */}
             <div className="space-y-2">
               <div className="flex items-center justify-center gap-1">
-                <span className="text-2xl font-black tracking-tight" style={{ color: '#5a1f9a' }}>Rotech</span>
-                <span className="text-2xl font-black tracking-tight" style={{ color: '#9B4FDE' }}>&#160;Data Consult</span>
+                <span className="text-2xl font-black tracking-tight" style={{ color: '#0F172A' }}>Rotech</span>
+                <span className="text-2xl font-black tracking-tight" style={{ color: '#8B5CF6' }}>&#160;Data Consult</span>
               </div>
               <div className="w-20 h-1 mx-auto rounded-full" style={{ backgroundColor: '#F59E0B' }} />
             </div>
@@ -105,7 +105,7 @@ export default function CertificatePage() {
 
             {/* Student name */}
             <div>
-              <p className="text-5xl font-extrabold" style={{ color: '#5a1f9a', fontFamily: 'Georgia, serif' }}>
+              <p className="text-5xl font-extrabold" style={{ color: '#0F172A', fontFamily: 'Georgia, serif' }}>
                 {profile?.full_name}
               </p>
               <div className="w-72 h-px mx-auto mt-3" style={{ backgroundColor: '#e5e7eb' }} />
@@ -125,7 +125,7 @@ export default function CertificatePage() {
             {/* Score + Date */}
             <div className="flex justify-center gap-16 text-sm">
               <div className="text-center">
-                <p className="text-2xl font-extrabold" style={{ color: '#5a1f9a' }}>{certificate.score}%</p>
+                <p className="text-2xl font-extrabold" style={{ color: '#0F172A' }}>{certificate.score}%</p>
                 <p className="text-gray-400 text-xs mt-0.5 uppercase tracking-wide">Final Score</p>
               </div>
               <div className="w-px bg-gray-200" />
@@ -143,7 +143,7 @@ export default function CertificatePage() {
               <p className="text-xs text-gray-400 mb-1 uppercase tracking-widest">Verification Code</p>
               <p
                 className="font-mono font-bold text-xl tracking-widest"
-                style={{ color: '#5a1f9a' }}
+                style={{ color: '#0F172A' }}
               >
                 {certificate.verification_code}
               </p>
@@ -158,9 +158,9 @@ export default function CertificatePage() {
         </div>
 
         {/* Share info — hidden on print */}
-        <div className="bg-[#7B2FBE] border border-[#9B4FDE]/30 rounded-xl p-5 text-center space-y-2 print:hidden">
+        <div className="bg-[#1E293B] border border-slate-700/50 rounded-xl p-5 text-center space-y-2 print:hidden">
           <p className="text-sm text-white font-semibold">&#127881; Share Your Achievement</p>
-          <p className="text-xs text-[#E8E0F0]">
+          <p className="text-xs text-slate-300">
             Employers can verify this certificate using code{' '}
             <span className="font-mono text-white font-bold">{certificate.verification_code}</span>.
             Use <strong>Print / Save PDF</strong> to download a copy.
@@ -168,14 +168,14 @@ export default function CertificatePage() {
           <div className="flex gap-3 justify-center mt-3">
             <Link
               href={`/courses/${domainId}/exam`}
-              className="text-xs text-[#C8D4E8] hover:text-white transition-colors"
+              className="text-xs text-slate-400 hover:text-white transition-colors"
             >
               Back to Exam &#8592;
             </Link>
-            <span className="text-[#9B4FDE]">|</span>
+            <span className="text-violet-400">|</span>
             <Link
               href="/dashboard"
-              className="text-xs text-[#C8D4E8] hover:text-white transition-colors"
+              className="text-xs text-slate-400 hover:text-white transition-colors"
             >
               Dashboard &#8594;
             </Link>

@@ -77,7 +77,7 @@ export default function HeroCMSPage() {
         <button
           onClick={() => setAiOpen(o => !o)}
           className="text-xs font-semibold px-4 py-2 rounded-lg border transition-colors"
-          style={{ borderColor: 'rgba(139,92,246,0.4)', color: '#C8D4E8', backgroundColor: 'rgba(108,63,212,0.12)' }}
+          style={{ borderColor: 'rgba(139,92,246,0.4)', color: '#94A3B8', backgroundColor: 'rgba(108,63,212,0.12)' }}
         >
           🤖 {aiOpen ? 'Close AI Assistant' : 'Open AI Assistant'}
         </button>
@@ -128,10 +128,10 @@ function Field({ label, hint, children }) {
   return (
     <div className="space-y-1.5">
       <label className="text-xs font-bold text-white">{label}</label>
-      {hint && <p className="text-xs" style={{ color: '#9B4FDE' }}>{hint}</p>}
+      {hint && <p className="text-xs" style={{ color: '#8B5CF6' }}>{hint}</p>}
       {children}
     </div>
   )
 }
 
-const INPUT = 'w-full rounded-lg px-3 py-2.5 text-sm text-white border outline-none focus:border-[#9B4FDE] transition-colors bg-[#3d1270] border-[#9B4FDE]/30 placeholder-[#9B4FDE]/40'
+const INPUT = 'w-full rounded-lg px-3 py-2.5 text-sm text-white border outline-none focus:border-violet-500 transition-colors bg-[#0F172A] border-slate-700/50 placeholder-violet-500/40'
