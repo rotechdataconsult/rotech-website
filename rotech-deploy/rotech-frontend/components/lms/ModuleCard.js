@@ -43,7 +43,7 @@ export default function ModuleCard({ module, domainId, completedLessons, totalLe
         href={`/courses/${domainId}/${module.id}`}
         className="w-full text-center text-xs font-semibold py-2 rounded-lg transition-all text-violet-400 hover:text-white"
         style={{ border: '1px solid rgba(139,92,246,0.4)' }}
-        onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#6C3FD4'; e.currentTarget.style.borderColor = '#6C3FD4'; e.currentTarget.style.color = 'white' }}
+        onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#683AA6'; e.currentTarget.style.borderColor = '#683AA6'; e.currentTarget.style.color = 'white' }}
         onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.borderColor = 'rgba(139,92,246,0.4)'; e.currentTarget.style.color = '#A78BFA' }}
       >
         {isComplete ? 'Review Module' : completedLessons > 0 ? 'Continue →' : 'Start Module →'}

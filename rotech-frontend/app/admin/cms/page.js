@@ -13,7 +13,7 @@ const CMS_SECTIONS = [
     icon:  '🦸',
     title: 'Hero Section',
     desc:  'Edit headline, sub-headline, badge text, and CTA buttons.',
-    color: '#6C3FD4',
+    color: '#683AA6',
   },
   {
     href:  '/admin/cms/impact',
@@ -60,7 +60,7 @@ export default function CMSDashboard() {
     <AdminLayout profile={profile} title="Landing Page CMS">
       <div className="max-w-4xl">
 
-        <div className="mb-8 p-5 rounded-xl border" style={{ backgroundColor: 'rgba(108,63,212,0.1)', borderColor: 'rgba(139,92,246,0.25)' }}>
+        <div className="mb-8 p-5 rounded-xl border" style={{ backgroundColor: 'rgba(104,58,166,0.1)', borderColor: 'rgba(139,92,246,0.25)' }}>
           <p className="text-sm font-semibold text-white mb-1">How it works</p>
           <p className="text-xs" style={{ color: '#94A3B8' }}>
             Edit any section below and save. The landing page automatically updates within 5 minutes,

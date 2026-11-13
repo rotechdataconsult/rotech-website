@@ -48,7 +48,7 @@ export default function QuizResult({ score, total, passed, onRetry, nextHref, mo
           <Link
             href={nextHref}
             className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white rounded-lg transition-all hover:opacity-90"
-            style={{ backgroundColor: '#6C3FD4' }}
+            style={{ backgroundColor: '#683AA6' }}
           >
             Continue Learning
           </Link>

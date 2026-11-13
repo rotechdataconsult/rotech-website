@@ -56,7 +56,7 @@ const components = {
   ),
   blockquote: ({ children }) => (
     <blockquote className="pl-4 py-1 my-4 rounded-r-lg"
-      style={{ borderLeft: '4px solid #6C3FD4', backgroundColor: 'rgba(108,63,212,0.1)' }}>
+      style={{ borderLeft: '4px solid #683AA6', backgroundColor: 'rgba(104,58,166,0.1)' }}>
       {children}
     </blockquote>
   ),

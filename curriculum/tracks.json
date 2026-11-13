@@ -1,0 +1,1041 @@
+[
+  {
+    "id": "ai-automation",
+    "code": "RT-AIA",
+    "name": "AI Automation",
+    "weeks": 10,
+    "pitch": "Design, build and run AI-powered workflows that a Nigerian business can trust: from mapping the process to handing over a monitored, documented automation.",
+    "who": "Operations staff, SME owners, virtual assistants, analysts. No coding needed; comfort with Google Sheets helps.",
+    "tools": [
+      "ChatGPT / Claude",
+      "n8n",
+      "Make / Zapier",
+      "Google Sheets & Apps Script",
+      "Webhooks & JSON",
+      "WhatsApp / Telegram bots",
+      "Supabase vector store",
+      "MCP"
+    ],
+    "certs": "Rotech certificate; portfolio of 8+ working workflows",
+    "roles": [
+      "Automation specialist",
+      "AI operations associate",
+      "No-code developer",
+      "Freelance automation consultant"
+    ],
+    "phases": [
+      [
+        "Foundations",
+        [
+          [
+            "Automation thinking and ROI",
+            [
+              "Map a process end to end (swimlanes)",
+              "Choose what to automate: rules vs AI vs leave it manual",
+              "Estimate hours saved and cost per run"
+            ],
+            "Process audit and ROI sheet for a real business"
+          ],
+          [
+            "LLMs for workflows",
+            [
+              "Tokens, context windows, temperature",
+              "Structured output (JSON) and prompt templates",
+              "Why models hallucinate and how to check them"
+            ],
+            "Prompt library with a 10-case test sheet"
+          ],
+          [
+            "n8n fundamentals",
+            [
+              "Triggers, nodes, expressions, data mapping",
+              "Credentials and connecting Gmail and Sheets",
+              "Branching, loops, merging data"
+            ],
+            "Lead capture → Sheet → auto-reply workflow"
+          ]
+        ]
+      ],
+      [
+        "Building blocks",
+        [
+          [
+            "APIs, webhooks and JSON",
+            [
+              "HTTP requests, API keys, OAuth",
+              "Pagination and rate limits",
+              "Paystack / Flutterwave webhook events"
+            ],
+            "Payment confirmation and receipt flow"
+          ],
+          [
+            "AI inside workflows",
+            [
+              "Classify, extract, summarise",
+              "Invoices and CVs into structured data",
+              "Human-in-the-loop approval steps"
+            ],
+            "Invoice extractor with a review queue"
+          ],
+          [
+            "Messaging bots",
+            [
+              "WhatsApp Business and Telegram bots",
+              "Conversation memory and state",
+              "Handover to a human agent"
+            ],
+            "Customer-service bot for an SME"
+          ],
+          [
+            "Knowledge bots (RAG)",
+            [
+              "Chunking, embeddings, vector search",
+              "Answering with citations",
+              "When RAG fails, and how to detect it"
+            ],
+            "Policy Q&A bot with cited answers"
+          ]
+        ]
+      ],
+      [
+        "Production",
+        [
+          [
+            "Agents and tools",
+            [
+              "Tool calling and MCP basics",
+              "Bounded permissions and guardrails",
+              "Why errors compound across steps"
+            ],
+            "Research agent with restricted tools"
+          ],
+          [
+            "Making it reliable",
+            [
+              "Error handling, retries, alerts",
+              "Logging and golden test sets (evals)",
+              "Cost monitoring; NDPA 2023 and credential security"
+            ],
+            "Reliability report: test results, failure log, cost per run"
+          ],
+          [
+            "Capstone and career",
+            [
+              "Build for a real SME client",
+              "SOP and handover documentation",
+              "Pricing and proposals for automation services"
+            ],
+            "Client handover pack + freelance proposal"
+          ]
+        ]
+      ]
+    ],
+    "capstone": "Automate one real process for a Nigerian SME end to end, with an eval set, monitoring, a cost estimate and a handover document the owner signs off.",
+    "answers": [
+      "AI demos that break in production → week 9 evals and monitoring",
+      "Pilots that never pay back → week 1 ROI before any build",
+      "Data protection worries → NDPA 2023 and credential handling"
+    ]
+  },
+  {
+    "id": "python",
+    "code": "RT-PY",
+    "name": "Python Programming",
+    "weeks": 12,
+    "pitch": "From first line of code to a deployed, tested Python application, with debugging and code reading practised every single week.",
+    "who": "Complete beginners, graduates, analysts who want to automate. Basic computer literacy only.",
+    "tools": [
+      "Python 3.12",
+      "VS Code",
+      "Git & GitHub",
+      "Jupyter",
+      "pytest",
+      "requests",
+      "pandas",
+      "SQLite",
+      "FastAPI",
+      "AI coding assistant"
+    ],
+    "certs": "Rotech certificate; prepares for PCEP (Python Institute)",
+    "roles": [
+      "Junior Python developer",
+      "Automation engineer",
+      "Data/reporting assistant",
+      "Backend intern"
+    ],
+    "phases": [
+      [
+        "Core language",
+        [
+          [
+            "Setup and first programs",
+            [
+              "Install Python, VS Code, Git",
+              "Variables, types, input/output",
+              "First GitHub commit"
+            ],
+            "Unit converter on GitHub"
+          ],
+          [
+            "Control flow and debugging",
+            [
+              "if/elif, for, while",
+              "Breaking problems into steps",
+              "Using the debugger and reading tracebacks"
+            ],
+            "Exam-grade calculator"
+          ],
+          [
+            "Data structures",
+            [
+              "Lists, tuples, dicts, sets",
+              "Comprehensions",
+              "Choosing the right structure"
+            ],
+            "Contact book"
+          ],
+          [
+            "Functions and modules",
+            [
+              "Parameters, returns, scope",
+              "Docstrings and type hints",
+              "Standard library tour"
+            ],
+            "Reusable utilities module"
+          ]
+        ]
+      ],
+      [
+        "Writing real software",
+        [
+          [
+            "Files and errors",
+            [
+              "CSV and JSON files",
+              "Exceptions and pathlib",
+              "Logging"
+            ],
+            "Expense tracker CLI (mid-course project)"
+          ],
+          [
+            "Object-oriented Python",
+            [
+              "Classes, methods, inheritance",
+              "Dataclasses",
+              "When not to use OOP"
+            ],
+            "Inventory system for a shop"
+          ],
+          [
+            "Testing and clean code",
+            [
+              "pytest and test-first habits",
+              "ruff linting, virtual environments",
+              "Code review etiquette"
+            ],
+            "Test suite at 80% coverage"
+          ],
+          [
+            "Talking to the web",
+            [
+              "requests and REST APIs",
+              "Scraping responsibly with BeautifulSoup",
+              "Handling failures and timeouts"
+            ],
+            "Exchange-rate tracker using a public API"
+          ]
+        ]
+      ],
+      [
+        "Applied Python",
+        [
+          [
+            "Data with pandas",
+            [
+              "Load, clean, group, merge",
+              "Charts with matplotlib",
+              "Excel in and out"
+            ],
+            "NBS dataset analysis notebook"
+          ],
+          [
+            "Databases and APIs",
+            [
+              "SQL basics with SQLite",
+              "Building a CRUD API with FastAPI",
+              "Environment variables and secrets"
+            ],
+            "Mini booking API"
+          ],
+          [
+            "Automation and AI-assisted coding",
+            [
+              "Scheduling scripts, emailing reports",
+              "Using AI assistants: prompt, review, test",
+              "Explaining generated code line by line"
+            ],
+            "Automated weekly report bot + AI-use log"
+          ],
+          [
+            "Capstone and career",
+            [
+              "Deploy to a free host",
+              "README and project docs",
+              "Mock technical interview and live coding"
+            ],
+            "Deployed app + interview recording"
+          ]
+        ]
+      ]
+    ],
+    "capstone": "Build and deploy a small application for a real use case (school, shop or NGO) with tests, a README, and a live code-walkthrough defence.",
+    "answers": [
+      "Grads who copy tutorials but can't debug → debugging in every week",
+      "“AI wrote it, I can't explain it” → week 11 and the explain-it-back rule",
+      "No proof of skill → GitHub history from week 1"
+    ]
+  },
+  {
+    "id": "ui-ux",
+    "code": "RT-UX",
+    "name": "UI/UX Design",
+    "weeks": 12,
+    "pitch": "Research-led product design for African users, ending with a portfolio of case studies that show reasoning, testing and results.",
+    "who": "Beginners, graphic designers, developers and product people moving into design.",
+    "tools": [
+      "Figma (auto layout, variables)",
+      "FigJam / Miro",
+      "Maze / Useberry",
+      "Google Forms",
+      "Figma AI & ChatGPT for synthesis",
+      "Framer or Lovable"
+    ],
+    "certs": "Rotech certificate; 3 portfolio case studies",
+    "roles": [
+      "Junior UX/UI designer",
+      "Product designer",
+      "UX researcher (assistant)",
+      "Freelance designer"
+    ],
+    "phases": [
+      [
+        "Understand",
+        [
+          [
+            "UX foundations",
+            [
+              "Design thinking and the double diamond",
+              "UX vs UI vs product roles",
+              "Reading a brief: business goals and constraints"
+            ],
+            "Problem statement for a local product"
+          ],
+          [
+            "User research",
+            [
+              "Interviews and surveys",
+              "Recruiting Nigerian users; consent and ethics",
+              "Avoiding leading questions"
+            ],
+            "Interview guide + 5 interviews"
+          ],
+          [
+            "Synthesis",
+            [
+              "Affinity mapping, personas, jobs-to-be-done",
+              "Journey maps",
+              "Using AI to synthesise, then checking it against raw notes"
+            ],
+            "Persona and journey map with an AI-check note"
+          ],
+          [
+            "Information architecture",
+            [
+              "Card sorting and tree testing",
+              "Sitemaps and user flows",
+              "Navigation patterns"
+            ],
+            "Sitemap and three task flows"
+          ]
+        ]
+      ],
+      [
+        "Design",
+        [
+          [
+            "Wireframing",
+            [
+              "Sketching and crazy 8s",
+              "Low-fidelity wireframes in Figma",
+              "Nielsen's usability heuristics"
+            ],
+            "Wireframe set + heuristic review"
+          ],
+          [
+            "Visual design and accessibility",
+            [
+              "Typography, colour, grids, hierarchy",
+              "WCAG 2.2 contrast and touch targets",
+              "Designing for low-end Android phones"
+            ],
+            "High-fidelity screens (mid-course project)"
+          ],
+          [
+            "Design systems in Figma",
+            [
+              "Auto layout, components, variants",
+              "Variables, modes and tokens",
+              "Documenting a mini design system"
+            ],
+            "Component library"
+          ],
+          [
+            "Prototyping",
+            [
+              "Interactive flows and micro-interactions",
+              "Mobile-first and low-bandwidth states",
+              "Offline, error and empty states"
+            ],
+            "Clickable prototype"
+          ]
+        ]
+      ],
+      [
+        "Validate and ship",
+        [
+          [
+            "Usability testing",
+            [
+              "Test plans and tasks",
+              "Moderated vs unmoderated testing",
+              "Task success, time on task, SUS score"
+            ],
+            "Test report with iteration v2"
+          ],
+          [
+            "Designing AI features and handoff",
+            [
+              "Designing for AI: trust, errors, explainability",
+              "Developer handoff and Dev Mode",
+              "Working with engineers and PMs"
+            ],
+            "Handoff file + spec"
+          ],
+          [
+            "Writing case studies",
+            [
+              "Telling the problem → decision → result story",
+              "Showing research and trade-offs",
+              "Metrics and what you would do next"
+            ],
+            "Two written case studies"
+          ],
+          [
+            "Capstone and career",
+            [
+              "Real client redesign",
+              "Portfolio review with practitioners",
+              "Whiteboard challenge practice"
+            ],
+            "Live portfolio site"
+          ]
+        ]
+      ]
+    ],
+    "capstone": "Redesign a real product for a Nigerian business or NGO: research, test with at least 5 users, iterate, and present the case study to a panel.",
+    "answers": [
+      "Pretty screens with no reasoning → week 11 case-study writing",
+      "AI makes screens instantly → research and decisions are graded, not polish",
+      "500–800 applicants per role → real client work and referrals"
+    ]
+  },
+  {
+    "id": "health",
+    "code": "RT-HDA",
+    "name": "Public Health Data Analytics",
+    "weeks": 10,
+    "pitch": "Turn routine health data into decisions: quality-checked DHIS2 data, indicator dashboards, and briefs that programme managers actually act on.",
+    "who": "Health information officers, M&E officers, nurses, CHEWs, public-health graduates, NGO programme staff.",
+    "tools": [
+      "Excel",
+      "DHIS2 (demo instance)",
+      "ODK / KoboToolbox",
+      "SQL",
+      "Power BI",
+      "JMP",
+      "QGIS (basic)"
+    ],
+    "certs": "Rotech certificate; JMP training badge",
+    "roles": [
+      "M&E / HMIS officer",
+      "Health data analyst",
+      "Data quality officer",
+      "Programme analyst (NGO, SMoH)"
+    ],
+    "phases": [
+      [
+        "Health data basics",
+        [
+          [
+            "The Nigerian health data landscape",
+            [
+              "NHMIS, DHIS2, EMRs, NDHS, MICS, NHIA claims",
+              "Key indicators: ANC4, Penta3, skilled birth attendance",
+              "Confidentiality and NDPA 2023"
+            ],
+            "Indicator reference sheet for one programme"
+          ],
+          [
+            "Excel for health data",
+            [
+              "Cleaning facility reports",
+              "Lookups and pivots",
+              "Numerators, denominators and target populations"
+            ],
+            "LGA indicator workbook"
+          ],
+          [
+            "Collecting good data",
+            [
+              "Designing ODK/Kobo forms with validation",
+              "DHIS2 data entry, pivot tables, data visualiser",
+              "Preventing errors at the source"
+            ],
+            "Validated survey form + DHIS2 pivot"
+          ]
+        ]
+      ],
+      [
+        "Quality and analysis",
+        [
+          [
+            "Data quality assurance",
+            [
+              "Completeness, timeliness, consistency",
+              "Outliers and internal consistency checks",
+              "RDQA / WHO DQR methods, triangulation"
+            ],
+            "DQA report for a synthetic state dataset"
+          ],
+          [
+            "SQL for health datasets",
+            [
+              "Patient and facility tables",
+              "Joins, cohorts, aggregations",
+              "Tracking clients over time"
+            ],
+            "Cohort retention query set"
+          ],
+          [
+            "Epidemiology and biostatistics",
+            [
+              "Rates, ratios, incidence, prevalence",
+              "Confidence intervals and chi-square",
+              "Trends and seasonality, in JMP"
+            ],
+            "Outbreak trend analysis (mid-course project)"
+          ]
+        ]
+      ],
+      [
+        "Decision support",
+        [
+          [
+            "Power BI health dashboards",
+            [
+              "Data model for facility × month × indicator",
+              "DAX for coverage and target vs achievement",
+              "Drill-down from state to LGA to facility"
+            ],
+            "Programme dashboard"
+          ],
+          [
+            "Mapping and equity",
+            [
+              "Mapping by LGA and ward",
+              "Coverage gaps and catchment areas",
+              "Equity: who is being missed"
+            ],
+            "Coverage gap map"
+          ],
+          [
+            "M&E reporting and data use",
+            [
+              "Logframes and indicator frameworks",
+              "Writing a 2-page data brief",
+              "Running a data review meeting"
+            ],
+            "Data brief for a programme manager"
+          ],
+          [
+            "Capstone and career",
+            [
+              "State routine-data analysis end to end",
+              "Panel presentation to programme managers",
+              "CV, LinkedIn and M&E interview practice"
+            ],
+            "Capstone pack + policy brief"
+          ]
+        ]
+      ]
+    ],
+    "capstone": "Analyse a state's routine immunisation or maternal health data: run a DQA, build a Power BI dashboard, and present a 2-page decision brief to a panel of programme managers.",
+    "answers": [
+      "Errors caught after reporting → week 4 DQA and validation at collection",
+      "Dashboards nobody uses → week 10 decision briefs and review meetings",
+      "Generic analytics that ignore health indicators → indicator-first teaching"
+    ]
+  },
+  {
+    "id": "accountants",
+    "code": "RT-DAA",
+    "name": "Data Analysis for Accountants",
+    "weeks": 8,
+    "pitch": "Automate month-end, reconcile faster, test full populations and report in Power BI, starting from the Excel skills accountants already use.",
+    "who": "Accountants, auditors, finance officers, tax practitioners, ICAN / ACCA students.",
+    "tools": [
+      "Excel 365 (dynamic arrays, LET)",
+      "Power Query",
+      "Power Pivot / DAX",
+      "Power BI",
+      "SQL",
+      "Python (optional, audit analytics)"
+    ],
+    "certs": "Rotech certificate; prepares for PL-300 (Power BI Data Analyst)",
+    "roles": [
+      "Finance analyst",
+      "FP&A analyst",
+      "Audit data analyst",
+      "Financial controller (upskilled)"
+    ],
+    "phases": [
+      [
+        "Excel and Power Query",
+        [
+          [
+            "Excel for finance, reset",
+            [
+              "Tables, XLOOKUP, FILTER, UNIQUE, LET",
+              "Error-proof model layout",
+              "Checks and controls inside workbooks"
+            ],
+            "Rebuilt trial-balance workbook"
+          ],
+          [
+            "Power Query",
+            [
+              "Import bank statements and GL exports",
+              "Unpivot, merge, append a folder of files",
+              "Refreshable month-end inputs"
+            ],
+            "One-click month-end data refresh"
+          ],
+          [
+            "Reconciliations and controls",
+            [
+              "Automated bank reconciliation",
+              "Fuzzy matching and duplicate payments",
+              "Benford's law and exception reports"
+            ],
+            "Bank rec + exception report"
+          ]
+        ]
+      ],
+      [
+        "Model and report",
+        [
+          [
+            "Data modelling with Power Pivot",
+            [
+              "Chart of accounts mapping",
+              "DAX measures",
+              "Time intelligence: YTD, prior year, rolling 12"
+            ],
+            "Financial data model (mid-course project)"
+          ],
+          [
+            "Financial reporting in Power BI",
+            [
+              "P&L, balance sheet and cash-flow visuals",
+              "Budget vs actual and variance analysis",
+              "Row-level security for departments"
+            ],
+            "Management reporting dashboard"
+          ],
+          [
+            "SQL for finance data",
+            [
+              "Querying Sage / QuickBooks / ERP exports",
+              "Joins and aggregations",
+              "Receivables and payables ageing"
+            ],
+            "Ageing analysis queries"
+          ]
+        ]
+      ],
+      [
+        "Audit and capstone",
+        [
+          [
+            "Audit analytics and forecasting",
+            [
+              "Full-population and journal-entry testing",
+              "Sampling vs testing everything",
+              "Forecasting in Excel; optional pandas intro"
+            ],
+            "Journal-entry testing workpaper"
+          ],
+          [
+            "Capstone and career",
+            [
+              "Month-end close pack automation",
+              "VAT / WHT data considerations",
+              "Presenting to a CFO"
+            ],
+            "Close pack + dashboard + controls memo"
+          ]
+        ]
+      ]
+    ],
+    "capstone": "Automate a company's month-end close pack (anonymised real data where possible): refreshable inputs, reconciliations, a Power BI management report and a controls memo.",
+    "answers": [
+      "Month-end done by copy and paste → Power Query in week 2",
+      "Python-first courses that lose accountants → Python is optional and late",
+      "Sampling only → full-population audit analytics"
+    ]
+  },
+  {
+    "id": "engineers",
+    "code": "RT-DAE",
+    "name": "Data Analysis for Engineers",
+    "weeks": 10,
+    "pitch": "Analyse sensor, process and maintenance data the way plants and utilities need it: SPC, experiments, reliability and early warning of failures.",
+    "who": "Mechanical, electrical, civil, chemical and petroleum engineers; maintenance planners; quality and process engineers.",
+    "tools": [
+      "Excel",
+      "Python (pandas, NumPy, SciPy, scikit-learn)",
+      "JMP (SPC, DOE)",
+      "Power BI",
+      "SQL",
+      "MATLAB (optional)"
+    ],
+    "certs": "Rotech certificate; JMP training badge; supports Six Sigma Green Belt prep",
+    "roles": [
+      "Process / reliability engineer (data-skilled)",
+      "Maintenance analyst",
+      "Quality engineer",
+      "Operations data analyst"
+    ],
+    "phases": [
+      [
+        "Engineering data",
+        [
+          [
+            "Engineering data foundations",
+            [
+              "Data from SCADA, PLCs, sensors, lab tests",
+              "Units, sampling rates and measurement error",
+              "Engineering calculations in Excel"
+            ],
+            "Cleaned sensor log with unit checks"
+          ],
+          [
+            "Python for engineers",
+            [
+              "NumPy and pandas",
+              "Reading historian and CSV exports",
+              "Plotting with matplotlib"
+            ],
+            "Generator run-hours analysis notebook"
+          ],
+          [
+            "Statistics for engineering",
+            [
+              "Distributions and uncertainty",
+              "Hypothesis tests and regression",
+              "Measurement system analysis (Gage R&R)"
+            ],
+            "Gage R&R study in JMP"
+          ]
+        ]
+      ],
+      [
+        "Quality and process",
+        [
+          [
+            "Statistical process control",
+            [
+              "X̄-R, I-MR and p charts",
+              "Cp / Cpk process capability",
+              "Western Electric rules"
+            ],
+            "SPC report on a production line (mid-course project)"
+          ],
+          [
+            "Design of experiments",
+            [
+              "Full and fractional factorials",
+              "Response surfaces",
+              "Optimising a process setting"
+            ],
+            "DOE study in JMP"
+          ],
+          [
+            "Time series and signals",
+            [
+              "Resampling and smoothing",
+              "Trend and seasonality",
+              "FFT basics for vibration data"
+            ],
+            "Vibration spectrum analysis"
+          ]
+        ]
+      ],
+      [
+        "Reliability and decisions",
+        [
+          [
+            "Reliability and maintenance",
+            [
+              "MTBF, MTTR, availability, OEE",
+              "Weibull analysis",
+              "Failure modes and Pareto"
+            ],
+            "Asset reliability scorecard"
+          ],
+          [
+            "Anomaly detection and predictive maintenance",
+            [
+              "Feature extraction",
+              "Thresholds vs isolation forest",
+              "Remaining useful life concept"
+            ],
+            "Early-warning model"
+          ],
+          [
+            "Operations dashboards and reporting",
+            [
+              "Operations KPIs in Power BI: OEE, downtime, energy",
+              "Writing engineering recommendations",
+              "Costing downtime and maintenance options"
+            ],
+            "Operations dashboard"
+          ],
+          [
+            "Capstone and career",
+            [
+              "Asset dataset analysis end to end",
+              "Presenting to plant management",
+              "CV, LinkedIn and technical interview practice"
+            ],
+            "Capstone report + recommendation memo"
+          ]
+        ]
+      ]
+    ],
+    "capstone": "Take a pump, generator or production-line dataset, run SPC and reliability analysis, build an anomaly warning, and recommend maintenance actions with cost estimates.",
+    "answers": [
+      "Courses built on sales data → engineering datasets throughout",
+      "SPC and DOE missing from data courses → weeks 4–5 in JMP",
+      "Models nobody trusts → recommendations tied to cost and downtime"
+    ]
+  },
+  {
+    "id": "cyber",
+    "code": "RT-CYB",
+    "name": "Cyber Security",
+    "weeks": 16,
+    "pitch": "A lab-first path to SOC Analyst (Tier 1) and junior security roles, aligned to Security+ and ISC2 CC, with every skill evidenced in a portfolio.",
+    "who": "IT support staff, networking graduates, career changers with basic computer skills. A laptop with 8 GB RAM is needed for labs.",
+    "tools": [
+      "Linux (Ubuntu, Kali)",
+      "Wireshark",
+      "Nmap",
+      "Burp Suite",
+      "Metasploit (lab only)",
+      "Wazuh / Splunk",
+      "Microsoft Defender & Sentinel",
+      "Online cyber ranges",
+      "Python & PowerShell"
+    ],
+    "certs": "Aligned to ISC2 CC, CompTIA Security+; foundation for CySA+ and CEH",
+    "roles": [
+      "SOC Analyst (Tier 1)",
+      "Junior security analyst",
+      "Vulnerability analyst",
+      "GRC / IT audit associate"
+    ],
+    "phases": [
+      [
+        "Foundations",
+        [
+          [
+            "Security foundations",
+            [
+              "CIA triad, risk, threats",
+              "Security careers and roles",
+              "Lab setup (VirtualBox, Kali, Ubuntu)"
+            ],
+            "Working home lab"
+          ],
+          [
+            "Networking",
+            [
+              "OSI and TCP/IP, subnetting",
+              "DNS, DHCP, ports and protocols",
+              "Packet analysis with Wireshark"
+            ],
+            "Packet capture analysis"
+          ],
+          [
+            "Linux and Windows administration",
+            [
+              "Linux CLI, permissions, processes",
+              "Windows, Active Directory basics",
+              "PowerShell essentials"
+            ],
+            "Hardened Linux server"
+          ],
+          [
+            "Scripting for security",
+            [
+              "Bash and Python",
+              "Parsing logs automatically",
+              "Working with APIs (VirusTotal)"
+            ],
+            "Log-parser script"
+          ]
+        ]
+      ],
+      [
+        "Threats and defences",
+        [
+          [
+            "Threats and attacks",
+            [
+              "Malware, phishing, social engineering",
+              "Nigerian patterns: BEC, SIM swap, POS fraud",
+              "MITRE ATT&CK"
+            ],
+            "Phishing analysis report"
+          ],
+          [
+            "Cryptography and identity",
+            [
+              "Hashing, PKI, TLS",
+              "MFA and password policy",
+              "Least privilege and IAM"
+            ],
+            "IAM policy for a small firm"
+          ],
+          [
+            "Network security",
+            [
+              "Firewalls, VPNs, segmentation",
+              "IDS / IPS",
+              "pfSense lab"
+            ],
+            "Segmented lab network"
+          ],
+          [
+            "Vulnerability management",
+            [
+              "Scanning with Nmap and OpenVAS",
+              "CVSS scoring and prioritisation",
+              "Patching and reporting"
+            ],
+            "Vulnerability report (mid-course project)"
+          ]
+        ]
+      ],
+      [
+        "Offence and operations",
+        [
+          [
+            "Web application security",
+            [
+              "OWASP Top 10",
+              "Burp Suite",
+              "DVWA and Juice Shop labs"
+            ],
+            "Web app findings report"
+          ],
+          [
+            "Ethical hacking methodology",
+            [
+              "Recon, exploitation, privilege escalation (lab only)",
+              "Rules of engagement",
+              "Law: Cybercrimes Act 2015 (amended 2024)"
+            ],
+            "Mini pentest report"
+          ],
+          [
+            "Security operations and SIEM",
+            [
+              "Log sources and ingestion",
+              "Writing detection rules",
+              "Alert triage and escalation"
+            ],
+            "SIEM dashboard + 5 detections"
+          ],
+          [
+            "Incident response and forensics",
+            [
+              "NIST incident response lifecycle",
+              "Playbooks and evidence handling",
+              "Disk and memory basics"
+            ],
+            "Incident playbook"
+          ]
+        ]
+      ],
+      [
+        "Specialise and certify",
+        [
+          [
+            "Cloud security",
+            [
+              "Shared responsibility model",
+              "IAM misconfigurations in AWS / Azure",
+              "Microsoft Defender and Sentinel"
+            ],
+            "Cloud misconfiguration audit"
+          ],
+          [
+            "Governance, risk and compliance",
+            [
+              "ISO 27001, NIST CSF 2.0",
+              "NDPA 2023, CBN cybersecurity framework",
+              "Writing policies and risk registers"
+            ],
+            "Risk register + policy"
+          ],
+          [
+            "AI and security",
+            [
+              "AI phishing and deepfakes",
+              "Using AI in the SOC",
+              "Securing LLM apps: prompt injection"
+            ],
+            "AI threat brief"
+          ],
+          [
+            "Capstone and certification prep",
+            [
+              "Blue-team SOC simulation",
+              "Security+ mock exams",
+              "Interview practice"
+            ],
+            "SOC simulation report + mock exam score"
+          ]
+        ]
+      ]
+    ],
+    "capstone": "Run a simulated SOC shift: detect, triage and respond to a staged attack in the lab SIEM, then write the incident report and present it to a panel.",
+    "answers": [
+      "Certificates without hands-on skill → a lab in every week",
+      "Graduates who can't write a report → a written report most weeks",
+      "Local threats ignored → BEC, SIM swap, POS fraud and CBN / NDPA rules"
+    ]
+  }
+]

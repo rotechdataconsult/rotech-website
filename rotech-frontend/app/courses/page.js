@@ -5,13 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/useAuth'
 import { supabase } from '@/lib/supabase'
-
-const TOOL_COLORS = {
-  Excel:      'bg-green-500/15 text-green-400 border-green-500/30',
-  SQL:        'bg-blue-500/15 text-blue-400 border-blue-500/30',
-  'Power BI': 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30',
-  Python:     'bg-purple-500/15 text-purple-400 border-purple-500/30',
-}
+import { ToolBadge } from '@/components/ui/Badge'
 
 function ConfirmModal({ domain, onConfirm, onCancel, loading }) {
   return (
@@ -38,7 +32,7 @@ function ConfirmModal({ domain, onConfirm, onCancel, loading }) {
             onClick={onConfirm}
             disabled={loading}
             className="flex-1 py-2.5 rounded-lg text-white text-sm font-semibold disabled:opacity-60 flex items-center justify-center gap-2 transition-all hover:opacity-90"
-            style={{ backgroundColor: '#6C3FD4' }}
+            style={{ backgroundColor: '#683AA6' }}
           >
             {loading ? (
               <>
@@ -56,7 +50,7 @@ function ConfirmModal({ domain, onConfirm, onCancel, loading }) {
   )
 }
 
-function DomainCard({ domain, enrollment, onSelect }) {
+function DomainCard({ domain, tools, enrollment, onSelect }) {
   const isEnrolled = enrollment?.domain_id === domain.id
   const isLocked   = enrollment && !isEnrolled
 
@@ -90,18 +84,14 @@ function DomainCard({ domain, enrollment, onSelect }) {
       </p>
 
       <div className="flex flex-wrap gap-1.5">
-        {['Excel', 'SQL', 'Power BI', 'Python'].map(tool => (
-          <span key={tool} className={`text-xs px-2 py-0.5 rounded-full border ${TOOL_COLORS[tool]}`}>
-            {tool}
-          </span>
-        ))}
+        {tools.map(tool => <ToolBadge key={tool} tool={tool} size="xs" />)}
       </div>
 
       {isEnrolled ? (
         <Link
           href={`/courses/${domain.id}`}
           className="w-full text-center text-sm font-semibold py-2.5 rounded-lg text-white transition-all hover:opacity-90"
-          style={{ backgroundColor: '#6C3FD4' }}
+          style={{ backgroundColor: '#683AA6' }}
         >
           Continue Learning →
         </Link>
@@ -115,7 +105,7 @@ function DomainCard({ domain, enrollment, onSelect }) {
           onClick={() => onSelect(domain)}
           className="w-full text-sm font-semibold py-2.5 rounded-lg transition-all hover:text-white"
           style={{ border: '1px solid rgba(139,92,246,0.4)', color: '#8B5CF6' }}
-          onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#6C3FD4'; e.currentTarget.style.borderColor = '#6C3FD4'; e.currentTarget.style.color = 'white' }}
+          onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#683AA6'; e.currentTarget.style.borderColor = '#683AA6'; e.currentTarget.style.color = 'white' }}
           onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.borderColor = 'rgba(139,92,246,0.4)'; e.currentTarget.style.color = '#8B5CF6' }}
         >
           Select Domain
@@ -130,6 +120,7 @@ export default function CoursesPage() {
   const { user, loading: authLoading } = useAuth()
 
   const [domains,     setDomains]     = useState([])
+  const [toolsByDomain, setToolsByDomain] = useState({})
   const [enrollment,  setEnrollment]  = useState(null)
   const [dataLoading, setDataLoading] = useState(true)
   const [selected,    setSelected]    = useState(null)
@@ -139,11 +130,20 @@ export default function CoursesPage() {
   useEffect(() => {
     if (!user) return
     async function load() {
-      const [{ data: domainData }, { data: enrollData }] = await Promise.all([
+      const [{ data: domainData }, { data: enrollData }, { data: moduleData }] = await Promise.all([
         supabase.from('domains').select('*').eq('is_active', true).order('title'),
         supabase.from('enrollments').select('*').eq('user_id', user.id).maybeSingle(),
+        supabase.from('modules').select('domain_id, tool').order('order_index'),
       ])
+      // Show each domain's own tools (first five, in course order), not a fixed list
+      const tools = {}
+      for (const { domain_id, tool } of moduleData ?? []) {
+        if (!tool || tool === 'Capstone') continue
+        tools[domain_id] ??= []
+        if (!tools[domain_id].includes(tool) && tools[domain_id].length < 5) tools[domain_id].push(tool)
+      }
       setDomains(domainData ?? [])
+      setToolsByDomain(tools)
       setEnrollment(enrollData)
       setDataLoading(false)
     }
@@ -187,7 +187,7 @@ export default function CoursesPage() {
         style={{ backgroundColor: 'rgba(15,23,42,0.97)', borderBottom: '1px solid rgba(51,65,85,0.6)', backdropFilter: 'blur(14px)' }}>
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <Link href="/dashboard" className="text-lg font-extrabold tracking-tight text-white">
-            Rotech <span style={{ color: '#8B5CF6' }}>Data Consult</span>
+            <img src="/brand/rotech-wordmark-white.png" alt="Rotech Data Consult" width={720} height={214} className="inline-block h-8 w-auto" />
           </Link>
           <Link href="/dashboard" className="text-sm text-slate-400 hover:text-white transition-colors">
             ← Dashboard
@@ -199,7 +199,7 @@ export default function CoursesPage() {
         <div className="mb-10 text-center">
           <h1 className="text-3xl font-extrabold text-white">Choose Your Domain</h1>
           <p className="mt-2 text-slate-300 text-sm max-w-xl mx-auto">
-            Each domain teaches data analysis with Excel, SQL, Power BI, and Python —
+            Each domain is a week-by-week programme with a hands-on deliverable every week,
             applied to real industry problems.{' '}
             <span className="text-white font-semibold">You can only enroll in one domain at a time.</span>
           </p>
@@ -224,6 +224,7 @@ export default function CoursesPage() {
             <DomainCard
               key={domain.id}
               domain={domain}
+              tools={toolsByDomain[domain.id] ?? []}
               enrollment={enrollment}
               onSelect={setSelected}
             />

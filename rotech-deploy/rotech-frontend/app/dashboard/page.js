@@ -95,7 +95,7 @@ export default function DashboardPage() {
         style={{ backgroundColor: 'rgba(15,23,42,0.97)', borderBottom: '1px solid rgba(51,65,85,0.6)', backdropFilter: 'blur(14px)' }}>
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <span className="text-lg font-extrabold tracking-tight text-white">
-            Rotech <span style={{ color: '#8B5CF6' }}>Data Consult</span>
+            <img src="/brand/rotech-wordmark-white.png" alt="Rotech Data Consult" width={720} height={214} className="inline-block h-8 w-auto" />
           </span>
           <div className="flex items-center gap-4">
             <Link href="/resources" className="text-sm text-slate-400 hover:text-white transition-colors hidden md:block">Resources</Link>
@@ -139,7 +139,7 @@ export default function DashboardPage() {
             </p>
             <Link href="/courses"
               className="inline-block text-sm font-semibold px-6 py-2.5 rounded-lg text-white transition-all hover:opacity-90 hover:scale-105"
-              style={{ backgroundColor: '#6C3FD4' }}>
+              style={{ backgroundColor: '#683AA6' }}>
               Browse Domains →
             </Link>
           </div>
@@ -150,13 +150,14 @@ export default function DashboardPage() {
             {/* Stat cards */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { label: 'Domain',        value: domain?.title?.split(' ')[0] ?? '—' },
+                // Full title: several domains share a first word ("Data Analysis for …")
+                { label: 'Domain',        value: domain?.title ?? '—', long: true },
                 { label: 'Lessons Done',  value: completed },
                 { label: 'Total Lessons', value: totalLessons },
                 { label: 'Certificate',   value: certificate ? '✓' : '—' },
-              ].map(({ label, value }) => (
+              ].map(({ label, value, long }) => (
                 <div key={label} className="rounded-xl px-5 py-5" style={{ backgroundColor: '#1E293B', border: '1px solid rgba(51,65,85,0.5)' }}>
-                  <p className="text-2xl font-extrabold" style={{ color: '#8B5CF6' }}>{value}</p>
+                  <p className={`${long ? 'text-base leading-snug' : 'text-2xl'} font-extrabold`} style={{ color: '#8B5CF6' }}>{value}</p>
                   <p className="mt-1 text-sm text-slate-400">{label}</p>
                 </div>
               ))}
@@ -170,7 +171,7 @@ export default function DashboardPage() {
               </div>
               <div className="w-full h-2.5 rounded-full overflow-hidden" style={{ backgroundColor: '#0F172A' }}>
                 <div className="h-full rounded-full transition-all duration-700"
-                  style={{ width: `${progressPct}%`, background: 'linear-gradient(90deg, #6C3FD4, #8B5CF6)' }} />
+                  style={{ width: `${progressPct}%`, background: 'linear-gradient(90deg, #683AA6, #8B5CF6)' }} />
               </div>
               <p className="mt-2 text-xs text-slate-500">{completed} of {totalLessons} lessons completed</p>
             </div>
@@ -278,7 +279,7 @@ export default function DashboardPage() {
                 </div>
                 <Link href={`/courses/${enrollment.domain_id}/certificate`}
                   className="shrink-0 text-sm font-semibold px-4 py-2 rounded-lg text-white transition-all hover:opacity-90"
-                  style={{ backgroundColor: '#6C3FD4' }}>
+                  style={{ backgroundColor: '#683AA6' }}>
                   View
                 </Link>
               </div>

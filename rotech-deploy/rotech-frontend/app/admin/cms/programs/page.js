@@ -136,7 +136,7 @@ export default function ProgramsCMSPage() {
                 </div>
               ))}
             </div>
-            <button onClick={startNew} className="px-5 py-2.5 rounded-xl text-white font-bold text-sm" style={{ backgroundColor: '#6C3FD4' }}>
+            <button onClick={startNew} className="px-5 py-2.5 rounded-xl text-white font-bold text-sm" style={{ backgroundColor: '#683AA6' }}>
               + Add Program
             </button>
           </>
@@ -206,7 +206,7 @@ export default function ProgramsCMSPage() {
             </div>
 
             <div className="flex gap-3 pt-2">
-              <button onClick={handleSave} disabled={saving} className="px-5 py-2.5 rounded-xl text-white font-bold text-sm disabled:opacity-60" style={{ backgroundColor: '#6C3FD4' }}>
+              <button onClick={handleSave} disabled={saving} className="px-5 py-2.5 rounded-xl text-white font-bold text-sm disabled:opacity-60" style={{ backgroundColor: '#683AA6' }}>
                 {saving ? 'Saving…' : 'Save Program'}
               </button>
               <button onClick={cancelEdit} className="px-5 py-2.5 rounded-xl text-sm border text-slate-400 hover:text-white" style={{ borderColor: 'rgba(51,65,85,0.6)' }}>

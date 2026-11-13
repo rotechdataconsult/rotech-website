@@ -193,7 +193,7 @@ export default function FinalExamPage() {
                 <Link
                   href={`/courses/${domainId}/certificate`}
                   className="inline-flex items-center justify-center px-5 py-2 text-sm font-semibold text-white rounded-lg"
-                  style={{ backgroundColor: '#6C3FD4' }}
+                  style={{ backgroundColor: '#683AA6' }}
                 >
                   View Certificate &#8594;
                 </Link>
@@ -289,7 +289,7 @@ export default function FinalExamPage() {
                     className={`w-2.5 h-2.5 rounded-full transition-all ${
                       i === current ? 'scale-125' : answers[q.id] ? 'opacity-100' : 'opacity-30'
                     }`}
-                    style={{ backgroundColor: '#6C3FD4' }}
+                    style={{ backgroundColor: '#683AA6' }}
                   />
                 ))}
               </div>
@@ -353,7 +353,7 @@ export default function FinalExamPage() {
                 <Link
                   href={`/courses/${domainId}/certificate`}
                   className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-semibold text-white rounded-lg"
-                  style={{ backgroundColor: '#6C3FD4' }}
+                  style={{ backgroundColor: '#683AA6' }}
                 >
                   View Certificate &#8594;
                 </Link>

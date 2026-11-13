@@ -15,7 +15,7 @@ const SUGGESTIONS = [
 function BotIcon() {
   return (
     <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-sm font-bold text-white"
-      style={{ background: 'linear-gradient(135deg, #6C3FD4, #8B5CF6)' }}>
+      style={{ background: 'linear-gradient(135deg, #683AA6, #8B5CF6)' }}>
       R
     </div>
   )
@@ -104,7 +104,7 @@ export default function ChatWidget() {
       <button
         onClick={() => setOpen(o => !o)}
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-white transition-transform hover:scale-105 active:scale-95"
-        style={{ background: 'linear-gradient(135deg, #6C3FD4, #8B5CF6)' }}
+        style={{ background: 'linear-gradient(135deg, #683AA6, #8B5CF6)' }}
         aria-label="Open chat"
       >
         {open ? (
@@ -148,7 +148,7 @@ export default function ChatWidget() {
                 }`}
                   style={{
                     background: msg.role === 'user'
-                      ? 'linear-gradient(135deg, #6C3FD4, #8B5CF6)'
+                      ? 'linear-gradient(135deg, #683AA6, #8B5CF6)'
                       : '#0F172A',
                     border: msg.role === 'bot' ? '1px solid rgba(51,65,85,0.5)' : 'none',
                   }}>
@@ -200,7 +200,7 @@ export default function ChatWidget() {
               onClick={() => sendMessage()}
               disabled={!input.trim() || loading}
               className="w-9 h-9 rounded-xl flex items-center justify-center text-white transition-opacity disabled:opacity-40 shrink-0"
-              style={{ background: 'linear-gradient(135deg, #6C3FD4, #8B5CF6)' }}>
+              style={{ background: 'linear-gradient(135deg, #683AA6, #8B5CF6)' }}>
               <svg className="w-4 h-4 rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 19V5M5 12l7-7 7 7" />
               </svg>

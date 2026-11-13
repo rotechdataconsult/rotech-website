@@ -1,156 +1,131 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
 
+const NAV_LINKS = [
+  ['/programs',  'Courses'],
+  ['/#business', 'For Business'],
+  ['/#tools',    'AI Tools'],
+  ['/about',     'About'],
+  ['/pricing',   'Pricing'],
+  ['/contact',   'Contact'],
+]
+
 export default function LandingNavbar() {
-  const [scrolled,  setScrolled]  = useState(false)
-  const [menuOpen,  setMenuOpen]  = useState(false)
-  const [darkMode,  setDarkMode]  = useState(true)   // default: dark (matches site theme)
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 60)
+    const handler = () => setScrolled(window.scrollY > 12)
+    handler()
     window.addEventListener('scroll', handler, { passive: true })
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
-  useEffect(() => {
-    const saved = localStorage.getItem('rotech-theme')
-    if (saved) setDarkMode(saved === 'dark')
-  }, [])
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light')
-    localStorage.setItem('rotech-theme', darkMode ? 'dark' : 'light')
-  }, [darkMode])
-
-  const navLinks = [
-    ['#path',     'Programs'],
-    ['#courses',  'Courses'],
-    ['#analyst',  'AI Analyst'],
-    ['#business', 'Business'],
-  ]
-
   return (
-    <nav
-      className="sticky top-0 z-50 transition-all duration-300"
-      style={{
-        backgroundColor: scrolled ? 'rgba(15,23,42,0.97)' : 'rgba(15,23,42,0.6)',
-        borderBottom: scrolled ? '1px solid rgba(51,65,85,0.8)' : '1px solid transparent',
-        backdropFilter: 'blur(14px)',
-      }}
+    <header
+      className={`sticky top-0 z-50 bg-white/95 backdrop-blur transition-shadow duration-300 ${
+        scrolled ? 'shadow-[0_1px_0_0_#DCCFF2,0_8px_24px_-12px_rgba(47,11,96,0.25)]' : ''
+      }`}
     >
-      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-lg focus:bg-brand-900 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+      >
+        Skip to main content
+      </a>
 
-        {/* Logo */}
-        <Link href="/" className="text-xl font-extrabold tracking-tight text-white">
-          Rotech{' '}
-          <span style={{ color: '#8B5CF6' }}>Data Consult</span>
+      <nav aria-label="Main" className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-3 sm:px-6">
+        <Link href="/" aria-label="Rotech Data Consult, home" className="shrink-0">
+          <Image
+            src="/brand/rotech-wordmark.png"
+            alt="Rotech Data Consult"
+            width={720}
+            height={214}
+            priority
+            className="h-9 w-auto sm:h-10"
+          />
         </Link>
 
-        {/* Desktop nav links */}
-        <div className="hidden md:flex items-center gap-7 text-sm font-medium">
-          {navLinks.map(([href, label]) => (
-            <a
-              key={label}
-              href={href}
-              className="text-slate-300 hover:text-white transition-colors"
-            >
-              {label}
-            </a>
+        <ul className="hidden items-center gap-7 text-sm font-semibold text-ink-soft lg:flex">
+          {NAV_LINKS.map(([href, label]) => (
+            <li key={label}>
+              <Link
+                href={href}
+                className="underline-offset-8 decoration-2 decoration-brand-600 transition-colors hover:text-brand-700 hover:underline"
+              >
+                {label}
+              </Link>
+            </li>
           ))}
-          <Link href="/pricing" className="text-slate-300 hover:text-white transition-colors">
-            Pricing
-          </Link>
-        </div>
+        </ul>
 
-        {/* Auth buttons + theme toggle */}
-        <div className="hidden md:flex items-center gap-3">
-          {/* Dark / Light toggle */}
-          <button
-            onClick={() => setDarkMode(d => !d)}
-            className="h-8 w-8 rounded-full flex items-center justify-center border transition-colors"
-            style={{ borderColor: 'rgba(100,116,139,0.4)', color: '#CBD5E1' }}
-            aria-label="Toggle dark mode"
-            title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-          >
-            {darkMode ? '☀️' : '🌙'}
-          </button>
+        <div className="hidden items-center gap-3 lg:flex">
           <Link
             href="/auth/login"
-            className="text-sm font-medium px-4 py-2 rounded-lg border transition-colors"
-            style={{ color: '#CBD5E1', borderColor: 'rgba(100,116,139,0.4)' }}
-            onMouseEnter={e => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'rgba(139,92,246,0.6)' }}
-            onMouseLeave={e => { e.currentTarget.style.color = '#CBD5E1'; e.currentTarget.style.borderColor = 'rgba(100,116,139,0.4)' }}
+            className="rounded-full px-4 py-2 text-sm font-semibold text-brand-700 underline-offset-4 hover:underline"
           >
-            Login
+            Log in
           </Link>
           <Link
             href="/auth/register"
-            className="text-sm font-bold px-5 py-2 rounded-lg text-white transition-all hover:opacity-90 hover:scale-105"
-            style={{ backgroundColor: '#6C3FD4' }}
+            className="rounded-full bg-brand-600 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-brand-700"
           >
-            Get Started
+            Get started
           </Link>
         </div>
 
-        {/* Mobile hamburger */}
         <button
-          className="md:hidden p-2 rounded-lg transition-colors"
-          style={{ color: '#CBD5E1' }}
-          onClick={() => setMenuOpen(m => !m)}
-          aria-label="Toggle navigation menu"
+          type="button"
+          className="rounded-lg p-2 text-brand-900 lg:hidden"
+          onClick={() => setMenuOpen((m) => !m)}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
         >
-          <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            {menuOpen
-              ? <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              : <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-            }
+          <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2} aria-hidden="true">
+            {menuOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+            )}
           </svg>
         </button>
-      </div>
+      </nav>
 
-      {/* Mobile drawer */}
       {menuOpen && (
-        <div
-          className="md:hidden px-6 pb-6 pt-2 space-y-1 border-t"
-          style={{ backgroundColor: 'rgba(15,23,42,0.98)', borderColor: 'rgba(51,65,85,0.6)' }}
-        >
-          {navLinks.map(([href, label]) => (
-            <a
-              key={label}
-              href={href}
-              onClick={() => setMenuOpen(false)}
-              className="block py-2.5 text-sm font-medium text-slate-300 hover:text-white transition-colors"
-            >
-              {label}
-            </a>
-          ))}
-          <Link
-            href="/pricing"
-            onClick={() => setMenuOpen(false)}
-            className="block py-2.5 text-sm font-medium text-slate-300 hover:text-white transition-colors"
-          >
-            Pricing
-          </Link>
-          <div className="flex gap-3 pt-3">
+        <div id="mobile-menu" className="border-t border-brand-100 bg-white px-5 pb-6 pt-2 lg:hidden">
+          <ul className="divide-y divide-brand-100">
+            {NAV_LINKS.map(([href, label]) => (
+              <li key={label}>
+                <Link
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className="block py-3.5 text-base font-semibold text-ink"
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-4 flex gap-3">
             <Link
               href="/auth/login"
-              className="flex-1 text-center text-sm font-medium py-2.5 rounded-lg border transition-colors text-slate-300 hover:text-white"
-              style={{ borderColor: 'rgba(100,116,139,0.5)' }}
+              className="flex-1 rounded-full border-2 border-brand-600 py-3 text-center text-sm font-bold text-brand-700"
             >
-              Login
+              Log in
             </Link>
             <Link
               href="/auth/register"
-              className="flex-1 text-center text-sm font-bold py-2.5 rounded-lg text-white"
-              style={{ backgroundColor: '#6C3FD4' }}
+              className="flex-1 rounded-full bg-brand-600 py-3 text-center text-sm font-bold text-white"
             >
-              Get Started
+              Get started
             </Link>
           </div>
         </div>
       )}
-    </nav>
+    </header>
   )
 }

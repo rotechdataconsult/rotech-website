@@ -238,7 +238,7 @@ export default function QuizPage() {
                         ? 'opacity-100'
                         : 'opacity-30'
                     }`}
-                    style={{ backgroundColor: '#6C3FD4' }}
+                    style={{ backgroundColor: '#683AA6' }}
                   />
                 ))}
               </div>

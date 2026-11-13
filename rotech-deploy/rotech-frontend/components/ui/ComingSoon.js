@@ -8,7 +8,7 @@ export function ComingSoonPage({ icon = '🚀', title, description, backHref = '
         <div className="text-6xl">{icon}</div>
         <div>
           <div className="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-full border mb-4"
-            style={{ borderColor: 'rgba(139,92,246,0.4)', backgroundColor: 'rgba(108,63,212,0.12)', color: '#94A3B8' }}>
+            style={{ borderColor: 'rgba(139,92,246,0.4)', backgroundColor: 'rgba(104,58,166,0.12)', color: '#94A3B8' }}>
             <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: '#8B5CF6' }} />
             Coming Soon
           </div>

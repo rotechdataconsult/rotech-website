@@ -22,7 +22,7 @@ export default function Button({
     ghost:   'font-medium rounded-lg text-slate-400 hover:text-white transition-colors disabled:opacity-40',
   }
 
-  const primaryStyle = variant === 'primary' ? { backgroundColor: '#6C3FD4' } : {}
+  const primaryStyle = variant === 'primary' ? { backgroundColor: '#683AA6' } : {}
 
   return (
     <button

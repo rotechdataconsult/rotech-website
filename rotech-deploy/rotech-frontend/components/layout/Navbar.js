@@ -33,14 +33,14 @@ export default function Navbar({ profile, back, backLabel }) {
           </Link>
         ) : (
           <Link href="/dashboard" className="text-lg font-extrabold tracking-tight text-white">
-            Rotech <span style={{ color: '#8B5CF6' }}>Data Consult</span>
+            <img src="/brand/rotech-wordmark-white.png" alt="Rotech Data Consult" width={720} height={214} className="inline-block h-8 w-auto" />
           </Link>
         )}
 
         {/* Center: brand when back is shown */}
         {back && (
           <Link href="/dashboard" className="text-base font-extrabold tracking-tight text-white hidden sm:block">
-            Rotech <span style={{ color: '#8B5CF6' }}>Data Consult</span>
+            <img src="/brand/rotech-wordmark-white.png" alt="Rotech Data Consult" width={720} height={214} className="inline-block h-8 w-auto" />
           </Link>
         )}
 

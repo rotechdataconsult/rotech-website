@@ -61,7 +61,7 @@ export default function ResetPasswordPage() {
 
         <div className="text-center mb-8">
           <Link href="/" className="inline-block text-2xl font-extrabold tracking-tight text-white">
-            Rotech <span style={{ color: '#8B5CF6' }}>Data Consult</span>
+            <img src="/brand/rotech-wordmark-white.png" alt="Rotech Data Consult" width={720} height={214} className="inline-block h-8 w-auto" />
           </Link>
           <h1 className="mt-4 text-3xl font-extrabold text-white">Set New Password</h1>
           <p className="mt-1.5 text-sm text-slate-400">Choose a strong new password.</p>
@@ -125,7 +125,7 @@ export default function ResetPasswordPage() {
               type="submit"
               disabled={loading}
               className="w-full font-semibold rounded-lg px-4 py-3 text-sm text-white flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed transition-all hover:opacity-90"
-              style={{ backgroundColor: '#6C3FD4' }}
+              style={{ backgroundColor: '#683AA6' }}
             >
               {loading ? (
                 <>

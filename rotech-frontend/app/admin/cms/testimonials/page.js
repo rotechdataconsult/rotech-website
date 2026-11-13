@@ -10,7 +10,7 @@ import AIContentSidebar from '@/components/admin/AIContentSidebar'
 
 const BLANK = {
   quote: '', author_name: '', author_role: '', author_location: '',
-  author_initials: '', avatar_color: '#6C3FD4', photo_url: '', rating: 5, is_active: true,
+  author_initials: '', avatar_color: '#683AA6', photo_url: '', rating: 5, is_active: true,
 }
 
 export default function TestimonialsCMSPage() {
@@ -103,7 +103,7 @@ export default function TestimonialsCMSPage() {
             <div className="space-y-2">
               {items.map((item, i) => (
                 <div key={item.id} className="flex items-start gap-3 p-4 rounded-xl border" style={{ backgroundColor: '#1E293B', borderColor: 'rgba(51,65,85,0.6)' }}>
-                  <div className="h-9 w-9 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0" style={{ backgroundColor: item.avatar_color || '#6C3FD4' }}>
+                  <div className="h-9 w-9 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0" style={{ backgroundColor: item.avatar_color || '#683AA6' }}>
                     {item.author_initials || item.author_name?.slice(0, 2)}
                   </div>
                   <div className="flex-1 min-w-0">
@@ -124,7 +124,7 @@ export default function TestimonialsCMSPage() {
                 </div>
               ))}
             </div>
-            <button onClick={startNew} className="px-5 py-2.5 rounded-xl text-white font-bold text-sm" style={{ backgroundColor: '#6C3FD4' }}>
+            <button onClick={startNew} className="px-5 py-2.5 rounded-xl text-white font-bold text-sm" style={{ backgroundColor: '#683AA6' }}>
               + Add Testimonial
             </button>
           </>
@@ -171,7 +171,7 @@ export default function TestimonialsCMSPage() {
                 </div>
                 <div>
                   <label className={LBL}>Avatar Color</label>
-                  <input className={INPUT} {...field('avatar_color')} placeholder="#6C3FD4" />
+                  <input className={INPUT} {...field('avatar_color')} placeholder="#683AA6" />
                 </div>
                 <div>
                   <label className={LBL}>Photo URL (optional)</label>
@@ -181,7 +181,7 @@ export default function TestimonialsCMSPage() {
             </div>
 
             <div className="flex gap-3 pt-1">
-              <button onClick={handleSave} disabled={saving} className="px-5 py-2.5 rounded-xl text-white font-bold text-sm disabled:opacity-60" style={{ backgroundColor: '#6C3FD4' }}>
+              <button onClick={handleSave} disabled={saving} className="px-5 py-2.5 rounded-xl text-white font-bold text-sm disabled:opacity-60" style={{ backgroundColor: '#683AA6' }}>
                 {saving ? 'Saving…' : 'Save Testimonial'}
               </button>
               <button onClick={cancelEdit} className="px-5 py-2.5 rounded-xl text-sm border text-slate-400" style={{ borderColor: 'rgba(51,65,85,0.6)' }}>Cancel</button>

@@ -6,7 +6,7 @@ import { supabase } from '@/lib/supabase'
 
 const DOMAIN_TRACKS = [
   'Fintech Analytics',
-  'Healthcare Analytics',
+  'Public Health Analytics',
   'E-commerce Analytics',
   'Supply Chain Analytics',
   'Climate & Energy Analytics',
@@ -100,7 +100,7 @@ export default function RegisterPage() {
       <main className="min-h-screen flex items-center justify-center px-4 py-12" style={{ backgroundColor: '#0F172A' }}>
         <div className="w-full max-w-md text-center space-y-6">
           <Link href="/" className="inline-block text-2xl font-extrabold tracking-tight text-white">
-            Rotech <span style={{ color: '#8B5CF6' }}>Data Consult</span>
+            <img src="/brand/rotech-wordmark-white.png" alt="Rotech Data Consult" width={720} height={214} className="inline-block h-8 w-auto" />
           </Link>
 
           <div className="rounded-2xl p-10 shadow-2xl space-y-5" style={{ backgroundColor: '#1E293B', border: '1px solid rgba(51,65,85,0.6)' }}>
@@ -125,7 +125,7 @@ export default function RegisterPage() {
             </p>
             <Link href="/auth/login"
               className="block w-full text-center font-semibold rounded-xl px-4 py-3 text-sm text-white transition-all hover:opacity-90 hover:scale-[1.01]"
-              style={{ backgroundColor: '#6C3FD4' }}>
+              style={{ backgroundColor: '#683AA6' }}>
               Go to Login
             </Link>
           </div>
@@ -138,7 +138,7 @@ export default function RegisterPage() {
   return (
     <main className="min-h-screen flex items-center justify-center px-4 py-12" style={{ backgroundColor: '#0F172A' }}>
       {/* Subtle purple glow */}
-      <div className="fixed pointer-events-none" style={{ width: '600px', height: '600px', left: '-200px', bottom: '-200px', background: 'radial-gradient(circle, rgba(108,63,212,0.10) 0%, transparent 65%)', borderRadius: '50%' }} />
+      <div className="fixed pointer-events-none" style={{ width: '600px', height: '600px', left: '-200px', bottom: '-200px', background: 'radial-gradient(circle, rgba(104,58,166,0.10) 0%, transparent 65%)', borderRadius: '50%' }} />
 
       <div className="w-full max-w-md relative">
 
@@ -154,7 +154,7 @@ export default function RegisterPage() {
 
         <div className="text-center mb-8">
           <Link href="/" className="inline-block text-2xl font-extrabold tracking-tight text-white">
-            Rotech <span style={{ color: '#8B5CF6' }}>Data Consult</span>
+            <img src="/brand/rotech-wordmark-white.png" alt="Rotech Data Consult" width={720} height={214} className="inline-block h-8 w-auto" />
           </Link>
           <h1 className="mt-4 text-3xl font-extrabold text-white">Create Your Account</h1>
           <p className="mt-1.5 text-sm text-slate-400">Start your data analytics journey — it is free</p>
@@ -249,7 +249,7 @@ export default function RegisterPage() {
             <button
               type="submit" disabled={loading}
               className="w-full font-semibold rounded-lg px-4 py-3 text-sm text-white transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed hover:opacity-90 hover:scale-[1.01]"
-              style={{ backgroundColor: '#6C3FD4' }}>
+              style={{ backgroundColor: '#683AA6' }}>
               {loading ? <><Spinner /> Creating account...</> : 'Create Free Account'}
             </button>
           </form>

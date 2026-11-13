@@ -48,7 +48,7 @@ export default function ForgotPasswordPage() {
 
         <div className="text-center mb-8">
           <Link href="/" className="inline-block text-2xl font-extrabold tracking-tight text-white">
-            Rotech <span style={{ color: '#8B5CF6' }}>Data Consult</span>
+            <img src="/brand/rotech-wordmark-white.png" alt="Rotech Data Consult" width={720} height={214} className="inline-block h-8 w-auto" />
           </Link>
           <h1 className="mt-4 text-3xl font-extrabold text-white">Reset Password</h1>
           <p className="mt-1.5 text-sm text-slate-400">
@@ -59,7 +59,7 @@ export default function ForgotPasswordPage() {
         <div className="rounded-2xl p-8 shadow-2xl" style={{ backgroundColor: '#1E293B', border: '1px solid rgba(51,65,85,0.6)' }}>
           {sent ? (
             <div className="text-center space-y-4">
-              <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto" style={{ backgroundColor: '#6C3FD4' }}>
+              <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto" style={{ backgroundColor: '#683AA6' }}>
                 <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
@@ -71,7 +71,7 @@ export default function ForgotPasswordPage() {
               <Link
                 href="/auth/login"
                 className="block w-full text-center font-semibold rounded-lg px-4 py-3 text-sm text-white mt-4 transition-all hover:opacity-90"
-                style={{ backgroundColor: '#6C3FD4' }}
+                style={{ backgroundColor: '#683AA6' }}
               >
                 Back to Login
               </Link>
@@ -105,7 +105,7 @@ export default function ForgotPasswordPage() {
                 type="submit"
                 disabled={loading}
                 className="w-full font-semibold rounded-lg px-4 py-3 text-sm text-white flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed transition-all hover:opacity-90"
-                style={{ backgroundColor: '#6C3FD4' }}
+                style={{ backgroundColor: '#683AA6' }}
               >
                 {loading ? (
                   <>

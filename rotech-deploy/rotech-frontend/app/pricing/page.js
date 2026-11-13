@@ -62,6 +62,12 @@ const PLANS = [
   },
 ]
 
+export const metadata = {
+  title: 'Pricing',
+  description: 'Rotech Data Consult pricing: start free with courses, data entry and the AI Analyst, then upgrade for unlimited analysis and team features.',
+  alternates: { canonical: '/pricing' },
+}
+
 export default function PricingPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#0F172A' }}>
@@ -71,7 +77,7 @@ export default function PricingPage() {
         style={{ backgroundColor: 'rgba(15,23,42,0.97)', borderBottom: '1px solid rgba(51,65,85,0.6)', backdropFilter: 'blur(14px)' }}>
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <Link href="/" className="text-lg font-extrabold tracking-tight text-white">
-            Rotech <span style={{ color: '#8B5CF6' }}>Data Consult</span>
+            <img src="/brand/rotech-wordmark-white.png" alt="Rotech Data Consult" width={720} height={214} className="inline-block h-8 w-auto" />
           </Link>
           <div className="flex items-center gap-3">
             <Link href="/auth/login"
@@ -80,7 +86,7 @@ export default function PricingPage() {
             </Link>
             <Link href="/auth/register"
               className="text-sm font-semibold px-4 py-2 rounded-lg text-white transition-all hover:opacity-90"
-              style={{ backgroundColor: '#6C3FD4' }}>
+              style={{ backgroundColor: '#683AA6' }}>
               Get Started Free
             </Link>
           </div>
@@ -96,7 +102,7 @@ export default function PricingPage() {
             Start free. Upgrade when your business grows. No hidden fees.
           </p>
           <div className="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full"
-            style={{ color: '#94A3B8', border: '1px solid rgba(139,92,246,0.35)', backgroundColor: 'rgba(108,63,212,0.12)' }}>
+            style={{ color: '#94A3B8', border: '1px solid rgba(139,92,246,0.35)', backgroundColor: 'rgba(104,58,166,0.12)' }}>
             <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: '#8B5CF6' }} />
             Pro & Team plans launching soon — join free now to be first in line
           </div>
@@ -117,7 +123,7 @@ export default function PricingPage() {
               {plan.highlight && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                   <span className="text-xs font-bold px-3 py-1 rounded-full text-white"
-                    style={{ backgroundColor: '#6C3FD4' }}>
+                    style={{ backgroundColor: '#683AA6' }}>
                     Most Popular
                   </span>
                 </div>
@@ -150,7 +156,7 @@ export default function PricingPage() {
               {plan.active ? (
                 <Link href={plan.href}
                   className="block w-full text-center font-semibold rounded-xl px-4 py-3 text-sm text-white transition-all hover:opacity-90"
-                  style={{ backgroundColor: '#6C3FD4' }}>
+                  style={{ backgroundColor: '#683AA6' }}>
                   {plan.cta}
                 </Link>
               ) : (

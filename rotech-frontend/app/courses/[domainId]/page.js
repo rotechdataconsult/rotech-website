@@ -119,7 +119,7 @@ export default function DomainPage() {
             <Link
               href={`/courses/${domainId}/exam`}
               className="shrink-0 text-sm font-semibold px-5 py-2.5 rounded-lg text-white"
-              style={{ backgroundColor: '#6C3FD4' }}
+              style={{ backgroundColor: '#683AA6' }}
             >
               Take Exam
             </Link>

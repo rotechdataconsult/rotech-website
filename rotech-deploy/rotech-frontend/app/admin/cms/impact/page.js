@@ -94,7 +94,7 @@ export default function ImpactCMSPage() {
         </div>
 
         <div className="flex items-center gap-4 pt-2">
-          <button onClick={handleSave} disabled={saving} className="px-6 py-2.5 rounded-xl text-white font-bold text-sm disabled:opacity-60" style={{ backgroundColor: '#6C3FD4' }}>
+          <button onClick={handleSave} disabled={saving} className="px-6 py-2.5 rounded-xl text-white font-bold text-sm disabled:opacity-60" style={{ backgroundColor: '#683AA6' }}>
             {saving ? 'Saving…' : 'Publish Changes'}
           </button>
           {saved && <span className="text-xs font-semibold" style={{ color: '#10B981' }}>✓ Saved & published</span>}

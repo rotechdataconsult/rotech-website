@@ -13,7 +13,7 @@ const DEFAULT_TESTIMONIALS = [
     author_role: 'Admin Officer → Data Analyst',
     author_location: 'Lagos, Nigeria',
     author_initials: 'AO',
-    avatar_color: '#6C3FD4',
+    avatar_color: '#683AA6',
     rating: 5,
   },
   {
@@ -90,7 +90,7 @@ function TestimonialCard({ t }) {
         ) : (
           <div
             className="h-10 w-10 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0"
-            style={{ backgroundColor: t.avatar_color || '#6C3FD4' }}
+            style={{ backgroundColor: t.avatar_color || '#683AA6' }}
           >
             {t.author_initials || t.author_name?.slice(0, 2).toUpperCase()}
           </div>
@@ -126,7 +126,7 @@ export default function TestimonialsSection({ testimonials }) {
 
         <ScrollReveal>
           <div className="text-center mb-14">
-            <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: '#6C3FD4' }}>
+            <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: '#683AA6' }}>
               Student Stories
             </p>
             <h2 className="text-4xl font-extrabold leading-tight" style={{ color: '#0F172A' }}>
@@ -178,7 +178,7 @@ export default function TestimonialsSection({ testimonials }) {
                 style={{
                   width:           i === active ? '20px' : '8px',
                   height:          '8px',
-                  backgroundColor: i === active ? '#6C3FD4' : '#CBD5E1',
+                  backgroundColor: i === active ? '#683AA6' : '#CBD5E1',
                 }}
                 aria-label={`Go to testimonial ${i + 1}`}
               />

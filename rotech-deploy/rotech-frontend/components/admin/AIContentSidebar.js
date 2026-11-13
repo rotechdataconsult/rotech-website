@@ -47,7 +47,7 @@ export default function AIContentSidebar({ context = 'general', onInsert }) {
   return (
     <div
       className="rounded-xl border p-5 space-y-4"
-      style={{ backgroundColor: 'rgba(108,63,212,0.08)', borderColor: 'rgba(139,92,246,0.3)' }}
+      style={{ backgroundColor: 'rgba(104,58,166,0.08)', borderColor: 'rgba(139,92,246,0.3)' }}
     >
       <div className="flex items-center gap-2">
         <span className="text-base">🤖</span>
@@ -87,7 +87,7 @@ export default function AIContentSidebar({ context = 'general', onInsert }) {
             onClick={() => run()}
             disabled={loading || !prompt.trim()}
             className="px-4 py-2 rounded-lg text-white font-bold text-xs transition-opacity disabled:opacity-50"
-            style={{ backgroundColor: '#6C3FD4' }}
+            style={{ backgroundColor: '#683AA6' }}
           >
             {loading ? '…' : 'Go'}
           </button>
@@ -113,7 +113,7 @@ export default function AIContentSidebar({ context = 'general', onInsert }) {
             <button
               onClick={() => { onInsert?.(result); setResult('') }}
               className="text-xs font-bold px-4 py-2 rounded-lg text-white"
-              style={{ backgroundColor: '#6C3FD4' }}
+              style={{ backgroundColor: '#683AA6' }}
             >
               Use This ↑
             </button>

@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+/*
+  Rotech brand tokens
+  -------------------
+  Primary purple #683AA6 comes straight from the logo. The accent is a warm
+  amber, chosen because purple + amber stay clearly apart for every common
+  type of colour blindness (they differ strongly in lightness, not just hue).
+  Rules the marketing pages follow:
+    - never rely on colour alone: every state also has text, an icon or shape
+    - no red/green pairs for meaning
+    - amber is only a fill (with dark ink text) or text on deep purple
+    - body text is at least 4.5:1 against its background (WCAG AA)
+*/
 :root {
   --background: #0F172A;
   --foreground: #f1f5f9;
@@ -10,10 +22,58 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-bricolage), var(--font-geist-sans), system-ui, sans-serif;
+
+  --color-brand-50: #F7F4FD;
+  --color-brand-100: #EEE7F9;
+  --color-brand-200: #DCCFF2;
+  --color-brand-300: #C2ABE6;
+  --color-brand-400: #A283D6;
+  --color-brand-500: #8359C0;
+  --color-brand-600: #683AA6;
+  --color-brand-700: #552E8B;
+  --color-brand-800: #412070;
+  --color-brand-900: #2F0B60;
+  --color-brand-950: #1D0640;
+
+  --color-sun-200: #FFE7A3;
+  --color-sun-300: #FFD766;
+  --color-sun-400: #FFC83D;
+  --color-sun-500: #F5A800;
+
+  --color-ink: #1B1230;
+  --color-ink-soft: #453B5C;
+  --color-ink-muted: #5E5578;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
   background: #0F172A;
   color: #f1f5f9;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+
+/* Clear keyboard focus everywhere: a two-tone ring that shows on light and dark. */
+:focus-visible {
+  outline: 3px solid #FFC83D;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px #1B1230;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

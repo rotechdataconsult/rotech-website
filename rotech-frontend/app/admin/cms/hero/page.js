@@ -77,7 +77,7 @@ export default function HeroCMSPage() {
         <button
           onClick={() => setAiOpen(o => !o)}
           className="text-xs font-semibold px-4 py-2 rounded-lg border transition-colors"
-          style={{ borderColor: 'rgba(139,92,246,0.4)', color: '#94A3B8', backgroundColor: 'rgba(108,63,212,0.12)' }}
+          style={{ borderColor: 'rgba(139,92,246,0.4)', color: '#94A3B8', backgroundColor: 'rgba(104,58,166,0.12)' }}
         >
           🤖 {aiOpen ? 'Close AI Assistant' : 'Open AI Assistant'}
         </button>
@@ -113,7 +113,7 @@ export default function HeroCMSPage() {
             onClick={handleSave}
             disabled={saving}
             className="px-6 py-2.5 rounded-xl text-white font-bold text-sm transition-opacity disabled:opacity-60"
-            style={{ backgroundColor: '#6C3FD4' }}
+            style={{ backgroundColor: '#683AA6' }}
           >
             {saving ? 'Saving…' : 'Publish Changes'}
           </button>

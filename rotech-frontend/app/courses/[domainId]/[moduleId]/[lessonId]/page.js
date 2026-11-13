@@ -99,7 +99,7 @@ export default function LessonPage() {
               target="_blank"
               rel="noreferrer"
               className="text-xs font-semibold px-3 py-1.5 rounded-lg text-white"
-              style={{ backgroundColor: '#6C3FD4' }}
+              style={{ backgroundColor: '#683AA6' }}
             >
               Download
             </a>

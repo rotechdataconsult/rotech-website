@@ -1,5 +1,11 @@
 import Link from 'next/link'
 
+export const metadata = {
+  title: 'Privacy Policy',
+  description: 'How Rotech Data Consult collects, uses and protects your personal data.',
+  alternates: { canonical: '/privacy' },
+}
+
 const LAST_UPDATED = '11 March 2026'
 
 function Section({ title, children }) {
@@ -35,11 +41,11 @@ export default function PrivacyPage() {
         style={{ backgroundColor: 'rgba(15,23,42,0.97)', borderBottom: '1px solid rgba(51,65,85,0.6)', backdropFilter: 'blur(14px)' }}>
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <Link href="/" className="text-lg font-extrabold tracking-tight text-white">
-            Rotech <span style={{ color: '#8B5CF6' }}>Data Consult</span>
+            <img src="/brand/rotech-wordmark-white.png" alt="Rotech Data Consult" width={720} height={214} className="inline-block h-8 w-auto" />
           </Link>
           <Link href="/auth/register"
             className="text-sm font-semibold px-4 py-2 rounded-lg text-white transition-all hover:opacity-90"
-            style={{ backgroundColor: '#6C3FD4' }}>
+            style={{ backgroundColor: '#683AA6' }}>
             Get Started
           </Link>
         </div>

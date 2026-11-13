@@ -71,7 +71,7 @@ export default function LoginPage() {
   return (
     <main className="min-h-screen flex items-center justify-center px-4 py-12" style={{ backgroundColor: '#0F172A' }}>
       {/* Subtle purple glow */}
-      <div className="fixed pointer-events-none" style={{ width: '600px', height: '600px', right: '-200px', top: '-200px', background: 'radial-gradient(circle, rgba(108,63,212,0.12) 0%, transparent 65%)', borderRadius: '50%' }} />
+      <div className="fixed pointer-events-none" style={{ width: '600px', height: '600px', right: '-200px', top: '-200px', background: 'radial-gradient(circle, rgba(104,58,166,0.12) 0%, transparent 65%)', borderRadius: '50%' }} />
 
       <div className="w-full max-w-md relative">
 
@@ -87,7 +87,7 @@ export default function LoginPage() {
 
         <div className="text-center mb-8">
           <Link href="/" className="inline-block text-2xl font-extrabold tracking-tight text-white">
-            Rotech <span style={{ color: '#8B5CF6' }}>Data Consult</span>
+            <img src="/brand/rotech-wordmark-white.png" alt="Rotech Data Consult" width={720} height={214} className="inline-block h-8 w-auto" />
           </Link>
           <h1 className="mt-4 text-3xl font-extrabold text-white">Welcome Back</h1>
           <p className="mt-1.5 text-sm text-slate-400">Continue your data analytics journey</p>
@@ -145,7 +145,7 @@ export default function LoginPage() {
             <button
               type="submit" disabled={loading}
               className="w-full font-semibold rounded-lg px-4 py-3 text-sm text-white transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed hover:opacity-90 hover:scale-[1.01]"
-              style={{ backgroundColor: '#6C3FD4' }}>
+              style={{ backgroundColor: '#683AA6' }}>
               {loading ? <><Spinner /> Logging in...</> : 'Login'}
             </button>
           </form>

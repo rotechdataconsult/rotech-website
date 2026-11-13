@@ -103,7 +103,7 @@ export default function ModulePage() {
             <a
               href={`/courses/${domainId}/${moduleId}/quiz`}
               className="shrink-0 text-sm font-semibold px-4 py-2 rounded-lg text-white"
-              style={{ backgroundColor: '#6C3FD4' }}
+              style={{ backgroundColor: '#683AA6' }}
             >
               Start Quiz
             </a>

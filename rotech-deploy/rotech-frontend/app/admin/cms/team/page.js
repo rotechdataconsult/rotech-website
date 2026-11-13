@@ -9,7 +9,7 @@ import AdminLayout from '@/components/admin/AdminLayout'
 
 const BLANK = {
   name: '', role: '', bio: '', photo_url: '',
-  initials: '', avatar_color: '#6C3FD4', linkedin_url: '', is_active: true,
+  initials: '', avatar_color: '#683AA6', linkedin_url: '', is_active: true,
 }
 
 export default function TeamCMSPage() {
@@ -114,7 +114,7 @@ export default function TeamCMSPage() {
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={item.photo_url} alt={item.name} className="h-10 w-10 rounded-full object-cover shrink-0" />
                   ) : (
-                    <div className="h-10 w-10 rounded-full flex items-center justify-center text-sm font-bold text-white shrink-0" style={{ backgroundColor: item.avatar_color || '#6C3FD4' }}>
+                    <div className="h-10 w-10 rounded-full flex items-center justify-center text-sm font-bold text-white shrink-0" style={{ backgroundColor: item.avatar_color || '#683AA6' }}>
                       {item.initials || item.name?.slice(0, 2)}
                     </div>
                   )}
@@ -131,7 +131,7 @@ export default function TeamCMSPage() {
                 </div>
               ))}
             </div>
-            <button onClick={startNew} className="px-5 py-2.5 rounded-xl text-white font-bold text-sm" style={{ backgroundColor: '#6C3FD4' }}>
+            <button onClick={startNew} className="px-5 py-2.5 rounded-xl text-white font-bold text-sm" style={{ backgroundColor: '#683AA6' }}>
               + Add Team Member
             </button>
           </>
@@ -160,7 +160,7 @@ export default function TeamCMSPage() {
               </div>
               <div>
                 <label className={LBL}>Avatar Color</label>
-                <input className={INPUT} {...field('avatar_color')} placeholder="#6C3FD4" />
+                <input className={INPUT} {...field('avatar_color')} placeholder="#683AA6" />
               </div>
               <div className="col-span-2">
                 <label className={LBL}>LinkedIn URL (optional)</label>
@@ -192,7 +192,7 @@ export default function TeamCMSPage() {
             </div>
 
             <div className="flex gap-3 pt-1">
-              <button onClick={handleSave} disabled={saving} className="px-5 py-2.5 rounded-xl text-white font-bold text-sm disabled:opacity-60" style={{ backgroundColor: '#6C3FD4' }}>
+              <button onClick={handleSave} disabled={saving} className="px-5 py-2.5 rounded-xl text-white font-bold text-sm disabled:opacity-60" style={{ backgroundColor: '#683AA6' }}>
                 {saving ? 'Saving…' : 'Save Member'}
               </button>
               <button onClick={cancelEdit} className="px-5 py-2.5 rounded-xl text-sm border text-slate-400" style={{ borderColor: 'rgba(51,65,85,0.6)' }}>Cancel</button>
